@@ -9,6 +9,8 @@ function App() {
   console.log(gamesData)
   const userData = useSelector(state => state.users.user);
   console.log(userData)
+  const highestScore = useSelector(state => state.gameStats.highestScore)
+  console.log(highestScore)
 
   return (
     <div className="App">
