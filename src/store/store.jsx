@@ -4,8 +4,8 @@ const gamesSlice = createSlice({
     name: 'games',
     initialState: {
         users: [],
-        artistImage: '',
         searchValue: '',
+        gamesData:[],
         textInput: '' ,
         searchArray: [],
         isLoading: false,
@@ -13,6 +13,11 @@ const gamesSlice = createSlice({
         error: {}
     },
     reducers: {
+
+      setGamesData(state, action) {
+        state.gamesData = action.payload;
+      },
+
       setUsers(state, action) {
         state.userRepos = action.payload;
       },
