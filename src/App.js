@@ -7,6 +7,8 @@ function App() {
   const { status } = useGetGames(10, 11, 'easy', 'multiple')
   const gamesData = useSelector(state => state.games.gamesData)
   console.log(gamesData)
+  const userData = useSelector(state => state.users.user);
+  console.log(userData)
 
   return (
     <div className="App">

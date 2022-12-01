@@ -3,14 +3,9 @@ import { createSlice } from '@reduxjs/toolkit';
 const usersSlice = createSlice({
     name: 'users',
     initialState: {
-        users: [],
+        user: 'user1',
         searchValue: '',
-        gamesData:[],
-        textInput: '' ,
-        searchArray: [],
-        isLoading: false,
-        isError: false,
-        error: {}
+        textInput: '' 
     },
     reducers: {
       setUsers(state, action) {
