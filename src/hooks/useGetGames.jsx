@@ -19,7 +19,6 @@ const useGetGames = (amount=1, category=1, difficulty='easy', type='multiple') =
     
         getGamesAxio(amount, category, difficulty, type)
         .then(data => { 
-            console.log(data);
             setStatus(false)
             dispatch(gamesActions.setGamesData(data.results))
             dispatch(gamesActions.setIsLoading(false))
