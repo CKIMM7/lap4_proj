@@ -4,7 +4,7 @@ import useGetGames from './hooks/useGetGames';
 
 function App() {
 
-  const { status } = useGetGames()
+  // const { status } = useGetGames()
 
   return (
     <div className="App">
