@@ -32,13 +32,13 @@ io.on("connection", (socket) => {
     //get updated array sent back to sender/host
     socket.emit('receive_rooms', roomsArray)
 
-    //get updated array sent back to other ppl
+    //get updated array sent back to other
     socket.broadcast.emit('receive_rooms', roomsArray)
   });
 
   //get_rooms
 
-  socket.on("get_rooms", () => {
+  socket.on("get_rooms", (data, callBack) => {
     console.log('get_rooms');
     console.log(roomsArray);
     socket.emit('receive_rooms', roomsArray)

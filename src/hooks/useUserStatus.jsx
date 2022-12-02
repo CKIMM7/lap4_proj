@@ -22,6 +22,7 @@ const useUserStatus = (action) => {
     const createRoom = () => {
       let room = uuidv4().slice(24)
       socket.emit("create_room", room)
+
   };
 
     const joinRoom = (room) => {
