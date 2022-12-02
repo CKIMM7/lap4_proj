@@ -3,8 +3,8 @@ import { socket } from '../../hooks/socket';
 import useUserStatus from '../../hooks/useUserStatus'
 
 export default function Room({ data }) {
-    console.log('room client js')
-    console.log(data)
+    // console.log('room client js')
+    // console.log(data)
 
     const { joinRoom, sendMessage, setMessage, message } = useUserStatus()
 
@@ -19,7 +19,7 @@ export default function Room({ data }) {
     };
 
     useEffect(() => {
-        console.log(message)
+        // console.log(message)
     }, [message])
 
     return (
