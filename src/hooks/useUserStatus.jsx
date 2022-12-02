@@ -32,20 +32,13 @@ const useUserStatus = (action) => {
 
     
     useEffect(() => {
-      console.log('In useEffect')
-      console.log(`Rooms:`)
-      console.log(room)
-
         socket.off().on('connect', function() {
-          console.log(`${socket.id}`)
-          console.log('test')
+          console.log(`${socket.id} connected`)
           dispatch(usersActions.setUser(socket.id))
           socket.emit("get_rooms");
         });
 
         socket.on("receive_rooms", (data) => {
-          console.log(socket.id)
-            console.log(data)
             dispatch(roomActions.setRoom(data))              
           })
 

@@ -12,7 +12,7 @@ export default function CreateRoom ({ data }) {
         console.log(r)
         return <Room data={r} key={i}></Room>
     })
-
+        
     return (
         <div className="App">
         <h2>user: {socket.id}</h2>
