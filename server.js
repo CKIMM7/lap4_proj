@@ -60,6 +60,6 @@ io.on("connection", (socket) => {
 
 app.get('/', (req, res) => res.send('Backend server is running'))
 
-server.listen(process.env.PORT || 3000, () => {
+server.listen(process.env.PORT || 3001, () => {
   console.log("SERVER IS RUNNING ON http://localhost:3001");
 });
