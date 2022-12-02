@@ -15,10 +15,11 @@ function App() {
   const dispatch = useDispatch();
   const { status } = useGetGames(10, 11, 'easy', 'multiple')
 
-  const { createRoom, sendMessage, setRoom, setMessage, messageReceived,  } = useUserStatus();
+  const { createRoom, sendMessage, setRoom, setMessage } = useUserStatus();
 
   const userData = useSelector(state => state.user.user);
   const roomsArray = useSelector(state => state.room.room);
+  const messageReceived = useSelector(state => state.user.messageReceived);
 
   let createdRooms = roomsArray.map((r,i) => {
       return <Room data={r} key={i}></Room>
@@ -28,6 +29,7 @@ function App() {
   //   console.log(roomsArray)
 
   // }, [roomsArray])
+
 
 return (
 

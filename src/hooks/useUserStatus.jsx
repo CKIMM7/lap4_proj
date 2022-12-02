@@ -18,7 +18,6 @@ const useUserStatus = (action) => {
     const [messageReceived, setMessageReceived] = useState("");
 
     const room = useSelector(state => state.room.room);
-    console.log(room)
 
     const createRoom = () => {
       let room = uuidv4().slice(24)
@@ -50,12 +49,13 @@ const useUserStatus = (action) => {
 
         socket.on("receive_message", (data) => {
             console.log("receive_message")
-            console.log(data)         
+            console.log(data)
+            dispatch(usersActions.setMessageReceived(data.message))        
           });          
 
     }, [socket]);
 
-    return { createRoom, sendMessage, messageReceived, setMessageReceived, setMessage, message, joinRoom }
+    return { createRoom, sendMessage, setMessage, message, joinRoom }
 }
 
 export default useUserStatus;
