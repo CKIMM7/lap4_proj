@@ -1,15 +1,26 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const usersSlice = createSlice({
+const userSlice = createSlice({
     name: 'users',
     initialState: {
-        user: 'user1',
+        user: '',
+        messageReceived: 'aaa',
+        socket: {},
         searchValue: '',
-        textInput: '' 
+        textInput: '',
     },
     reducers: {
-      setUsers(state, action) {
-        state.userRepos = action.payload;
+
+      setMessageReceived(state, action) {
+        state.messageReceived = state.messageReceived +' '+ action.payload;
+      },
+
+      setSocket(state, action) {
+        state.socket = action.payload;
+      },
+
+      setUser(state, action) {
+        state.user = action.payload;
       },
   
       setIsLoading(state, action) {
@@ -45,6 +56,6 @@ const usersSlice = createSlice({
     },
 });
 
-export const usersActions = usersSlice.actions;
+export const usersActions = userSlice.actions;
 
-export default usersSlice;
+export default userSlice;
