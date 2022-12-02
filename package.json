@@ -13,6 +13,7 @@
     "axios": "^1.2.0",
     "cors": "^2.8.5",
     "express": "^4.18.2",
+    "nodemon": "^2.0.20",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.5",
@@ -29,7 +30,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "server": "nodemon ./src/api",
-    "start": "node server.js",
+    "start": "nodemon server.js",
     "build": "npm i"
   },
   "eslintConfig": {
