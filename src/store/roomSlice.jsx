@@ -7,7 +7,7 @@ const roomSlice = createSlice({
         searchValue: '',
         textInput: '' 
     },
-    reducers: {
+  reducers: {
 
       setRoom(state, action) {
         console.log('state.room')
