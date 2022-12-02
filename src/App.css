@@ -1,38 +1,38 @@
-.App {
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata&family=Press+Start+2P&family=Space+Mono&display=swap');
+
+body {
+  background-color: #170F29;
+}
+
+.header {
+  margin: 270px auto 0;
+  width: 60%;
   text-align: center;
+  
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+h1 {
+  color: #F07DEA;
+  font-family: 'Press Start 2p';
+  text-shadow: 1px 3px 2px rgba(9, 0, 0, 0.81);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+h3 {
   color: white;
+  font-family: 'Space Mono';
+  width: 700px;
+  margin: 0 auto;
+  
 }
 
-.App-link {
-  color: #61dafb;
+.quizbtn {
+  margin: 30px auto;
+  width: 200px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+button {
+  font-size: 20px;
+  width: 200px;
+  font-family: 'Press Start 2p';
+  
 }

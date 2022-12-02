@@ -7,7 +7,8 @@ import io from "socket.io-client";
 import useUserStatus from './hooks/useUserStatus';
 import { roomActions } from './store/roomSlice';
 import Room from './pages/room';
-import { Start, Lobby, ChooseTopic } from './pages'
+import { Start, Lobby, Topic } from './pages'
+import './App.css';
 
 const socket = io.connect("http://localhost:3001");
 
@@ -32,27 +33,31 @@ function App() {
   }, [roomsArray])
 
 return (
-
-  <div className="App">
-      <h2>user: {socket.id}</h2>
-      {/* <input
-        placeholder="Room Number..."
-        onChange={(event) => {
-          dispatch(roomActions.setRoom(event.target.value));
-        }}  
-      /> */}
-      <button onClick={createRoom}> Create Room</button>
-      <input
-        placeholder="Message..."
-        onChange={(event) => {
-          setMessage(event.target.value);
-        }}
-      />
-      <button onClick={sendMessage}> Send Message</button>
-      <h1> Message:</h1>
-      {messageReceived}
-      {createdRooms}
-    </div>
+     <Routes>
+     <Route path="/" element={<Start/>}></Route>
+     <Route path="/Lobby" element={"<Lobby/>"}></Route>
+     <Route path="/Topic" element={"<Topic/>"}></Route>
+     </Routes>
+  // <div className="App">
+  //     <h2>user: {socket.id}</h2>
+  //     {/* <input
+  //       placeholder="Room Number..."
+  //       onChange={(event) => {
+  //         dispatch(roomActions.setRoom(event.target.value));
+  //       }}  
+  //     /> */}
+  //     <button onClick={createRoom}> Create Room</button>
+  //     <input
+  //       placeholder="Message..."
+  //       onChange={(event) => {
+  //         setMessage(event.target.value);
+  //       }}
+  //     />
+  //     <button onClick={sendMessage}> Send Message</button>
+  //     <h1> Message:</h1>
+  //     {messageReceived}
+  //     {createdRooms}
+  //   </div>
 )}
 
 export default App;
