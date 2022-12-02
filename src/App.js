@@ -7,6 +7,7 @@ import io from "socket.io-client";
 import useUserStatus from './hooks/useUserStatus';
 import { roomActions } from './store/roomSlice';
 import Room from './pages/room';
+import { Start, Lobby, ChooseTopic } from './pages'
 
 const socket = io.connect("http://localhost:3001");
 
