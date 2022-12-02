@@ -3,7 +3,17 @@ import { createSlice } from '@reduxjs/toolkit';
 const roomSlice = createSlice({
     name: 'room',
     initialState: {
-        room: [],
+      room: [
+        {
+          id: 'Default',
+          messages: [
+            {
+              user: 'Test User',
+              message: 'Hello'
+            }
+          ]
+        }
+      ],
         searchValue: '',
         textInput: '' 
     },
@@ -13,7 +23,7 @@ const roomSlice = createSlice({
         console.log('state.room')
         //console.log(state.room)
         console.log(action.payload)
-        console.log(...state.room)
+      console.log(...state.room)
         state.room = action.payload
       },  
 

@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import io from "socket.io-client";
 import { usersActions } from '../store/usersSlice';
 import { roomActions } from '../store/roomSlice';
 import { v4 as uuidv4 } from 'uuid';
@@ -20,7 +19,15 @@ const useUserStatus = (action) => {
     const room = useSelector(state => state.room.room);
 
     const createRoom = () => {
-      let room = uuidv4().slice(24)
+      let room = {
+        id: uuidv4().slice(24),
+          messages: [
+            {
+              user: 'Test User',
+              message: 'Hello'
+            }
+          ]
+      }
       socket.emit("create_room", room)
 
   };
@@ -28,6 +35,11 @@ const useUserStatus = (action) => {
   const joinRoom = (room) => {
       console.log("You have joined room: "+room)
       socket.emit("join_room", room)
+  };
+
+  const leaveRoom = (room) => {
+    console.log("You have left room: " + room)
+    socket.emit("leave_room", room)
   };
 
     const sendMessage = (message, room) => {
@@ -43,7 +55,7 @@ const useUserStatus = (action) => {
 
         socket.off().on('connect', function() {
           console.log(`${socket.id}`)
-          console.log('test')
+
           dispatch(usersActions.setUser(socket.id))
           socket.emit("get_rooms");
         });
@@ -62,7 +74,7 @@ const useUserStatus = (action) => {
 
     }, [socket]);
 
-    return { createRoom, sendMessage, setMessage, message, joinRoom }
+    return { createRoom, sendMessage, setMessage, message, joinRoom, leaveRoom }
 }
 
 export default useUserStatus;

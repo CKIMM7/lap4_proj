@@ -53,9 +53,17 @@ io.on("connection", (socket) => {
     //route change to this room<-
   });
 
+  socket.on("leave_room", (room) => {
+
+    console.log(`left room: ${room}`)
+    socket.leave(room);
+    //route change to this room<-
+  });
+
   socket.on("send_message", (message, room) => {
     console.log("send_message")
     console.log(message)
+    socket.emit("receive_message", message)
     socket.to(message.room).emit("receive_message", message);
   });
 });
