@@ -28,8 +28,8 @@
     "react-build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "socket": "node server.js",
-    "start": "nodemon ./src/api",
+    "server": "nodemon ./src/api",
+    "start": "node server.js",
     "build": "npm i"
   },
   "eslintConfig": {
