@@ -14,7 +14,7 @@ const roomSlice = createSlice({
         //console.log(state.room)
         console.log(action.payload)
         console.log(...state.room)
-        state.room = [action.payload, ...state.room]
+        state.room = action.payload
       },  
 
       setIsLoading(state, action) {

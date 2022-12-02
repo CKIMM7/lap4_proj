@@ -22,6 +22,7 @@ function App() {
   const messageReceived = useSelector(state => state.user.messageReceived);
 
   let createdRooms = roomsArray.map((r,i) => {
+      console.log(r)
       return <Room data={r} key={i}></Room>
   })
 
@@ -29,6 +30,8 @@ function App() {
   //   console.log(roomsArray)
 
   // }, [roomsArray])
+
+  console.log(roomsArray)
 
 
 return (

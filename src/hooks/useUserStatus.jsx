@@ -22,7 +22,6 @@ const useUserStatus = (action) => {
     const createRoom = () => {
       let room = uuidv4().slice(24)
       socket.emit("create_room", room)
-      dispatch(roomActions.setRoom(room))
   };
 
     const joinRoom = (room) => {
@@ -32,7 +31,8 @@ const useUserStatus = (action) => {
     const sendMessage = (message, room) => {
       // console.log(message, room)
         socket.emit("send_message", { message, room });
-      };  
+      };
+
     
     useEffect(() => {
       console.log('In useEffect')
@@ -43,16 +43,14 @@ const useUserStatus = (action) => {
           console.log(`${socket.id}`)
           console.log('test')
           dispatch(usersActions.setUser(socket.id))
-          socket.on("get_rooms", (data) => { dispatch(roomActions.setRoom(data)) })
+          socket.emit("get_rooms");
         });
 
         socket.on("receive_rooms", (data) => {
-            console.log("receive_rooms")
-          console.log(data)
-          console.log('Receive room running')
           console.log(socket.id)
+            console.log(data)
             dispatch(roomActions.setRoom(data))              
-          });
+          })
 
         socket.on("receive_message", (data) => {
             console.log("receive_message")
