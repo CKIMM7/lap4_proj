@@ -58,6 +58,7 @@ io.on("connection", (socket) => {
   });
 });
 
+server.get('/', (req, res) => res.send('<h1>Backend Server Running</h1>'))
 
 server.listen(3001, () => {
   console.log("SERVER IS RUNNING ON http://localhost:3001");
