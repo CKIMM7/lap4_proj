@@ -25,7 +25,8 @@ const useUserStatus = (action) => {
 
   };
 
-    const joinRoom = (room) => {
+  const joinRoom = (room) => {
+      console.log("You have joined room: "+room)
       socket.emit("join_room", room)
   };
 

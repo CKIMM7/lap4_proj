@@ -14,6 +14,8 @@ const io = new Server(server, {
   },
 });
 
+const port = process.env.PORT || 3500
+
 let roomsArray = [];
 
 io.on("connection", (socket) => {
@@ -60,6 +62,8 @@ io.on("connection", (socket) => {
 
 app.get('/', (req, res) => res.send('Backend server is running'))
 
-server.listen(process.env.PORT || 3500, () => {
-  console.log("SERVER IS RUNNING ON http://localhost:3001");
+
+
+server.listen(port, () => {
+  console.log(`SERVER IS RUNNING ON http://localhost:${port}`);
 });
