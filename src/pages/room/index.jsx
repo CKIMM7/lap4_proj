@@ -34,7 +34,9 @@ export default function Room({ data }) {
       <button onClick={sendMessageHandler}> Send Message</button>
       <br/>
 
-        <button onClick={joinRoomHandler}>join</button>
+        <button onClick={joinRoomHandler}>
+            join room: {data}
+        </button>
         </div>
     )
   }

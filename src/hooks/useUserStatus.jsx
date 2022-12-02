@@ -5,24 +5,20 @@ import { usersActions } from '../store/usersSlice';
 import { roomActions } from '../store/roomSlice';
 import { v4 as uuidv4 } from 'uuid';
 import { socket } from './socket';
-
-
-//const socket = io.connect("http://localhost:3001");
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const useUserStatus = (action) => {
 
-    //console.log(counter)
-    //const [userHookstatus, setStatus] = useState(true)
     const dispatch = useDispatch()
     const [message, setMessage] = useState("");
     const [messageReceived, setMessageReceived] = useState("");
+
 
     const room = useSelector(state => state.room.room);
 
     const createRoom = () => {
       let room = uuidv4().slice(24)
       socket.emit("create_room", room)
-
   };
 
     const joinRoom = (room) => {
