@@ -8,7 +8,6 @@ import useUserStatus from './hooks/useUserStatus';
 import { roomActions } from './store/roomSlice';
 import Room from './pages/room';
 
-const socket = io.connect("http://localhost:3001");
 
 function App() {
 
