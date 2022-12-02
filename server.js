@@ -50,6 +50,10 @@ io.on("connection", (socket) => {
     socket.broadcast.emit('receive_rooms', data)
   });
 
+  socket.on("get_rooms", (data) => {
+    socket.broadcast.emit('receive_rooms', data)
+  })
+
   socket.on("join_room", (room) => {
     
     console.log(`joined room: ${room}`)
