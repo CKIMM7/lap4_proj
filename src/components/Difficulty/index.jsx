@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Diffculty = () => {
+const Diffculty = ({ level }) => {
 
     function startGame(e) { 
         e.preventDefault()
