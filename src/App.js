@@ -24,11 +24,10 @@ function App() {
       return <Room data={r} key={i}></Room>
   })
 
-  useEffect(() => {
-    console.log(roomsArray)
+  // useEffect(() => {
+  //   console.log(roomsArray)
 
-
-  }, [roomsArray])
+  // }, [roomsArray])
 
 return (
 

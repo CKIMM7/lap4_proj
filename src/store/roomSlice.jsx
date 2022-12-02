@@ -1,7 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-
-
 const roomSlice = createSlice({
     name: 'room',
     initialState: {
@@ -12,9 +10,10 @@ const roomSlice = createSlice({
     reducers: {
 
       setRoom(state, action) {
-        //console.log(action.payload)
-
-        state.room = [...state.room, action.payload]
+        console.log('state.room')
+        //console.log(state.room)
+        console.log(action.payload)
+        state.room = [action.payload, ...state.room]
       },  
 
       setIsLoading(state, action) {
