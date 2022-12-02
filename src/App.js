@@ -8,7 +8,7 @@ import useUserStatus from './hooks/useUserStatus';
 import { roomActions } from './store/roomSlice';
 import Room from './pages/room';
 
-const socket = io.connect("https://helpful-taffy-b1fa62.netlify.app/");
+// const socket = io.connect("https://helpful-taffy-b1fa62.netlify.app/");
 
 function App() {
 
@@ -35,7 +35,7 @@ function App() {
 return (
 
   <div className="App">
-      <h2>user: {socket.id}</h2>
+      {/* <h2>user: {socket.id}</h2> */}
       {/* <input
         placeholder="Room Number..."
         onChange={(event) => {
