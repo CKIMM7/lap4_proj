@@ -10,42 +10,43 @@ import { socket } from './socket';
 
 const useUserStatus = (action) => {
 
-    //console.log(counter)
-    //const [userHookstatus, setStatus] = useState(true)
-    const dispatch = useDispatch()
-    const [message, setMessage] = useState("");
-    const [messageReceived, setMessageReceived] = useState("");
+  //console.log(counter)
+  //const [userHookstatus, setStatus] = useState(true)
+  const dispatch = useDispatch()
+  const [message, setMessage] = useState("");
+  const [messageReceived, setMessageReceived] = useState("");
 
-    const room = useSelector(state => state.room.room);
+  const room = useSelector(state => state.room.room);
 
-    const createRoom = () => {
-      let room = {
-        id: uuidv4().slice(24),
-          messages: [
-            {
-              user: 'Test User',
-              message: 'Hello'
-            }
-          ]
-      }
-      socket.emit("create_room", room)
-
+  const createRoom = () => {
+    let room = {
+      id: uuidv4().slice(24),
+        messages: [
+          {
+            user: 'Test User',
+            message: 'Hello'
+          }
+        ]
+    }
+    socket.emit("create_room", room)
   };
 
   const joinRoom = (room) => {
-      console.log("You have joined room: "+room)
-      socket.emit("join_room", room)
+    console.log("You have joined room: "+room.id)
+    socket.emit("join_room", room.id)
   };
 
   const leaveRoom = (room) => {
-    console.log("You have left room: " + room)
-    socket.emit("leave_room", room)
+    console.log("You have left room: " + room.id)
+    socket.emit("leave_room", room.id)
   };
 
-    const sendMessage = (message, room) => {
-      // console.log(message, room)
-        socket.emit("send_message", { message, room });
-      };
+  const sendMessage = (message, room) => {
+    // console.log(message, room)
+    console.log(message)
+
+    socket.emit("send_message", { user: 'User', message: message }, room );
+  };
 
     
     useEffect(() => {
