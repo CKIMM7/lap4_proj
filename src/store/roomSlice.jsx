@@ -9,8 +9,8 @@ const roomSlice = createSlice({
         id: 'Default',
         messages: [
           {
-            user: 'Test User',
-            message: 'Hello'
+            user: '',
+            message: ''
           }
         ]
       }

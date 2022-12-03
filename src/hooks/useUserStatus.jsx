@@ -23,8 +23,8 @@ const useUserStatus = (action) => {
       id: uuidv4().slice(24),
         messages: [
           {
-            user: 'Test User',
-            message: 'Hello'
+            user: 'Admin',
+            message: 'Welcome to the chat room!'
           }
         ]
     }
