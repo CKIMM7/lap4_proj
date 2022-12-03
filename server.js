@@ -63,8 +63,9 @@ io.on("connection", (socket) => {
   socket.on("send_message", (message, room) => {
     console.log("send_message")
     console.log(message)
-    socket.emit("receive_message", message)
-    socket.to(room.id).emit("receive_message", message);
+    console.log(room)
+    socket.emit("receive_message", message, room)
+    socket.to(room.id).emit("receive_message", message, room);
   });
 });
 

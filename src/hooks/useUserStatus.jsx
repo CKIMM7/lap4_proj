@@ -43,7 +43,7 @@ const useUserStatus = (action) => {
 
   const sendMessage = (message, room) => {
     // console.log(message, room)
-    console.log(message)
+    console.log(room)
 
     socket.emit("send_message", { user: 'User', message: message }, room );
   };
@@ -67,10 +67,12 @@ const useUserStatus = (action) => {
             dispatch(roomActions.setRoom(data))              
           })
 
-        socket.on("receive_message", (data) => {
+        socket.on("receive_message", (data, room) => {
             console.log("receive_message")
             console.log(data)
-            dispatch(roomActions.setMessage(data))        
+          console.log(room)
+          data.room = room.id
+            dispatch(roomActions.setMessage(data, room))        
           });          
 
     }, [socket]);

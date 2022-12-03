@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { current } from '@reduxjs/toolkit'
 
 const roomSlice = createSlice({
   name: 'room',
@@ -28,14 +29,20 @@ const roomSlice = createSlice({
     },  
     
     setMessage(state, action) {
-      console.log(state.room.length)
-      console.log(...state.room)
+      console.log(current(state))
+      console.log(action)
       state.room.map(room => console.log(room.id))
       console.log(state.messageReceived)
+      state.room.map(room => console.log(room.messages.user))
+      let ind = state.room.findIndex(obj => obj.id == action.payload.room)
+      const newObj = state.room
+      newObj[ind].messages.push({user:action.payload.user, message:action.payload.message})
+
       console.log(action.payload)
-      let temp = state.room[0].messages.push(action.payload)
-      console.log(temp)
-      state.room[0].messages = temp
+      state.room = newObj
+      // let temp = state.room[0].messages.push(action.payload)
+      // console.log(temp)
+      // state.room[0].messages = temp
     },
 
     setIsLoading(state, action) {
