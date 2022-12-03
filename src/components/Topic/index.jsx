@@ -1,6 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+const listOfCategory = [
+    {id: 23, subject: 'history' },
+    {id: 17, subject: 'science&nature' },
+    {id: 21, subject: 'sports' }
+]
 
 const Topic = ({ topic }) => {
+
+    const [category, setCategory] = useState(23)
 
     const handleCategory = (e) => {
         const subject = e.target.value;

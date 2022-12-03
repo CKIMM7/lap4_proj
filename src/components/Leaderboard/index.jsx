@@ -1,5 +1,4 @@
-import React, { useRef } from 'react';
-import { useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 
 let tempArr = [
     { id: 1, name: 'a', score: 2131},
@@ -44,10 +43,10 @@ const Leaderboard = () => {
 
     function populateTable(){
         sortScore();
-
+    // bug in line 50
         for(let i=0; i< 10; i++){
           if(sortedData[i] !== undefined) rank[i] = sortedData[i]
-          else rank[i] = { id: null, name: 'xxxx', score: 0000 }
+        //   else rank[i] = { id: null, name: 'xxxx', score: 0000 }
         //   console.log( rank[i])
         }
     }

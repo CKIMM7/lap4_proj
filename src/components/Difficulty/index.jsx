@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const Diffculty = ({ level }) => {
 
+    const [mode, setMode] = useState('easy')
+
     function startGame(e) { 
         e.preventDefault()
-        console.log(`Goto ${e.target.value} game`)
+        console.log(`${e.target.value} game selected`)
         setMode(e.target.value)
+        // setMode('')
     }
 
     function displayLeaderboard(e) { 
