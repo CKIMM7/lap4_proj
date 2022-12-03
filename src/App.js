@@ -19,7 +19,7 @@ function App() {
 
   const userData = useSelector(state => state.user.user);
   const roomsArray = useSelector(state => state.room.room);
-  const messageReceived = useSelector(state => state.user.messageReceived);
+  const messageReceived = useSelector(state => state.room.messageReceived);
 
   let createdRooms = roomsArray.map((r,i) => {
       console.log(r)

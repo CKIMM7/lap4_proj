@@ -70,7 +70,7 @@ const useUserStatus = (action) => {
         socket.on("receive_message", (data) => {
             console.log("receive_message")
             console.log(data)
-            dispatch(usersActions.setMessageReceived(data.message))        
+            dispatch(roomActions.setMessage(data))        
           });          
 
     }, [socket]);

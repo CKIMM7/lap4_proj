@@ -14,8 +14,8 @@ const roomSlice = createSlice({
         ]
       }
     ],
-        searchValue: '',
-        textInput: '' 
+    searchValue: '',
+    textInput: '' 
   },
   reducers: {
 
@@ -27,8 +27,15 @@ const roomSlice = createSlice({
       state.room = action.payload
     },  
     
-    setMessageReceived(state, action) {
-      state.messageReceived = state.messageReceived + ' ' + action.payload;
+    setMessage(state, action) {
+      console.log(state.room.length)
+      console.log(...state.room)
+      state.room.map(room => console.log(room.id))
+      console.log(state.messageReceived)
+      console.log(action.payload)
+      let temp = state.room[0].messages.push(action.payload)
+      console.log(temp)
+      state.room[0].messages = temp
     },
 
     setIsLoading(state, action) {
