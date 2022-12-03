@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 const Diffculty = ({ level }) => {
 
-    const [mode, setMode] = useState('easy')
-
-    function startGame(e) { 
+    function startGame(e, id) { 
         e.preventDefault()
-        console.log(`${e.target.value} game selected`)
-        setMode(e.target.value)
-        // setMode('')
+        updateInput(e, id)
+        console.log(`start ${level} game`)
+        level = '';
+    }
+
+    function updateInput(e, id){
+        console.log(`${id} game selected`)
+        level = id
     }
 
     function displayLeaderboard(e) { 
@@ -18,13 +21,13 @@ const Diffculty = ({ level }) => {
 
     return <div className='difficulty'>
         <div id="list-of-difficulty">
-            <button type="button" className="choose-mode" onClick={startGame} value="easy" >
+            <button type="button" className="choose-mode" onClick={e => startGame(e, 'easy')} id="easy" value={level} >
                 <h2>Beginner</h2>
             </button>
-            <button type="button" className="choose-mode" onClick={startGame} value="medium" >
+            <button type="button" className="choose-mode" onClick={e => startGame(e, 'medium')} id="medium" value={level} >
                 <h2>Intermediate</h2>
             </button>
-            <button type="button" className="choose-mode" onClick={startGame} value="hard" >
+            <button type="button" className="choose-mode" onClick={e => startGame(e, 'hard')} id="hard" value={level} >
                 <h2>Expert</h2>
             </button>
         </div>

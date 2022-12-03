@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 
 import useGetGames from './hooks/useGetGames';
@@ -12,7 +12,7 @@ function App() {
   return (
     <div className="App">
       <h1>GAME</h1>
-      <Difficulty level={difficulty} />
+      <Difficulty />
       <Topic />
     </div>
   );
