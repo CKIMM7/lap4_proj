@@ -54,12 +54,15 @@ const Leaderboard = ( dataArray ) => {
     return <div id='leaderboard-beginner'>
         <h2>Leaderboard</h2>
         <h2>Beginner</h2>
-        {rank.row[0].map((ele, index) => <div key={index}>
+        <div id='leaderboard-list'> 
+        {rank.map((ele, index) => 
+         <div id={`leaderboard-row-${index}`} key={index}>
             <p>{index}</p>
             <p>{ele.name}</p>
             <p>{ele.score}</p>
+         </div>
+        )} 
         </div>
-        )}
     </div>
 }
 
