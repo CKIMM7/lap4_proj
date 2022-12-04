@@ -7,14 +7,14 @@ import { Difficulty, Topic, Leaderboard } from './components'
 
 function App() {
 
-  const { status, difficulty } = useGetGames()
+  const { status, category, difficulty } = useGetGames()
 
   return (
     <div className="App">
       <h1>GAME</h1>
-      <Difficulty />
-      <Topic />
-      <Leaderboard />
+      <Difficulty level={difficulty} />
+      <Topic topic={category} />
+      {/* <Leaderboard /> */}
     </div>
   );
 }
