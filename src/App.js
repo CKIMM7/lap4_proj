@@ -3,7 +3,7 @@ import './App.css';
 
 import useGetGames from './hooks/useGetGames';
 
-import { Difficulty, Topic } from './components'
+import { Difficulty, Topic, Leaderboard } from './components'
 
 function App() {
 
@@ -14,6 +14,7 @@ function App() {
       <h1>GAME</h1>
       <Difficulty />
       <Topic />
+      {/* <Leaderboard /> */}
     </div>
   );
 }
