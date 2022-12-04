@@ -10,9 +10,9 @@ describe('Leaderboard', () => {
     // beforeAll(() => {
     // })
 
-    test('rank top 10 are displayed', () => {
+    test.skip('rank top 10 are displayed', () => {
         render(<Leaderboard/>)
-        screen.getByText
+        // screen.getByText
         const divElement = screen.getByText(/Leaderboard/i);
         expect(divElement).toBeInTheDocument()
     }) 

@@ -20,6 +20,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "coverage": "jest --coverage",
     "eject": "react-scripts eject",
     "server": "nodemon ./src/api"
   },
@@ -42,6 +43,7 @@
     ]
   },
   "devDependencies": {
+    "jest-fetch-mock": "^3.0.3",
     "nodemon": "^2.0.20"
   }
 }

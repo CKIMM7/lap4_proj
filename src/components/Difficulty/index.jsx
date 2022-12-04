@@ -22,17 +22,16 @@ const Diffculty = ({ level }) => {
     return <div className='difficulty'>
         <div id="list-of-difficulty">
             <button type="button" className="choose-mode" onClick={e => startGame(e, 'easy')} id="easy" value={level} >
-                <h2>Beginner</h2>
+                Beginner
             </button>
             <button type="button" className="choose-mode" onClick={e => startGame(e, 'medium')} id="medium" value={level} >
-                <h2>Intermediate</h2>
+                Intermediate
             </button>
             <button type="button" className="choose-mode" onClick={e => startGame(e, 'hard')} id="hard" value={level} >
-                <h2>Expert</h2>
+                Expert
             </button>
         </div>
 
-        {/* <button onClick={startGame}>Beginner</button> */}
         <button onClick={displayLeaderboard}>*Leaderboard Icon*</button>
     </div>
 }
