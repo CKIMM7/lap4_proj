@@ -3,9 +3,10 @@
 ## Intro
 
 ## Installation & Usage
-- ```npm i``` install dependencies
+- ```npm i``` to install dependencies
 - ```npm run build```
-- ```npm run dev```
+- ```npm run start``` to run client side
+- ```npm run server``` to start server
 - ```npm test script_name```
 - ```npm run coverage```
 
