@@ -7,7 +7,6 @@ const cors = require("cors");
 app.use(cors());
 
 const server = http.createServer(app);
-
 const io = new Server(server, {
   cors: {
     origin: "*",
@@ -15,30 +14,7 @@ const io = new Server(server, {
   },
 });
 
-// io.on("connection", (socket) => {
-//   console.log(`User Connected: ${socket.id}`);
-
-//   socket.on("join_room", (data) => {
-//     socket.join(data);
-//   });
-
-//   socket.on("send_message", (data) => {
-//     socket.to(data.room).emit("receive_message", data);
-//   });
-// });
-
-// io.on("connection", (socket) => {
-//   console.log(`User Connected: ${socket.id}`);
-
-//   socket.on('send_message', data => {
-//     console.log('data');
-//     console.log(data);
-
-//     socket.broadcast.emit('receive_message', data)
-
-//   })
-
-// });
+let roomsArray = [];
 
 io.on("connection", (socket) => {
   console.log(`User Connected: ${socket.id}`);
@@ -47,7 +23,25 @@ io.on("connection", (socket) => {
     console.log("create_room")
     console.log(data)
 
-    socket.broadcast.emit('receive_rooms', data)
+    //update the array
+    roomsArray.push(data);
+
+    console.log('roomsArray');
+    console.log(roomsArray);
+
+    //get updated array sent back to sender/host
+    socket.emit('receive_rooms', roomsArray)
+
+    //get updated array sent back to other
+    socket.broadcast.emit('receive_rooms', roomsArray)
+  });
+
+  //get_rooms
+
+  socket.on("get_rooms", (data, callBack) => {
+    console.log('get_rooms');
+    console.log(roomsArray);
+    socket.emit('receive_rooms', roomsArray)
   });
 
   socket.on("join_room", (room) => {
@@ -63,8 +57,6 @@ io.on("connection", (socket) => {
     socket.to(message.room).emit("receive_message", message);
   });
 });
-
-
 
 
 server.listen(3001, () => {

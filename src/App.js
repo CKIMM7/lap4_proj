@@ -1,13 +1,16 @@
-<<<<<<<<< Temporary merge branch 1
 import { useState, useEffect } from 'react';
 
 import { Routes, Route } from 'react-router-dom'
 import useGetGames from './hooks/useGetGames';
 import { useDispatch, useSelector } from 'react-redux';
-import io from "socket.io-client";
-import useUserStatus from './hooks/useUserStatus';
-import { roomActions } from './store/roomSlice';
+import { Routes, Route } from 'react-router-dom';
+
 import Room from './pages/room';
+import CreateRoom from './pages/createRoom';
+import GameSettings from './pages/gameSettings';
+import FetchTravia from './components/FetchTravia';
+import Nav from './pages/navBar';
+import GameRoom from './pages/gameRoom';
 import { Start, Lobby, Topic } from './pages'
 import './App.css';
 
@@ -17,49 +20,29 @@ import { Difficulty, Topic, Leaderboard } from './components'
 
 function App() {
 
-  const dispatch = useDispatch();
-  const { status } = useGetGames(10, 11, 'easy', 'multiple')
-
-  const { createRoom, sendMessage, setRoom, setMessage, messageReceived,  } = useUserStatus();
-
-  const userData = useSelector(state => state.user.user);
-  const roomsArray = useSelector(state => state.room.room);
-
-  let createdRooms = roomsArray.map((r,i) => {
-      return <Room data={r} key={i}></Room>
-  })
-
-  // useEffect(() => {
-  //   console.log(roomsArray)
-
-  // }, [roomsArray])
 
 return (
-     <Routes>
-     <Route path="/" element={<Start/>}></Route>
-     <Route path="/Lobby" element={"<Lobby/>"}></Route>
-     <Route path="/Topic" element={"<Topic/>"}></Route>
-     </Routes>
-  // <div className="App">
-  //     <h2>user: {socket.id}</h2>
-  //     {/* <input
-  //       placeholder="Room Number..."
-  //       onChange={(event) => {
-  //         dispatch(roomActions.setRoom(event.target.value));
-  //       }}  
-  //     /> */}
-  //     <button onClick={createRoom}> Create Room</button>
-  //     <input
-  //       placeholder="Message..."
-  //       onChange={(event) => {
-  //         setMessage(event.target.value);
-  //       }}
-  //     />
-  //     <button onClick={sendMessage}> Send Message</button>
-  //     <h1> Message:</h1>
-  //     {messageReceived}
-  //     {createdRooms}
-  //   </div>
+
+  <div className="App">
+      <h2>user: {socket.id}</h2>
+      {/* <input
+        placeholder="Room Number..."
+        onChange={(event) => {
+          dispatch(roomActions.setRoom(event.target.value));
+        }}  
+      /> */}
+      <button onClick={createRoom}> Create Room</button>
+      <input
+        placeholder="Message..."
+        onChange={(event) => {
+          setMessage(event.target.value);
+        }}
+      />
+      <button onClick={sendMessage}> Send Message</button>
+      <h1> Message:</h1>
+      {messageReceived}
+      {createdRooms}
+    </div>
 )}
 //   const { status, category, difficulty } = useGetGames()
 

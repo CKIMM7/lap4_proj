@@ -25,17 +25,14 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "dev": "react-scripts start",
+    "react-build": "react-scripts build",
     "test": "react-scripts test",
-<<<<<<<<< Temporary merge branch 1
     "eject": "react-scripts eject",
-    "socket": "node server.js",
-=========
+    "server": "nodemon ./src/api",
+    "start": "node server.js",
     "coverage": "jest --coverage",
-    "eject": "react-scripts eject",
->>>>>>>>> Temporary merge branch 2
-    "server": "nodemon ./src/api"
+    "build": "npm i"
   },
   "eslintConfig": {
     "extends": [

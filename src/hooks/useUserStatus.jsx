@@ -5,25 +5,22 @@ import { usersActions } from '../store/usersSlice';
 import { roomActions } from '../store/roomSlice';
 import { v4 as uuidv4 } from 'uuid';
 import { socket } from './socket';
-
-
-//const socket = io.connect("http://localhost:3001");
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const useUserStatus = (action) => {
 
-    //console.log(counter)
-    //const [userHookstatus, setStatus] = useState(true)
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [message, setMessage] = useState("");
     const [messageReceived, setMessageReceived] = useState("");
 
+
     const room = useSelector(state => state.room.room);
-    // console.log(room)
 
     const createRoom = () => {
       let room = uuidv4().slice(24)
       socket.emit("create_room", room)
-      dispatch(roomActions.setRoom(room))
+      navigate(`/rooms/${room}`)
   };
 
     const joinRoom = (room) => {
@@ -33,31 +30,29 @@ const useUserStatus = (action) => {
     const sendMessage = (message, room) => {
       // console.log(message, room)
         socket.emit("send_message", { message, room });
-      };  
+      };
+
     
     useEffect(() => {
-        console.log('In useEffect')
-        socket.on('connect', function() {
-          console.log(`${socket.id}`)
+        socket.off().on('connect', function() {
+          console.log(`${socket.id} connected`)
           dispatch(usersActions.setUser(socket.id))
+          socket.emit("get_rooms");
         });
 
-        socket.off().on("receive_rooms", (data) => {
-            console.log("receive_rooms")
-          console.log(data)
-          console.log('Receive room running')
-          console.log(socket.id)
+        socket.on("receive_rooms", (data) => {
             dispatch(roomActions.setRoom(data))              
-          });
+          })
 
         socket.on("receive_message", (data) => {
             console.log("receive_message")
-            console.log(data)         
+            console.log(data)
+            dispatch(usersActions.setMessageReceived(data.message))        
           });          
 
     }, [socket]);
 
-    return { createRoom, sendMessage, messageReceived, setMessageReceived, setMessage, message, joinRoom }
+    return { createRoom, sendMessage, setMessage, message, joinRoom }
 }
 
 export default useUserStatus;
