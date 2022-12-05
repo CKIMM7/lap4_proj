@@ -3,6 +3,7 @@ const app = express();
 const http = require("http");
 const { Server } = require("socket.io");
 const cors = require("cors");
+const { rm } = require("fs");
 
 app.use(cors());
 
@@ -46,17 +47,50 @@ io.on("connection", (socket) => {
     socket.emit('receive_rooms', roomsArray)
   });
 
-  socket.on("join_room", (room) => {
+  socket.on("join_room", (room, userId) => {
     
-    console.log(`joined room: ${room}`)
+    console.log(`${userId} joined room: ${room}`)
     socket.join(room);
+    const indexOfRoom = roomsArray.findIndex(obj => obj.id == room)
+    console.log(indexOfRoom)
+    const tempArr = roomsArray
+    console.log(roomsArray)
+    tempArr[indexOfRoom].users.push(userId)
+    roomsArray = tempArr
+    socket.emit('receive_rooms', roomsArray)
+    socket.broadcast.emit('receive_rooms', roomsArray)
+
+
+
     //route change to this room<-
   });
 
-  socket.on("leave_room", (room) => {
+  socket.on("leave_room", (room, userId) => {
 
     console.log(`left room: ${room}`)
     socket.leave(room);
+    console.log(`${userId} left room: ${room}`)
+
+    const indexOfRoom = roomsArray.findIndex(obj => obj.id == room)
+    console.log(`Index: ${indexOfRoom}`)
+    console.log(roomsArray[indexOfRoom].users)
+    const indexOfUser= roomsArray[indexOfRoom].users.findIndex(obj => obj == userId)
+    console.log(indexOfUser)
+    console.log('Before')
+    console.log(roomsArray)
+    roomsArray[indexOfRoom].users.splice(indexOfUser, 1)
+    // arr.splice(index, 1);
+    if (roomsArray[indexOfRoom].users.length == 0) {
+      roomsArray.splice(indexOfRoom, 1)
+
+
+    }
+    console.log('After')
+    console.log(roomsArray)
+
+    socket.emit('receive_rooms', roomsArray)
+    socket.broadcast.emit('receive_rooms', roomsArray)
+
     //route change to this room<-
   });
 
@@ -64,6 +98,12 @@ io.on("connection", (socket) => {
     console.log("send_message")
     console.log(message)
     console.log(room)
+    const indexOfRoom = roomsArray.findIndex(obj => obj.id == room.id)
+    console.log(indexOfRoom)
+    const tempArr = roomsArray
+    tempArr[indexOfRoom].messages.push({ user: message.user, message: message.message })
+    roomsArray = tempArr
+
     socket.emit("receive_message", message, room)
     socket.to(room.id).emit("receive_message", message, room);
   });

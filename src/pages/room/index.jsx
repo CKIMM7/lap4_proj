@@ -33,6 +33,9 @@ export default function Room({ data }) {
             {console.log(data)}
             {console.log(data.messages)}
 
+            <p>Users:</p>
+            {data.users.map((user, i) => <p key={i}>{`${user}`}</p>)}
+
             <p>Chatroom:</p>
             {data.messages.map((msg, i) => <p key={ i}>{`${msg.user} - ${msg.message}`}</p>)}
 

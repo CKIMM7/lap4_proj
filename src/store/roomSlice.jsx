@@ -7,6 +7,7 @@ const roomSlice = createSlice({
     room: [
       {
         id: 'Default',
+        users: [],
         messages: [
           {
             user: '',
@@ -29,17 +30,17 @@ const roomSlice = createSlice({
     },  
     
     setMessage(state, action) {
-      console.log(current(state))
-      console.log(action)
-      state.room.map(room => console.log(room.id))
-      console.log(state.messageReceived)
-      state.room.map(room => console.log(room.messages.user))
-      let ind = state.room.findIndex(obj => obj.id == action.payload.room)
-      const newObj = state.room
-      newObj[ind].messages.push({user:action.payload.user, message:action.payload.message})
+      // console.log(current(state))
+      // console.log(action)
+      // state.room.map(room => console.log(room.id))
+      // console.log(state.messageReceived)
+      // state.room.map(room => console.log(room.messages.user))
+      let indexOfRoom = state.room.findIndex(room => room.id == action.payload.room)
+      const tempRoom = state.room
+      tempRoom[indexOfRoom].messages.push({user:action.payload.user, message:action.payload.message})
 
       console.log(action.payload)
-      state.room = newObj
+      state.room = tempRoom
       // let temp = state.room[0].messages.push(action.payload)
       // console.log(temp)
       // state.room[0].messages = temp

@@ -21,24 +21,25 @@ const useUserStatus = (action) => {
   const createRoom = () => {
     let room = {
       id: uuidv4().slice(24),
-        messages: [
-          {
-            user: 'Admin',
-            message: 'Welcome to the chat room!'
-          }
-        ]
+      users: [],
+      messages: [
+        {
+          user: 'Admin',
+          message: 'Welcome to the chat room!'
+        }
+      ]
     }
     socket.emit("create_room", room)
   };
 
   const joinRoom = (room) => {
-    console.log("You have joined room: "+room.id)
-    socket.emit("join_room", room.id)
+    console.log(`${socket.id} has joined room: ${room.id}`)
+    socket.emit("join_room", room.id, socket.id)
   };
 
   const leaveRoom = (room) => {
-    console.log("You have left room: " + room.id)
-    socket.emit("leave_room", room.id)
+    console.log(`${socket.id} has left room: ${room.id}`)
+    socket.emit("leave_room", room.id, socket.id)
   };
 
   const sendMessage = (message, room) => {
