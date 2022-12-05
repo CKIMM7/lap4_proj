@@ -9,6 +9,8 @@ import { roomActions } from './store/roomSlice';
 import Room from './pages/room';
 import { Start, Lobby, Topic } from './pages'
 import './App.css';
+import "nes.css/css/nes.min.css";
+
 
 const socket = io.connect("http://localhost:3001");
 
