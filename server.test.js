@@ -59,7 +59,7 @@ describe('socket tests', () => {
         let roomsArray = [1]
         socket.emit('receive_rooms', roomsArray)
         socket.on("receive_rooms", (data) => {
-            expect(data).toBe('lol')
+            expect(data).toBe(roomsArray)
         })
     })
 })
