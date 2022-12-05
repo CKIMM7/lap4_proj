@@ -7,7 +7,7 @@ const roomSlice = createSlice({
     room: [
       {
         id: 'Default',
-        users: [],
+        users: [{ name: '', isReady: false }],
         messages: [
           {
             user: '',

@@ -100,6 +100,11 @@ io.on("connection", (socket) => {
     socket.emit("receive_message", message, room)
     socket.to(room.id).emit("receive_message", message, room);
   });
+
+  socket.on("ready", (room, userId) => {
+    const indexOfRoom = roomsArray.findIndex(obj => obj.id == room.id)
+    roomsArray[indexOfRoom].map
+  })
 });
 
 app.get('/', (req, res) => res.send('Backend server is running'))

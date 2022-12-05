@@ -19,7 +19,7 @@ const useUserStatus = (action) => {
   const createRoom = () => {
     let room = {
       id: uuidv4().slice(24),
-      users: [],
+      users: [{name: '', isReady: false}],
       messages: [
         {
           user: 'Admin',
@@ -39,6 +39,10 @@ const useUserStatus = (action) => {
     console.log(`${socket.id} has left room: ${room.id}`)
     socket.emit("leave_room", room.id, socket.id)
   };
+
+  const readyUp = (room) => {
+    socket.emit("ready", room.id, socket.id)
+  }
 
   const sendMessage = (message, room) => {
     // console.log(message, room)
