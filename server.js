@@ -22,6 +22,24 @@ let roomsArray = [];
 io.on("connection", (socket) => {
   console.log(`User Connected: ${socket.id}`);
 
+  function joinRoom(room, userId) {
+    socket.join(room);
+    const indexOfRoom = roomsArray.findIndex(obj => obj.id == room)
+
+    const tempArr = roomsArray
+
+    tempArr[indexOfRoom].users.push(userId)
+    roomsArray = tempArr
+   }
+
+   function updateData () {
+    //get updated array sent back to sender/host
+    socket.emit('receive_rooms', roomsArray)
+
+    //get updated array sent back to other
+    socket.broadcast.emit('receive_rooms', roomsArray)
+   }
+
   socket.on("create_room", (data, userId) => {
     console.log("create_room")
     console.log(data)
@@ -32,19 +50,10 @@ io.on("connection", (socket) => {
     console.log('roomsArray');
     console.log(roomsArray);
     const room = data.id
-    socket.join(room);
-    const indexOfRoom = roomsArray.findIndex(obj => obj.id == room)
-    console.log(indexOfRoom)
-    const tempArr = roomsArray
-    console.log(roomsArray)
-    tempArr[indexOfRoom].users.push(userId)
-    roomsArray = tempArr
-
-    //get updated array sent back to sender/host
-    socket.emit('receive_rooms', roomsArray)
-
-    //get updated array sent back to other
-    socket.broadcast.emit('receive_rooms', roomsArray)
+    joinRoom(data.id, userId)
+    
+    updateData()
+    
   });
 
   //get_rooms
@@ -56,62 +65,39 @@ io.on("connection", (socket) => {
   });
 
   socket.on("join_room", (room, userId) => {
-    
-    
-    const indexOfRoom = roomsArray.findIndex(obj => obj.id == room)
-    console.log(indexOfRoom)
-    if(roomsArray[indexOfRoom].users.includes(userId)) return
-    const tempArr = roomsArray
-    console.log(roomsArray)
-    tempArr[indexOfRoom].users.push(userId)
-    console.log(`${userId} joined room: ${room}`)
-    socket.join(room);
-    roomsArray = tempArr
-    socket.emit('receive_rooms', roomsArray)
-    socket.broadcast.emit('receive_rooms', roomsArray)
 
+    joinRoom(room, userId)
 
+    updateData()
 
-    //route change to this room<-
   });
 
   socket.on("leave_room", (room, userId) => {
 
-    console.log(`left room: ${room}`)
     socket.leave(room);
     console.log(`${userId} left room: ${room}`)
 
     const indexOfRoom = roomsArray.findIndex(obj => obj.id == room)
-    console.log(`Index: ${indexOfRoom}`)
+
     if (!roomsArray[indexOfRoom].users.includes(userId)) return
 
-    console.log(roomsArray[indexOfRoom].users)
+
     const indexOfUser= roomsArray[indexOfRoom].users.findIndex(obj => obj == userId)
-    console.log(indexOfUser)
-    console.log('Before')
-    console.log(roomsArray)
+
     roomsArray[indexOfRoom].users.splice(indexOfUser, 1)
-    // arr.splice(index, 1);
+
     if (roomsArray[indexOfRoom].users.length == 0) {
       roomsArray.splice(indexOfRoom, 1)
-
-
     }
-    console.log('After')
-    console.log(roomsArray)
 
-    socket.emit('receive_rooms', roomsArray)
-    socket.broadcast.emit('receive_rooms', roomsArray)
+    updateData()
 
-    //route change to this room<-
   });
 
   socket.on("send_message", (message, room) => {
-    console.log("send_message")
-    console.log(message)
-    console.log(room)
+
     const indexOfRoom = roomsArray.findIndex(obj => obj.id == room.id)
-    console.log(indexOfRoom)
+
     const tempArr = roomsArray
     tempArr[indexOfRoom].messages.push({ user: message.user, message: message.message })
     roomsArray = tempArr
