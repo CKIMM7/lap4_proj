@@ -12,7 +12,6 @@ const listOfCategory = [
 ]
 
 const Category = ({ }) => {
-
     const dispatch = useDispatch();
     let category = useSelector(state => state.user.category);
 

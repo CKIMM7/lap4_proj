@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import useGetGames from "../../hooks/useGetGames"
 import { usersActions } from '../../store/usersSlice';
 
-const Diffculty = ({ }) => {
+const Difficulty = ({ }) => {
 
     const dispatch = useDispatch();
     let difficulty = useSelector(state => state.user.difficulty)
@@ -44,4 +44,4 @@ const Diffculty = ({ }) => {
     </div>
 }
 
-export default Diffculty;
+export default Difficulty;
