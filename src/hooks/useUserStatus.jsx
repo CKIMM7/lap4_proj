@@ -9,7 +9,8 @@ import { Navigate, useNavigate } from 'react-router-dom';
 
 const useUserStatus = (action) => {
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [message, setMessage] = useState("");
     const [messageReceived, setMessageReceived] = useState("");
 
@@ -19,6 +20,7 @@ const useUserStatus = (action) => {
     const createRoom = () => {
       let room = uuidv4().slice(24)
       socket.emit("create_room", room)
+      navigate(`/rooms/${room}`)
   };
 
     const joinRoom = (room) => {
