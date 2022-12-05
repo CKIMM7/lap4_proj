@@ -83,6 +83,8 @@ io.on("connection", (socket) => {
 
     const indexOfRoom = roomsArray.findIndex(obj => obj.id == room)
     console.log(`Index: ${indexOfRoom}`)
+    if (!roomsArray[indexOfRoom].users.includes(userId)) return
+
     console.log(roomsArray[indexOfRoom].users)
     const indexOfUser= roomsArray[indexOfRoom].users.findIndex(obj => obj == userId)
     console.log(indexOfUser)
