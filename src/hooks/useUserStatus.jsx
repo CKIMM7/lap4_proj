@@ -46,7 +46,7 @@ const useUserStatus = (action) => {
     // console.log(message, room)
     console.log(room)
 
-    socket.emit("send_message", { user: 'User', message: message }, room );
+    socket.emit("send_message", { user: socket.id, message: message }, room );
   };
 
     

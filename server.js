@@ -57,13 +57,15 @@ io.on("connection", (socket) => {
 
   socket.on("join_room", (room, userId) => {
     
-    console.log(`${userId} joined room: ${room}`)
-    socket.join(room);
+    
     const indexOfRoom = roomsArray.findIndex(obj => obj.id == room)
     console.log(indexOfRoom)
+    if(roomsArray[indexOfRoom].users.includes(userId)) return
     const tempArr = roomsArray
     console.log(roomsArray)
     tempArr[indexOfRoom].users.push(userId)
+    console.log(`${userId} joined room: ${room}`)
+    socket.join(room);
     roomsArray = tempArr
     socket.emit('receive_rooms', roomsArray)
     socket.broadcast.emit('receive_rooms', roomsArray)
