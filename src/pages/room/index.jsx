@@ -24,9 +24,7 @@ export default function Room({ data }) {
 
     const sendMessageHandler = () => {
         console.log(message)
-        console.log(data)
         sendMessage(message, data)
-
     };
 
     useEffect(() => {

@@ -7,6 +7,7 @@ const cors = require("cors");
 app.use(cors());
 
 const server = http.createServer(app);
+
 const io = new Server(server, {
   cors: {
     origin: "*",
@@ -14,9 +15,6 @@ const io = new Server(server, {
   },
 });
 
-const port = process.env.PORT || 3500
-
-let roomsArray = [];
 
 io.on("connection", (socket) => {
   console.log(`User Connected: ${socket.id}`);
@@ -51,7 +49,7 @@ io.on("connection", (socket) => {
     
   });
 
-  //get_rooms
+  //get_rooms{}
 
   socket.on("get_rooms", (data, callBack) => {
     console.log('get_rooms');
@@ -67,27 +65,19 @@ io.on("connection", (socket) => {
 
   });
 
-  socket.on("leave_room", (room, userId) => {
-
-    socket.leave(room);
-    console.log(`${userId} left room: ${room}`)
-
-    const indexOfRoom = roomsArray.findIndex(obj => obj.id == room)
-
-    if (!roomsArray[indexOfRoom].users.includes(userId)) return
-
-
-    const indexOfUser= roomsArray[indexOfRoom].users.findIndex(obj => obj == userId)
-
-    roomsArray[indexOfRoom].users.splice(indexOfUser, 1)
-
-    if (roomsArray[indexOfRoom].users.length == 0) {
-      roomsArray.splice(indexOfRoom, 1)
-    }
-
-    updateData()
-
+  socket.on("join_room", (room) => {
+    
+    console.log(`joined room: ${room}`)
+    socket.join(room);
+    //route change to this room<-
   });
+
+  socket.on("send_message", (message, room) => {
+    console.log("send_message")
+    console.log(message)
+    socket.to(message.room).emit("receive_message", message);
+  });
+
 
   socket.on("send_message", (message, room) => {
 
@@ -100,12 +90,23 @@ io.on("connection", (socket) => {
     socket.emit("receive_message", message, room)
     socket.to(room.id).emit("receive_message", message, room);
   });
+
+
+  socket.on("broadcast_game", (game, room) => {
+
+    const indexOfRoom = roomsArray.findIndex(obj => obj.id == room.id)
+
+    const tempArr = roomsArray
+    tempArr[indexOfRoom].game.push(game)
+    roomsArray = tempArr
+
+    socket.emit("receive_game", game, room)
+    socket.to(room.id).emit("receive_game", game, room);
+  });
+
 });
 
-app.get('/', (req, res) => res.send('Backend server is running'))
 
-
-
-server.listen(port, () => {
-  console.log(`SERVER IS RUNNING ON http://localhost:${port}`);
+server.listen(3001, () => {
+  console.log("SERVER IS RUNNING ON http://localhost:3001");
 });

@@ -4,12 +4,13 @@ import useGetGames from './hooks/useGetGames';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Room from './pages/room';
+import useUserStatus from './hooks/useUserStatus';
+import { roomActions } from './store/roomSlice';
 import CreateRoom from './pages/createRoom';
 import GameSettings from './pages/gameSettings';
-import FetchTravia from './components/FetchTravia';
 import Nav from './pages/navBar';
 import GameRoom from './pages/gameRoom';
-import { Start, Lobby } from './pages'
+import { Start, Lobby, Game } from './pages'
 
 import './App.css';
 import "nes.css/css/nes.min.css";
@@ -18,7 +19,7 @@ import "nes.css/css/nes.min.css";
 // const socket = io.connect("https://helpful-taffy-b1fa62.netlify.app/");
 
 
-import { Difficulty, Topic, Leaderboard, LobbyCode } from './components'
+import { Difficulty, Category, Leaderboard, LobbyCode } from './components'
 
 function App() {
 
@@ -35,6 +36,8 @@ return (
      <Route path="/Lobby" element={"<Lobby/>"}></Route>
      <Route path='/lobby/:id' element={<LobbyCode/> } />
      <Route path="/Topic" element={"<Topic/>"}></Route>
+     <Route path='/startgame' element={<Game />} />
+      <Route path='/leaderboard' element={<Leaderboard /> } />
      </Routes>
   // <div className="App">
   //     <h2>user: {socket.id}</h2>

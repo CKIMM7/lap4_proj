@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom'
 import CreateRoom from '../createRoom'
-import FetchTravia from '../../components/FetchTravia'
+
 import Room from '../room'
 
 export default function Nav() {
@@ -17,7 +17,7 @@ export default function Nav() {
     <div id='nav'>
         <nav>nav, user</nav>
       <CreateRoom />
-      <FetchTravia />
+
      {createdRooms}
 
         <Outlet />
