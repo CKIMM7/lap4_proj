@@ -17,19 +17,19 @@ const roomSlice = createSlice({
       }
     ],
     searchValue: '',
-    textInput: '' 
+    textInput: ''
   },
   reducers: {
 
     setRoom(state, action) {
       state.room = action.payload
-    },  
+    },
     
     setMessage(state, action) {
 
       let indexOfRoom = state.room.findIndex(room => room.id == action.payload.room)
       const tempRoom = state.room
-      tempRoom[indexOfRoom].messages.push({user:action.payload.user, message:action.payload.message})
+      tempRoom[indexOfRoom].messages.push({ user: action.payload.user, message: action.payload.message })
 
       console.log(action.payload)
       state.room = tempRoom

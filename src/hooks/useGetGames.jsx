@@ -3,10 +3,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getGamesAxio } from "../api/axios";
 import { gamesActions } from "../store/store";
 
-const useGetGames = (amount=1, category=1, difficulty='easy', type='multiple') => {
+const useGetGames = (amount=1, category=7, difficulty='easy', type='multiple') => {
 
     const [status, setStatus] = useState(false)
     const dispatch = useDispatch()
+
 
     useEffect(() => {
         setStatus(true)
@@ -18,7 +19,8 @@ const useGetGames = (amount=1, category=1, difficulty='easy', type='multiple') =
         const { signal } = controller;
     
         getGamesAxio(amount, category, difficulty, type)
-        .then(data => { 
+        .then(data => {
+            console.log(data); 
             setStatus(false)
             dispatch(gamesActions.setGamesData(data.results))
             dispatch(gamesActions.setIsLoading(false))

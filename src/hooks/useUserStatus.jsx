@@ -4,19 +4,17 @@ import { usersActions } from '../store/usersSlice';
 import { roomActions } from '../store/roomSlice';
 import { v4 as uuidv4 } from 'uuid';
 import { socket } from './socket';
-
-
-//const socket = io.connect("http://localhost:3001");
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const useUserStatus = (action) => {
 
-  //console.log(counter)
-  //const [userHookstatus, setStatus] = useState(true)
-  const dispatch = useDispatch()
-  const [message, setMessage] = useState("");
-  const [messageReceived, setMessageReceived] = useState("");
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const [message, setMessage] = useState("");
+    const [messageReceived, setMessageReceived] = useState("");
 
-  const room = useSelector(state => state.room.room);
+
+    const room = useSelector(state => state.room.room);
 
   const createRoom = () => {
     let room = {
@@ -51,20 +49,13 @@ const useUserStatus = (action) => {
 
     
     useEffect(() => {
-      console.log('In useEffect')
-      console.log(`Rooms:`)
-      console.log(room)
-
         socket.off().on('connect', function() {
-          console.log(`${socket.id}`)
-
+          console.log(`${socket.id} connected`)
           dispatch(usersActions.setUser(socket.id))
           socket.emit("get_rooms");
         });
 
         socket.on("receive_rooms", (data) => {
-          console.log(socket.id)
-            console.log(data)
             dispatch(roomActions.setRoom(data))              
           })
 
