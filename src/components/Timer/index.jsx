@@ -1,5 +1,4 @@
-import React from "react";
-import { useState, useRef } from "react"
+import React, { useEffect, useState, useRef } from "react";
 import './index.css'
 
 const Timer = () => {
