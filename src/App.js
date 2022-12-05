@@ -9,7 +9,7 @@ import useUserStatus from './hooks/useUserStatus';
 import { roomActions } from './store/roomSlice';
 import Room from './pages/room';
 
-// import { Start, Lobby, Topic } from './pages'
+import { Start, Lobby, Topic, Game } from './pages'
 import './App.css';
 
 import { Difficulty, Category, Leaderboard } from './components'
@@ -21,10 +21,16 @@ function App() {
   const { status } = useGetGames()
 
   return (
-    <div className="App">
-      <h1>GAME</h1>
-      <Difficulty />
-    </div>
+    <Routes>
+      <Route path='/' element={<Lobby />}> </Route>
+      <Route path='/startgame' element={<Game />}> </Route>
+    </Routes>
+
+    // <div className="App">
+    //   <h1>GAME</h1>
+    //   <Lobby />
+    //   <Game />
+    // </div>
   );
 }
 

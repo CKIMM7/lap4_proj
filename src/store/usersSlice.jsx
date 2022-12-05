@@ -6,9 +6,19 @@ const userSlice = createSlice({
         user: '',
         socket: {},
         searchValue: '',
-        textInput: '' 
+        textInput: '',
+        difficulty: '',
+        category: '',
     },
     reducers: {
+
+      setCategory(state, action) {
+        state.category = action.payload;
+      },
+      
+      setDifficulty(state, action) {
+        state.difficulty = action.payload;
+      },
 
       setSocket(state, action) {
         state.socket = action.payload;

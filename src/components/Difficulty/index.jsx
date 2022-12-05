@@ -1,24 +1,25 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { difficulty } from '../../hooks/useGetGames';
-import getGamesAxio from '../../api/axios'
+import { useSelector, useDispatch } from 'react-redux';
+import useGetGames from "../../hooks/useGetGames"
+import { usersActions } from '../../store/usersSlice';
 
-const Diffculty = ({ level }) => {
+const Diffculty = ({ }) => {
 
     const dispatch = useDispatch();
-    const difficulty = useSelector(state => state.user.difficulty)
+    let difficulty = useSelector(state => state.user.difficulty)
 
     function startGame(e, id) { 
         e.preventDefault()
         updateInput(e, id)
-        console.log(`start ${level} game`)
-        level = '';
-        // fetch/trigger start function?
+        console.log(`start ${difficulty} game`)
+        difficulty = '';
+        
     }
 
     function updateInput(e, id){
         console.log(`${id} game selected`)
-        level = id
+        difficulty = id
+        dispatch(usersActions.setDifficulty(difficulty))
     }
 
     function displayLeaderboard(e) { 
@@ -28,13 +29,13 @@ const Diffculty = ({ level }) => {
 
     return <div className='difficulty'>
         <div id="list-of-difficulty">
-            <button type="button" className="choose-mode" onClick={e => startGame(e, 'easy')} id="easy" value={level} >
+            <button type="button" className="choose-mode" onClick={e => startGame(e, 'easy')} id="easy" value={difficulty} >
                 Beginner
             </button>
-            <button type="button" className="choose-mode" onClick={e => startGame(e, 'medium')} id="medium" value={level} >
+            <button type="button" className="choose-mode" onClick={e => startGame(e, 'medium')} id="medium" value={difficulty} >
                 Intermediate
             </button>
-            <button type="button" className="choose-mode" onClick={e => startGame(e, 'hard')} id="hard" value={level} >
+            <button type="button" className="choose-mode" onClick={e => startGame(e, 'hard')} id="hard" value={difficulty} >
                 Expert
             </button>
         </div>
