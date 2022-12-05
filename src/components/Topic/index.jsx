@@ -49,5 +49,3 @@ const Topic = ({ topic }) => {
 }
 
 export default Topic;
-
-// need add topic description
