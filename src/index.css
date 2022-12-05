@@ -11,3 +11,19 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.question {
+  margin-top: 20px;
+}
+
+.room {
+  text-align: center;
+  border: 3px solid yellow;
+  width: 65%
+}
+
+.createRoom {
+  text-align: center;
+  border: 3px solid yellow;
+  width: 65%
+}

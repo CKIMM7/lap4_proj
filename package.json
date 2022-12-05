@@ -11,10 +11,14 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.2.0",
+    "babel-jest": "^29.3.1",
     "babel-loader": "^8.3.0",
     "cors": "^2.8.5",
     "css-loader": "^6.7.2",
     "express": "^4.18.2",
+    "nes.css": "^2.3.0",
+    "jest": "^27.5.1",
+    "nodemon": "^2.0.20",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.5",
@@ -26,11 +30,14 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "dev": "react-scripts start",
+    "react-build": "react-scripts build",
     "test": "jest",
-    "coverage": "jest coverage",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "start": "nodemon server.js",
+    "server": "nodemon ./src/api",
+    "coverage": "jest --coverage",
+    "build": "npm i"
   },
   "jest": {
     "resetMocks": false,
