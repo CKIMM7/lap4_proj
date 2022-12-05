@@ -6,14 +6,11 @@ import { useParams, useNavigate } from 'react-router-dom';
 export default function Room({ data }) {
     // console.log('room client js')
     // console.log(data)
-<<<<<<< HEAD:src/components/room/index.jsx
 
-    const { joinRoom, leaveRoom, sendMessage, setMessage, message } = useUserStatus()
-=======
+    
     const { roomId } = useParams()
     const navigate = useNavigate()
-    const { joinRoom, sendMessage, setMessage, message } = useUserStatus()
->>>>>>> 6dab8c2ecda15522f4fe2d6215099c4f992b419e:src/pages/room/index.jsx
+    const { joinRoom, leaveRoom, sendMessage, setMessage, message } = useUserStatus()
 
     const joinRoomHandler = () => {
         joinRoom(data)
@@ -56,14 +53,8 @@ export default function Room({ data }) {
       <button onClick={sendMessageHandler}> Send Message</button>
       <br/>
 
-<<<<<<< HEAD:src/components/room/index.jsx
             <button onClick={joinRoomHandler}>Join</button>
             <button onClick={leaveRoomHandler}>Leave</button>
-=======
-        <button onClick={joinRoomHandler}>
-            join room: {data}
-        </button>
->>>>>>> 6dab8c2ecda15522f4fe2d6215099c4f992b419e:src/pages/room/index.jsx
         </div>
     )
   }

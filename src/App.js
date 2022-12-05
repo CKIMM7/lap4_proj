@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import useGetGames from './hooks/useGetGames';
 import { useDispatch, useSelector } from 'react-redux';
-import { Routes, Route } from 'react-router-dom';
 
 import Room from './pages/room';
 import CreateRoom from './pages/createRoom';
@@ -10,13 +9,14 @@ import GameSettings from './pages/gameSettings';
 import FetchTravia from './components/FetchTravia';
 import Nav from './pages/navBar';
 import GameRoom from './pages/gameRoom';
-import { Start, Lobby, Topic } from './pages'
+import { Start, Lobby } from './pages'
+
 import './App.css';
 
 // const socket = io.connect("https://helpful-taffy-b1fa62.netlify.app/");
 
 
-import { Difficulty, Topic, Leaderboard } from './components'
+import { Difficulty, Topic, Leaderboard, LobbyCode } from './components'
 
 function App() {
 

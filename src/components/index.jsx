@@ -5,3 +5,4 @@ export { default as Leaderboard } from './Leaderboard';
 export { default as Topic } from './Topic';
 export { default as UsernameForm } from './UsernameForm';
 export { default as loadingSpinner } from './loadingSpinner';
+export { default as LobbyCode } from './LobbyCode'
