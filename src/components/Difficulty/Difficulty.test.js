@@ -2,21 +2,34 @@
  * @jest-environment jsdom
  */
 
-
 import React from 'react'
 import { render, screen, fireEvent } from '@testing-library/react';
+
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from '../../store/index';
+import { BrowserRouter as Router } from 'react-router-dom';
+
 // import axios from 'axios';
-import mockAxiosResponse from '../../../__mocks__/axios'
+// import mockAxiosResponse from '../../../__mocks__/axios'
 
 import Difficulty from './index'
 
-jest.mock('../../api/axios');
+// jest.mock('../../api/axios');
+// const mockDispatch = jest.fn();
 
-const mockDispatch = jest.fn();
-let difficulty = jest.fn();
+const MockDifficulty = () => {
+    return (
+        <Provider store={store}>
+        <BrowserRouter>
+            <Difficulty />
+        </BrowserRouter>
+        </Provider>
+    )
+}
+
 
 describe('Leaderboard', () => {
-    let levelProp = 'easy';
 
     // const checkBtns = (btns) => {
     //     btns.forEach((btn) => {
@@ -26,12 +39,10 @@ describe('Leaderboard', () => {
     //     })
     // }
 
-
-
     beforeEach(() => {
         jest.resetAllMocks()
         
-        render(<Difficulty level={levelProp} />)
+        render(<MockDifficulty/>)
     })
 
     test('all 3 levels are displayed', () => {
@@ -47,6 +58,6 @@ describe('Leaderboard', () => {
 
     test('updateInput sets level selected successfully', async () => {
         const btnElement = screen.getByText(/Beginner/i);
-        await expect(btnElement.value).toBe(levelProp)
+        await expect(btnElement.value).toBe('easy')
     })
 })
