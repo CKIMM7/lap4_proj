@@ -14,7 +14,7 @@ function App() {
       <h1>GAME</h1>
       <Difficulty level={difficulty} />
       <Topic topic={category} />
-      {/* <Leaderboard /> */}
+      <Leaderboard />
     </div>
   );
 }

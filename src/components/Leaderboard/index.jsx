@@ -13,15 +13,18 @@ const Leaderboard = ( dataArray ) => {
     const [rank, setRank] = useState([])
 
     useEffect(() => {
+        let tempArray = []
         function populateTable(){
             // sortScore();
-            for(let i=0; i< 10; i++){
-              if(tempArr[i] !== undefined) setRank(rank[i] = tempArr[i])
-              else setRank(rank[i] = { id: null, name: 'xxxx', score: '0000' })
+            
+            for(let i=0; i < 10; i++){
+              if(tempArr[i] !== undefined) tempArray.push(tempArr[i])
+              else tempArray.push({ id: null, name: 'xxxx', score: i })
             }
-            console.log(rank)
+            console.log(tempArray)
         }
         populateTable()
+        setRank(tempArray)
     }, [])
 
     // sort array of objects
@@ -55,6 +58,7 @@ const Leaderboard = ( dataArray ) => {
         <h2>Leaderboard</h2>
         <h2>Beginner</h2>
         <div id='leaderboard-list'> 
+            { console.log(rank)}
         {rank.map((ele, index) => 
          <div id={`leaderboard-row-${index}`} key={index}>
             <p>{index}</p>
