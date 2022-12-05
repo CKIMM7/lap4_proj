@@ -1,43 +1,39 @@
-import { useState, useEffect } from 'react';
-
+import { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import useGetGames from './hooks/useGetGames';
 import { useDispatch, useSelector } from 'react-redux';
-import io from "socket.io-client";
-import useUserStatus from './hooks/useUserStatus';
-import { roomActions } from './store/roomSlice';
+
 import Room from './pages/room';
-import { Start, Lobby, Topic } from './pages'
+import CreateRoom from './pages/createRoom';
+import GameSettings from './pages/gameSettings';
+import FetchTravia from './components/FetchTravia';
+import Nav from './pages/navBar';
+import GameRoom from './pages/gameRoom';
+import { Start, Lobby } from './pages'
+
 import './App.css';
 import "nes.css/css/nes.min.css";
 
 
-const socket = io.connect("http://localhost:3001");
+// const socket = io.connect("https://helpful-taffy-b1fa62.netlify.app/");
+
+
+import { Difficulty, Topic, Leaderboard, LobbyCode } from './components'
 
 function App() {
 
-  const dispatch = useDispatch();
-  const { status } = useGetGames(10, 11, 'easy', 'multiple')
+  
 
-  const { createRoom, sendMessage, setRoom, setMessage, messageReceived,  } = useUserStatus();
+  // useEffect(() => {
+  //   console.log(roomsArray)
 
-  const userData = useSelector(state => state.user.user);
-  const roomsArray = useSelector(state => state.room.room);
-
-  let createdRooms = roomsArray.map((r,i) => {
-      return <Room data={r} key={i}></Room>
-  })
-
-  useEffect(() => {
-    console.log(roomsArray)
-
-
-  }, [roomsArray])
+  // }, [roomsArray])
 
 return (
      <Routes>
      <Route path="/" element={<Start/>}></Route>
      <Route path="/Lobby" element={"<Lobby/>"}></Route>
+     <Route path='/lobby/:id' element={<LobbyCode/> } />
      <Route path="/Topic" element={"<Topic/>"}></Route>
      </Routes>
   // <div className="App">
@@ -61,5 +57,16 @@ return (
   //     {createdRooms}
   //   </div>
 )}
+//   const { status, category, difficulty } = useGetGames()
+
+//   return (
+//     <div className="App">
+//       <h1>GAME</h1>
+//       <Difficulty level={difficulty} />
+//       <Topic topic={category} />
+//       <Leaderboard />
+//     </div>
+//   );
+// }
 
 export default App;

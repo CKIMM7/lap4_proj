@@ -4,11 +4,26 @@ const userSlice = createSlice({
     name: 'users',
     initialState: {
         user: '',
+        difficulty: '',
+        category: '',
+        messageReceived: '',
         socket: {},
         searchValue: '',
         textInput: '' 
     },
     reducers: {
+
+      setCategory(state, action) {
+        state.category = action.payload;
+      },
+
+      setDifficulty(state, action) {
+        state.difficulty = action.payload;
+      },
+
+      setMessageReceived(state, action) {
+        state.messageReceived = state.messageReceived +' '+ action.payload;
+      },
 
       setSocket(state, action) {
         state.socket = action.payload;

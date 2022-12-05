@@ -7,7 +7,6 @@ const cors = require("cors");
 app.use(cors());
 
 const server = http.createServer(app);
-
 const io = new Server(server, {
   cors: {
     origin: "*",
@@ -15,56 +14,98 @@ const io = new Server(server, {
   },
 });
 
-// io.on("connection", (socket) => {
-//   console.log(`User Connected: ${socket.id}`);
+const port = process.env.PORT || 3500
 
-//   socket.on("join_room", (data) => {
-//     socket.join(data);
-//   });
-
-//   socket.on("send_message", (data) => {
-//     socket.to(data.room).emit("receive_message", data);
-//   });
-// });
-
-// io.on("connection", (socket) => {
-//   console.log(`User Connected: ${socket.id}`);
-
-//   socket.on('send_message', data => {
-//     console.log('data');
-//     console.log(data);
-
-//     socket.broadcast.emit('receive_message', data)
-
-//   })
-
-// });
+let roomsArray = [];
 
 io.on("connection", (socket) => {
   console.log(`User Connected: ${socket.id}`);
 
-  socket.on("create_room", (data) => {
-    console.log("create_room")
-    console.log(data)
+  function joinRoom(room, userId) {
 
-    socket.broadcast.emit('receive_rooms', data)
+    const indexOfRoom = roomsArray.findIndex(obj => obj.id == room)
+    if (roomsArray[indexOfRoom].users.includes(userId)) return
+    socket.join(room);
+
+    const tempArr = roomsArray
+
+    tempArr[indexOfRoom].users.push(userId)
+    roomsArray = tempArr
+   }
+
+   function updateData () {
+    //get updated array sent back to sender/host
+    socket.emit('receive_rooms', roomsArray)
+
+    //get updated array sent back to other
+    socket.broadcast.emit('receive_rooms', roomsArray)
+   }
+
+  socket.on("create_room", (data, userId) => {
+    //update the array
+    roomsArray.push(data);
+
+    joinRoom(data.id, userId)
+    
+    updateData()
+    
   });
 
-  socket.on("join_room", (room) => {
-    
-    console.log(`joined room: ${room}`)
-    socket.join(room);
-    //route change to this room<-
+  //get_rooms
+
+  socket.on("get_rooms", (data, callBack) => {
+    console.log('get_rooms');
+    console.log(roomsArray);
+    socket.emit('receive_rooms', roomsArray)
+  });
+
+  socket.on("join_room", (room, userId) => {
+
+    joinRoom(room, userId)
+
+    updateData()
+
+  });
+
+  socket.on("leave_room", (room, userId) => {
+
+    socket.leave(room);
+    console.log(`${userId} left room: ${room}`)
+
+    const indexOfRoom = roomsArray.findIndex(obj => obj.id == room)
+
+    if (!roomsArray[indexOfRoom].users.includes(userId)) return
+
+
+    const indexOfUser= roomsArray[indexOfRoom].users.findIndex(obj => obj == userId)
+
+    roomsArray[indexOfRoom].users.splice(indexOfUser, 1)
+
+    if (roomsArray[indexOfRoom].users.length == 0) {
+      roomsArray.splice(indexOfRoom, 1)
+    }
+
+    updateData()
+
   });
 
   socket.on("send_message", (message, room) => {
-    console.log("send_message")
-    console.log(message)
-    socket.to(message.room).emit("receive_message", message);
+
+    const indexOfRoom = roomsArray.findIndex(obj => obj.id == room.id)
+
+    const tempArr = roomsArray
+    tempArr[indexOfRoom].messages.push({ user: message.user, message: message.message })
+    roomsArray = tempArr
+
+    socket.emit("receive_message", message, room)
+    socket.to(room.id).emit("receive_message", message, room);
   });
 });
 
+app.get('/', (req, res) => res.send('Backend server is running'))
 
-server.listen(3001, () => {
-  console.log("SERVER IS RUNNING ON http://localhost:3001");
+
+
+server.listen(port, () => {
+  console.log(`SERVER IS RUNNING ON http://localhost:${port}`);
 });
