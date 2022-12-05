@@ -23,8 +23,10 @@ io.on("connection", (socket) => {
   console.log(`User Connected: ${socket.id}`);
 
   function joinRoom(room, userId) {
-    socket.join(room);
+
     const indexOfRoom = roomsArray.findIndex(obj => obj.id == room)
+    if (roomsArray[indexOfRoom].users.includes(userId)) return
+    socket.join(room);
 
     const tempArr = roomsArray
 
@@ -41,15 +43,9 @@ io.on("connection", (socket) => {
    }
 
   socket.on("create_room", (data, userId) => {
-    console.log("create_room")
-    console.log(data)
-
     //update the array
     roomsArray.push(data);
 
-    console.log('roomsArray');
-    console.log(roomsArray);
-    const room = data.id
     joinRoom(data.id, userId)
     
     updateData()
