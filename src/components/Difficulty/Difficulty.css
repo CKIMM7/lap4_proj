@@ -1,0 +1,29 @@
+.difficulty-screen {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#list-of-difficulty {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+
+#list-of-difficulty button {
+    height: 100px;
+    width: 600px;
+    margin: 10px;
+}
+
+#leaderboard-icons {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+
+#leaderboard-icons button {
+    height: 100px;
+    width: 120px;
+    margin: 10px;
+}

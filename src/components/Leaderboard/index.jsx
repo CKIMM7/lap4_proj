@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './Leaderboard.css'
 
 let tempArr = [
     { id: 1, name: 'a', score: 2131},
@@ -8,7 +9,9 @@ let tempArr = [
     { id: 5, name: 'e', score: 300}
 ];
 
-const Leaderboard = ( dataArray ) => {
+
+//dataArray
+const Leaderboard = ( difficulty ) => {
     // let sortedData = [];
     const [rank, setRank] = useState([])
 
@@ -54,18 +57,20 @@ const Leaderboard = ( dataArray ) => {
     //     }
     // }   
 
-    return <div id='leaderboard-beginner'>
+    return <div id={`leaderboard-${difficulty}`}>
         <h2>Leaderboard</h2>
         <h2>Beginner</h2>
-        <div id='leaderboard-list'> 
-            { console.log(rank)}
-        {rank.map((ele, index) => 
-         <div id={`leaderboard-row-${index}`} key={index}>
-            <p>{index}</p>
-            <p>{ele.name}</p>
-            <p>{ele.score}</p>
-         </div>
-        )} 
+        <div id='leaderboard-rank-list'> 
+            {/* { console.log(rank)} */}
+            {rank.map((ele, index) => 
+            <div id={`leaderboard-row-${index}`} key={index}>
+                <ul>
+                    <p>{index}</p>
+                    <p>{ele.name}</p>
+                    <p>{ele.score}</p>
+                </ul>
+            </div>
+            )} 
         </div>
     </div>
 }

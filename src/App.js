@@ -9,7 +9,7 @@ import useUserStatus from './hooks/useUserStatus';
 import { roomActions } from './store/roomSlice';
 import Room from './pages/room';
 
-import { Start, Lobby, Topic, Game } from './pages'
+import { Start, Lobby, Game } from './pages'
 import './App.css';
 
 import { Difficulty, Category, Leaderboard } from './components'
