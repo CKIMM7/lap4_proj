@@ -15,3 +15,15 @@ code {
 .question {
   margin-top: 20px;
 }
+
+.room {
+  text-align: center;
+  border: 3px solid yellow;
+  width: 65%
+}
+
+.createRoom {
+  text-align: center;
+  border: 3px solid yellow;
+  width: 65%
+}

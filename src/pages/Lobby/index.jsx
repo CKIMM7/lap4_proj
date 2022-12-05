@@ -9,7 +9,7 @@ import useUserStatus from "../../hooks/useUserStatus";
 import useGetGames from "../../hooks/useGetGames";
 
 
-const Lobby = () => {
+const Lobby = (room) => {
 
     const navigate = useNavigate();
     const { broadCastGame } = useUserStatus()
@@ -23,7 +23,7 @@ const Lobby = () => {
         broadCastGame({num: 10, 
             categoy: category, 
             difficulty: difficulty, 
-            choice: 'multiple'})
+            choice: 'multiple'}, room)
         navigate('/startgame')
     }
 

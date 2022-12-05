@@ -19,11 +19,50 @@ const io = new Server(server, {
 io.on("connection", (socket) => {
   console.log(`User Connected: ${socket.id}`);
 
-  socket.on("create_room", (data) => {
-    console.log("create_room")
-    console.log(data)
+  function joinRoom(room, userId) {
 
-    socket.broadcast.emit('receive_rooms', data)
+    const indexOfRoom = roomsArray.findIndex(obj => obj.id == room)
+    if (roomsArray[indexOfRoom].users.includes(userId)) return
+    socket.join(room);
+
+    const tempArr = roomsArray
+
+    tempArr[indexOfRoom].users.push(userId)
+    roomsArray = tempArr
+   }
+
+   function updateData () {
+    //get updated array sent back to sender/host
+    socket.emit('receive_rooms', roomsArray)
+
+    //get updated array sent back to other
+    socket.broadcast.emit('receive_rooms', roomsArray)
+   }
+
+  socket.on("create_room", (data, userId) => {
+    //update the array
+    roomsArray.push(data);
+
+    joinRoom(data.id, userId)
+    
+    updateData()
+    
+  });
+
+  //get_rooms{}
+
+  socket.on("get_rooms", (data, callBack) => {
+    console.log('get_rooms');
+    console.log(roomsArray);
+    socket.emit('receive_rooms', roomsArray)
+  });
+
+  socket.on("join_room", (room, userId) => {
+
+    joinRoom(room, userId)
+
+    updateData()
+
   });
 
   socket.on("join_room", (room) => {
@@ -66,8 +105,6 @@ io.on("connection", (socket) => {
   });
 
 });
-
-
 
 
 server.listen(3001, () => {
