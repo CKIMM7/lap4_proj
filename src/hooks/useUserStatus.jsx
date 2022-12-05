@@ -30,10 +30,18 @@ const useUserStatus = (action) => {
       socket.emit("join_room", room)
   };
 
-    const sendMessage = (message, room) => {
+  const sendMessage = (message, room) => {
+    // console.log(message, room)
+    console.log(room)
+
+    socket.emit("send_message", { user: socket.id, message: message }, room );
+  };
+      
+    const broadCastGame = (game, room) => {
       // console.log(message, room)
-        socket.emit("send_message", { message, room });
-      };  
+        socket.emit("broadcast_game", game, room);
+      };
+
     
     useEffect(() => {
         console.log('In useEffect')
@@ -53,11 +61,12 @@ const useUserStatus = (action) => {
         socket.on("receive_message", (data) => {
             console.log("receive_message")
             console.log(data)         
-          });          
+          });
+
 
     }, [socket]);
 
-    return { createRoom, sendMessage, messageReceived, setMessageReceived, setMessage, message, joinRoom }
+    return { createRoom, sendMessage, messageReceived, setMessageReceived, setMessage, message, joinRoom, broadCastGame }
 }
 
 export default useUserStatus;

@@ -15,30 +15,6 @@ const io = new Server(server, {
   },
 });
 
-// io.on("connection", (socket) => {
-//   console.log(`User Connected: ${socket.id}`);
-
-//   socket.on("join_room", (data) => {
-//     socket.join(data);
-//   });
-
-//   socket.on("send_message", (data) => {
-//     socket.to(data.room).emit("receive_message", data);
-//   });
-// });
-
-// io.on("connection", (socket) => {
-//   console.log(`User Connected: ${socket.id}`);
-
-//   socket.on('send_message', data => {
-//     console.log('data');
-//     console.log(data);
-
-//     socket.broadcast.emit('receive_message', data)
-
-//   })
-
-// });
 
 io.on("connection", (socket) => {
   console.log(`User Connected: ${socket.id}`);
@@ -62,6 +38,33 @@ io.on("connection", (socket) => {
     console.log(message)
     socket.to(message.room).emit("receive_message", message);
   });
+
+
+  socket.on("send_message", (message, room) => {
+
+    const indexOfRoom = roomsArray.findIndex(obj => obj.id == room.id)
+
+    const tempArr = roomsArray
+    tempArr[indexOfRoom].messages.push({ user: message.user, message: message.message })
+    roomsArray = tempArr
+
+    socket.emit("receive_message", message, room)
+    socket.to(room.id).emit("receive_message", message, room);
+  });
+
+
+  socket.on("broadcast_game", (game, room) => {
+
+    const indexOfRoom = roomsArray.findIndex(obj => obj.id == room.id)
+
+    const tempArr = roomsArray
+    tempArr[indexOfRoom].game.push(game)
+    roomsArray = tempArr
+
+    socket.emit("receive_game", game, room)
+    socket.to(room.id).emit("receive_game", game, room);
+  });
+
 });
 
 

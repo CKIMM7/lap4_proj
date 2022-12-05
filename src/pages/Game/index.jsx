@@ -7,21 +7,28 @@ import { usersActions } from '../../store/usersSlice';
 import useUserStatus from "../../hooks/useUserStatus";
 //getGamesAxio
 
-
-// import {Category, Difficulty} from '../../components'
+import GameCard from "../GameCard";
 
 const Game = () => {
     const dispatch = useDispatch();
-    let game = useSelector(state => state.games.gamesData) //grab the data here
+
     let difficulty = useSelector(state => state.user.difficulty) //save var to here
     let category = useSelector(state => state.user.category) 
 
-    let getGames = useGetGames(10, category, difficulty, 'multiple') //call api
+    let getGames = useGetGames(10, category, difficulty, 'multiple') //call ap
 
-    console.log(game)
+    let game = useSelector(state => state.games.gamesData) //grab the data here
+    //console.log(game)
+
+    let gameArray = game.map((q, index) => {
+        return <GameCard data={q} key={index}/>
+    })
+
+
 
     return <div>
-        { console.log(getGames) }
+        <p>game page</p>
+        <ul>{gameArray[0]}</ul>
     </div>
 }
 

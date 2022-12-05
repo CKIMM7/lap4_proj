@@ -25,12 +25,6 @@ function App() {
       <Route path='/' element={<Lobby />}> </Route>
       <Route path='/startgame' element={<Game />}> </Route>
     </Routes>
-
-    // <div className="App">
-    //   <h1>GAME</h1>
-    //   <Lobby />
-    //   <Game />
-    // </div>
   );
 }
 
