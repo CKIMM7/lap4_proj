@@ -37,7 +37,7 @@ const roomSlice = createSlice({
 
   }
 
-});
+);
 
 export const roomActions = roomSlice.actions;
 
