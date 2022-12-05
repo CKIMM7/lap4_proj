@@ -6,15 +6,20 @@ export default function Room({ data }) {
     // console.log('room client js')
     // console.log(data)
 
-    const { joinRoom, sendMessage, setMessage, message } = useUserStatus()
+    const { joinRoom, leaveRoom, sendMessage, setMessage, message } = useUserStatus()
 
     const joinRoomHandler = () => {
         joinRoom(data)
     };
 
+    const leaveRoomHandler = () => {
+        leaveRoom(data)
+    };
+
 
     const sendMessageHandler = () => {
         console.log(message)
+        console.log(data)
         sendMessage(message, data)
     };
 
@@ -24,7 +29,15 @@ export default function Room({ data }) {
 
     return (
         <div className='room'>
-            {data}<br/>
+            {data.id}<br />
+            {console.log(data)}
+            {console.log(data.messages)}
+
+            <p>Users:</p>
+            {data.users.map((user, i) => <p key={i}>{`${user}`}</p>)}
+
+            <p>Chatroom:</p>
+            {data.messages.map((msg, i) => <p key={ i}>{`${msg.user} - ${msg.message}`}</p>)}
 
         <input placeholder="Message..."
                onChange={(event) => {
@@ -34,7 +47,8 @@ export default function Room({ data }) {
       <button onClick={sendMessageHandler}> Send Message</button>
       <br/>
 
-        <button onClick={joinRoomHandler}>join</button>
+            <button onClick={joinRoomHandler}>Join</button>
+            <button onClick={leaveRoomHandler}>Leave</button>
         </div>
     )
   }

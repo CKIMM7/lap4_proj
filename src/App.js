@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react';
-
+import { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 // import logo from './logo.svg';
 import './App.css';
@@ -13,23 +12,14 @@ import Room from './pages/room';
 import { Start, Lobby, Topic } from './pages'
 import './App.css';
 
-const socket = io.connect("http://localhost:3001");
+// const socket = io.connect("https://helpful-taffy-b1fa62.netlify.app/");
+
 
 import { Difficulty, Topic, Leaderboard } from './components'
 
 function App() {
 
-  const dispatch = useDispatch();
-  const { status } = useGetGames(10, 11, 'easy', 'multiple')
-
-  const { createRoom, sendMessage, setRoom, setMessage, messageReceived,  } = useUserStatus();
-
-  const userData = useSelector(state => state.user.user);
-  const roomsArray = useSelector(state => state.room.room);
-
-  let createdRooms = roomsArray.map((r,i) => {
-      return <Room data={r} key={i}></Room>
-  })
+  
 
   // useEffect(() => {
   //   console.log(roomsArray)
@@ -40,6 +30,7 @@ return (
      <Routes>
      <Route path="/" element={<Start/>}></Route>
      <Route path="/Lobby" element={"<Lobby/>"}></Route>
+     <Route path='/lobby/:id' element={<LobbyCode/> } />
      <Route path="/Topic" element={"<Topic/>"}></Route>
      </Routes>
   // <div className="App">

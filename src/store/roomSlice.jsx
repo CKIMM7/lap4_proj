@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { current } from '@reduxjs/toolkit'
 
 const roomSlice = createSlice({
   name: 'room',
@@ -6,10 +7,11 @@ const roomSlice = createSlice({
     room: [
       {
         id: 'Default',
+        users: [],
         messages: [
           {
-            user: 'Test User',
-            message: 'Hello'
+            user: '',
+            message: ''
           }
         ]
       }
@@ -20,22 +22,18 @@ const roomSlice = createSlice({
   reducers: {
 
     setRoom(state, action) {
-      console.log('state.room')
-      //console.log(state.room)
-      console.log(action.payload)
-      console.log(...state.room)
       state.room = action.payload
     },  
     
     setMessage(state, action) {
-      console.log(state.room.length)
-      console.log(...state.room)
-      state.room.map(room => console.log(room.id))
-      console.log(state.messageReceived)
+
+      let indexOfRoom = state.room.findIndex(room => room.id == action.payload.room)
+      const tempRoom = state.room
+      tempRoom[indexOfRoom].messages.push({user:action.payload.user, message:action.payload.message})
+
       console.log(action.payload)
-      let temp = state.room[0].messages.push(action.payload)
-      console.log(temp)
-      state.room[0].messages = temp
+      state.room = tempRoom
+
     },
 
     setIsLoading(state, action) {

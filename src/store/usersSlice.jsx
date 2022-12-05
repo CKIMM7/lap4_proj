@@ -4,7 +4,7 @@ const userSlice = createSlice({
     name: 'users',
     initialState: {
         user: '',
-        messageReceived: 'aaa',
+        messageReceived: '',
         socket: {},
         searchValue: '',
         textInput: '',
