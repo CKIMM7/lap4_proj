@@ -29,7 +29,7 @@ const useUserStatus = (action) => {
         }
       ]
     }
-    socket.emit("create_room", room)
+    socket.emit("create_room", room, socket.id)
   };
 
   const joinRoom = (room) => {

@@ -22,7 +22,7 @@ let roomsArray = [];
 io.on("connection", (socket) => {
   console.log(`User Connected: ${socket.id}`);
 
-  socket.on("create_room", (data) => {
+  socket.on("create_room", (data, userId) => {
     console.log("create_room")
     console.log(data)
 
@@ -31,6 +31,14 @@ io.on("connection", (socket) => {
 
     console.log('roomsArray');
     console.log(roomsArray);
+    const room = data.id
+    socket.join(room);
+    const indexOfRoom = roomsArray.findIndex(obj => obj.id == room)
+    console.log(indexOfRoom)
+    const tempArr = roomsArray
+    console.log(roomsArray)
+    tempArr[indexOfRoom].users.push(userId)
+    roomsArray = tempArr
 
     //get updated array sent back to sender/host
     socket.emit('receive_rooms', roomsArray)
