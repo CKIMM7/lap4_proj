@@ -14,7 +14,7 @@ export default function Room({ data }) {
 
     const joinRoomHandler = () => {
         joinRoom(data)
-        navigate(`/rooms/${data}`)
+        // navigate(`/rooms/${data}`)
     };
 
     const leaveRoomHandler = () => {
@@ -45,16 +45,20 @@ export default function Room({ data }) {
             <p>Chatroom:</p>
             {data.messages.map((msg, i) => <p key={ i}>{`${msg.user} - ${msg.message}`}</p>)}
 
-        <input placeholder="Message..."
-               onChange={(event) => {
-               setMessage(event.target.value);
-        }}
-        /><br/>
-      <button onClick={sendMessageHandler}> Send Message</button>
-      <br/>
+            <form name='message-form'>
+                <label htmlFor="message-input">Type to chat:</label>
+                <input id='message-input' placeholder="Message..."
+                    onChange={(event) => {
+                        setMessage(event.target.value);
+                    }}
+                /><br />
+                <button onClick={sendMessageHandler}> Send Message</button>
+                <br />
 
-            <button onClick={joinRoomHandler}>Join</button>
-            <button onClick={leaveRoomHandler}>Leave</button>
+                <button id='join-button' onClick={joinRoomHandler}>Join</button>
+                <button onClick={leaveRoomHandler}>Leave</button>
+            </form>
+            
         </div>
     )
   }

@@ -53,7 +53,7 @@ io.on("connection", (socket) => {
 
   //get_rooms
 
-  socket.on("get_rooms", (data, callBack) => {
+  socket.on("get_rooms", () => {
     console.log('get_rooms');
     console.log(roomsArray);
     socket.emit('receive_rooms', roomsArray)
