@@ -2,10 +2,20 @@
  * @jest-environment jsdom
  */
 
- import { render, screen, fireEvent } from '@testing-library/react';
- import Difficulty from './index'
- 
- describe('Leaderboard', () => {
+
+import React from 'react'
+import { render, screen, fireEvent } from '@testing-library/react';
+// import axios from 'axios';
+import mockAxiosResponse from '../../../__mocks__/axios'
+
+import Difficulty from './index'
+
+jest.mock('../../api/axios');
+
+const mockDispatch = jest.fn();
+let difficulty = jest.fn();
+
+describe('Leaderboard', () => {
     let levelProp = 'easy';
 
     // const checkBtns = (btns) => {
@@ -16,7 +26,11 @@
     //     })
     // }
 
+
+
     beforeEach(() => {
+        jest.resetAllMocks()
+        
         render(<Difficulty level={levelProp} />)
     })
 
@@ -31,8 +45,8 @@
         expect(btnElement.id).toBe('easy');
     })
 
-    test('updateInput sets level selected successfully', () => {
+    test('updateInput sets level selected successfully', async () => {
         const btnElement = screen.getByText(/Beginner/i);
-        expect(btnElement.value).toBe(levelProp)
+        await expect(btnElement.value).toBe(levelProp)
     })
 })
