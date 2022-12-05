@@ -1,12 +1,18 @@
 import React, { useState } from "react";
+import { useSelector, useDispatch } from 'react-redux';
+import useGetGames from "../../hooks/useGetGames"
+import { usersActions } from '../../store/usersSlice';
 import axios from 'axios';
+
 
 const FetchTravia = () => {
 
     const [mode, setMode] = useState('easy')
-    const [category, setCategory] = useState(23)
     const [data, setData] = useState([]);
 
+    const dispatch = useDispatch();
+    const difficulty = useSelector(state => state.user.difficulty)
+    const category = useSelector(state => state.user.category)
     // const [answers, setAnswers] = useState([
     //    { id: 0, set: [{id: 0, ans: ''}, {id: 1, ans: ''}, {id: 2, ans: ''}, {id: 3, ans: ''}] }
     // ])
@@ -25,12 +31,11 @@ const FetchTravia = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         getResults()
-        // display()
     }
 
     async function getResults(){
         try {
-            const response = await axios.get(`https://opentdb.com/api.php?amount=10&category=${category}&difficulty=${mode}&type=multiple`)
+            const response = await axios.get(`https://opentdb.com/api.php?amount=10&category=${category}&difficulty=${difficulty}&type=multiple`)
             const getData = await response.data
             console.log(getData.results)
             setData(getData.results)
@@ -75,20 +80,25 @@ const FetchTravia = () => {
     const handleMode = (e) => {
         // const text = e.target.options[e.target.selectedIndex].text;
         console.log('mode: '+e.target.value)
-        setMode(e.target.value)
+
+        dispatch(usersActions.setDifficulty(e.target.value))
+        //setMode(e.target.value)
     }
 
     const handleCategory = (e) => {
         const subject = e.target.value;
         console.log('subject: '+subject)
         
+
         listOfCategory.find(s => {
-            if(s.subject === subject) setCategory(s.id)
+            if(s.subject === subject) dispatch(usersActions.setCategory(s.id))
         })
     }
 
     return <>
         <h1>FetchTravia</h1>
+        {difficulty} <br />
+        {category}
         <form onSubmit={handleSubmit}>
             <label htmlFor="choose-mode">Choose a mode:</label>
             <select id="choose-mode" name="choose-mode" onChange={handleMode}>

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Room from './pages/room';
 import CreateRoom from './pages/createRoom';
 import GameSettings from './pages/gameSettings';
+import FetchTravia from './components/FetchTravia';
 
 function App() {
 
@@ -18,7 +19,7 @@ return (
 
   <div className="App">
       <CreateRoom />
-      <GameSettings />
+      <FetchTravia />
       {createdRooms}
     </div>
 )}
