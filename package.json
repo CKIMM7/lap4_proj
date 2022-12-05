@@ -28,7 +28,14 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+<<<<<<<<< Temporary merge branch 1
+    "eject": "react-scripts eject",
+    "socket": "node server.js",
+=========
+    "coverage": "jest --coverage",
+    "eject": "react-scripts eject",
+>>>>>>>>> Temporary merge branch 2
+    "server": "nodemon ./src/api"
   },
   "eslintConfig": {
     "extends": [
