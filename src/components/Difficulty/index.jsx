@@ -5,8 +5,8 @@ import getGamesAxio from '../../api/axios'
 
 const Diffculty = ({ level }) => {
 
-    // const val = useSelector(state => state.useGetGames.difficulty )
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
+    const difficulty = useSelector(state => state.user.difficulty)
 
     function startGame(e, id) { 
         e.preventDefault()
