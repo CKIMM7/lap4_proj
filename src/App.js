@@ -22,8 +22,9 @@ function App() {
 
   return (
     <Routes>
-      <Route path='/' element={<Lobby />}> </Route>
-      <Route path='/startgame' element={<Game />}> </Route>
+      <Route path='/' element={<Lobby />} />
+      <Route path='/startgame' element={<Game />} />
+      <Route path='/leaderboard' element={<Leaderboard /> } />
     </Routes>
 
     // <div className="App">
