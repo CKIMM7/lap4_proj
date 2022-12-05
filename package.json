@@ -28,6 +28,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "coverage": "jest --coverage",
     "eject": "react-scripts eject",
     "socket": "node server.js",
     "server": "nodemon ./src/api"
@@ -49,5 +50,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "jest-fetch-mock": "^3.0.3",
+    "nodemon": "^2.0.20"
   }
 }

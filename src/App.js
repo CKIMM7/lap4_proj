@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 
 import { Routes, Route } from 'react-router-dom'
+// import logo from './logo.svg';
+import './App.css';
+
 import useGetGames from './hooks/useGetGames';
 import { useDispatch, useSelector } from 'react-redux';
 import io from "socket.io-client";
@@ -11,6 +14,8 @@ import { Start, Lobby, Topic } from './pages'
 import './App.css';
 
 const socket = io.connect("http://localhost:3001");
+
+import { Difficulty, Topic, Leaderboard } from './components'
 
 function App() {
 
@@ -58,5 +63,16 @@ return (
   //     {createdRooms}
   //   </div>
 )}
+//   const { status, category, difficulty } = useGetGames()
+
+//   return (
+//     <div className="App">
+//       <h1>GAME</h1>
+//       <Difficulty level={difficulty} />
+//       <Topic topic={category} />
+//       <Leaderboard />
+//     </div>
+//   );
+// }
 
 export default App;
