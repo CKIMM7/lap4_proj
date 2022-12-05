@@ -31,14 +31,14 @@ function App() {
   // }, [roomsArray])
 
 return (
-     <Routes>
-     <Route path="/" element={<Start/>}></Route>
-     <Route path="/Lobby" element={"<Lobby/>"}></Route>
-     <Route path='/lobby/:id' element={<LobbyCode/> } />
-     <Route path="/Topic" element={"<Topic/>"}></Route>
-     <Route path='/startgame' element={<Game />} />
-      <Route path='/leaderboard' element={<Leaderboard /> } />
-     </Routes>
+    <Routes>
+    <Route path="/" element={<Start/>}></Route>
+    <Route path="/Lobby" element={"<Lobby/>"}></Route>
+    <Route path='/lobby/:id' element={<LobbyCode/> } />
+    <Route path="/Topic" element={"<Topic/>"}></Route>
+    <Route path='/startgame' element={<Game />} />
+    <Route path='/difficulty' element={<Difficulty /> } />
+    </Routes>
   // <div className="App">
   //     <h2>user: {socket.id}</h2>
   //     {/* <input
