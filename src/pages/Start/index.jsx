@@ -2,6 +2,9 @@ import React from "react";
 import Rockets from "../../components/Rockets"
 
 
+
+
+
 const Start = () => {
     return (
         <div className="start">
@@ -18,7 +21,7 @@ const Start = () => {
                 </h3>
             </div>
             <div className="quizbtn">
-                <button>Quiz Now!</button>
+                <button>Create Username</button>
             </div>
             <Rockets />
         </div>
