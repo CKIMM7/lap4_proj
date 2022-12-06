@@ -4,7 +4,7 @@ import { usersActions } from '../store/usersSlice';
 import { roomActions } from '../store/roomSlice';
 import { v4 as uuidv4 } from 'uuid';
 import { socket } from './socket';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const useUserStatus = (action) => {
 
@@ -27,12 +27,12 @@ const useUserStatus = (action) => {
         }
       ]
     }
-    socket.emit("create_room", room, socket.id)
+      socket.emit("create_room", room, { name: socket.id, isReady: false })
   };
 
   const joinRoom = (room) => {
     console.log(`${socket.id} has joined room: ${room.id}`)
-    socket.emit("join_room", room.id, socket.id)
+      socket.emit("join_room", room.id, { name: socket.id, isReady: false })
   };
 
   const leaveRoom = (room) => {
@@ -40,6 +40,9 @@ const useUserStatus = (action) => {
     socket.emit("leave_room", room.id, socket.id)
   };
 
+  const readyUp = (room, user) => {
+    socket.emit("ready", room, user)
+  }
 
   const sendMessage = (message, room) => {
     // console.log(message, room)
@@ -67,13 +70,15 @@ const useUserStatus = (action) => {
 
         socket.on("receive_message", (data, room) => {
             console.log("receive_message")
-            console.log(data)         
-          });
-
+            console.log(data)
+          console.log(room)
+          data.room = room.id
+            dispatch(roomActions.setMessage(data, room))        
+          });          
 
     }, [socket]);
 
-    return { createRoom, sendMessage, messageReceived, setMessageReceived, setMessage, message, joinRoom, broadCastGame }
+    return { createRoom, sendMessage, messageReceived, setMessageReceived, setMessage, message, joinRoom, leaveRoom, readyUp, broadCastGame }
 }
 
 export default useUserStatus;

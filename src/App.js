@@ -20,6 +20,7 @@ import "nes.css/css/nes.min.css";
 
 
 import { Difficulty, Category, Leaderboard, LobbyCode } from './components'
+import Ready from './components/Ready';
 
 function App() {
 
@@ -38,6 +39,7 @@ return (
      <Route path="/Topic" element={"<Topic/>"}></Route>
      <Route path='/startgame' element={<Game />} />
       <Route path='/leaderboard' element={<Leaderboard /> } />
+    <Route path="/room/:id" element={<Ready />}></Route>
      </Routes>
   // <div className="App">
   //     <h2>user: {socket.id}</h2>

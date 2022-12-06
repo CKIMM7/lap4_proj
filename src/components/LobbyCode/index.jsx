@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import io from "socket.io-client";
 import useUserStatus from '../../hooks/useUserStatus';
 import { roomActions } from '../../store/roomSlice';
-import Room from '../../pages/room';
+import Room from '../room';
 
 // const socket = io.connect("https://helpful-taffy-b1fa62.netlify.app/");
 
@@ -25,6 +25,7 @@ function LobbyCode() {
         console.log(r)
         return <Room data={r} key={i}></Room>
     })
+    console.log(roomsArray)
 
     // useEffect(() => {
     //   console.log(roomsArray)
@@ -36,15 +37,8 @@ function LobbyCode() {
 
         <div className="App">
             <button onClick={createRoom}> Create Room</button>
-            <input
-                placeholder="Message..."
-                onChange={(event) => {
-                    setMessage(event.target.value);
-                }}
-            />
-            <button onClick={sendMessage}> Send Message</button>
-            <h1> Message:</h1>
-            {messageReceived}
+
+
             {createdRooms}
         </div>
     )
