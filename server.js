@@ -8,6 +8,8 @@ app.use(cors());
 
 const server = http.createServer(app);
 
+const port = process.env.PORT || 3500
+
 const io = new Server(server, {
   cors: {
     origin: "*",
@@ -15,6 +17,7 @@ const io = new Server(server, {
   },
 });
 
+let roomsArray = []
 
 io.on("connection", (socket) => {
   console.log(`User Connected: ${socket.id}`);
@@ -153,6 +156,6 @@ io.on("connection", (socket) => {
 });
 
 
-server.listen(3001, () => {
-  console.log("SERVER IS RUNNING ON http://localhost:3001");
+server.listen(port, () => {
+  console.log(`SERVER IS RUNNING ON http://localhost:${port}`);
 });
