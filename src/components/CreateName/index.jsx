@@ -1,11 +1,17 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "nes.css/css/nes.min.css";
 
 const CreateName = props => {
-
+    const navigate = useNavigate()
     
     if (!props.show) {
         return null
+    }
+
+    const goHandler = () => {
+        //save the username to redux and do something
+        navigate('/createroom')
     }
     
 
@@ -18,7 +24,7 @@ const CreateName = props => {
             </div>
             <div className="buttons">
                 <button type="button" class="nes-btn is-error" onClick={props.onClose}>Close</button>
-                <button type="button" class="nes-btn is-primary">Go!</button>
+                <button onClick={goHandler} type="button" class="nes-btn is-primary">Go!</button>
             </div>
         </div>
     )

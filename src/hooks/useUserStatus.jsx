@@ -17,8 +17,11 @@ const useUserStatus = (action) => {
     const room = useSelector(state => state.room.room);
 
   const createRoom = () => {
+
+    let id = uuidv4().slice(24)
+
     let room = {
-      id: uuidv4().slice(24),
+      id: id,
       users: [],
       messages: [
         {
@@ -28,6 +31,7 @@ const useUserStatus = (action) => {
       ]
     }
     socket.emit("create_room", room, socket.id)
+    navigate(`/lobby`)
   };
 
   const joinRoom = (room) => {
