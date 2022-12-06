@@ -21,15 +21,18 @@ let roomsArray = [];
 io.on("connection", (socket) => {
   console.log(`User Connected: ${socket.id}`);
 
-  function joinRoom(room, userId) {
-
+  function joinRoom(room, user) {
+    console.log(user)
+    console.log(roomsArray)
     const indexOfRoom = roomsArray.findIndex(obj => obj.id == room)
-    if (roomsArray[indexOfRoom].users.includes(userId)) return
+    console.log(roomsArray[indexOfRoom].users)
+    if (roomsArray[indexOfRoom].users.find(obj => obj.name == user.name)) return
+    if (roomsArray[indexOfRoom].users.length >= 6) { console.log('Lobby is full'); return }
     socket.join(room);
 
     const tempArr = roomsArray
 
-    tempArr[indexOfRoom].users.push(userId)
+    tempArr[indexOfRoom].users.push(user)
     roomsArray = tempArr
    }
 
@@ -41,11 +44,13 @@ io.on("connection", (socket) => {
     socket.broadcast.emit('receive_rooms', roomsArray)
    }
 
-  socket.on("create_room", (data, userId) => {
+  socket.on("create_room", (data, user) => {
     //update the array
     roomsArray.push(data);
+    console.log('hey')
+    console.log(user)
 
-    joinRoom(data.id, userId)
+    joinRoom(data.id, user)
     
     updateData()
     
@@ -59,31 +64,36 @@ io.on("connection", (socket) => {
     socket.emit('receive_rooms', roomsArray)
   });
 
-  socket.on("join_room", (room, userId) => {
+  socket.on("join_room", (room, user) => {
 
-    joinRoom(room, userId)
+    joinRoom(room, user)
 
     updateData()
 
   });
 
-  socket.on("leave_room", (room, userId) => {
+  socket.on("leave_room", (room, user) => {
 
     socket.leave(room);
-    console.log(`${userId} left room: ${room}`)
+    console.log(`${user} left room: ${room}`)
 
     const indexOfRoom = roomsArray.findIndex(obj => obj.id == room)
 
-    if (!roomsArray[indexOfRoom].users.includes(userId)) return
+    if (!roomsArray[indexOfRoom].users.find(obj => obj.name == user)) return
 
 
-    const indexOfUser= roomsArray[indexOfRoom].users.findIndex(obj => obj == userId)
-
+    const indexOfUser= roomsArray[indexOfRoom].users.findIndex(obj => obj.name == user)
+    
+    console.log(user)
+    console.log(indexOfUser)
+    console.log(roomsArray[indexOfRoom].users)
+    console.log(roomsArray[indexOfRoom].users[indexOfUser])
     roomsArray[indexOfRoom].users.splice(indexOfUser, 1)
 
     if (roomsArray[indexOfRoom].users.length == 0) {
       roomsArray.splice(indexOfRoom, 1)
     }
+    console.log(roomsArray)
 
     updateData()
 
@@ -101,10 +111,23 @@ io.on("connection", (socket) => {
     socket.to(room.id).emit("receive_message", message, room);
   });
 
-  socket.on("ready", (room, userId) => {
-    const indexOfRoom = roomsArray.findIndex(obj => obj.id == room.id)
-    roomsArray[indexOfRoom].map
+  socket.on("ready", (room, user) => {
+    const indexOfRoom = roomsArray.findIndex(obj => obj.id == room)
+    const indexOfUser = roomsArray[indexOfRoom].users.findIndex(obj => obj.name == user)
+    roomsArray[indexOfRoom].users[indexOfUser].isReady = true
+    if (!roomsArray[indexOfRoom].users.find(obj => obj.isReady == false)) {
+      console.log('Start Game')
+      socket.emit("start", 'room')
+      socket.to(room.id).emit("start", 'room');
+    }
+    
+
   })
+
+  // socket.on("start", (room) => {
+  //   socket.emit("start", room)
+  //   socket.to(room.id).emit("start", room);
+  // })
 });
 
 app.get('/', (req, res) => res.send('Backend server is running'))

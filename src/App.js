@@ -17,6 +17,7 @@ import './App.css';
 
 
 import { Difficulty, Topic, Leaderboard, LobbyCode } from './components'
+import Ready from './components/Ready';
 
 function App() {
 
@@ -32,7 +33,8 @@ return (
      <Route path="/" element={<Start/>}></Route>
      <Route path="/Lobby" element={"<Lobby/>"}></Route>
      <Route path='/lobby/:id' element={<LobbyCode/> } />
-     <Route path="/Topic" element={"<Topic/>"}></Route>
+    <Route path="/Topic" element={"<Topic/>"}></Route>
+    <Route path="/room/:id" element={<Ready />}></Route>
      </Routes>
   // <div className="App">
   //     <h2>user: {socket.id}</h2>

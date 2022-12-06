@@ -25,6 +25,7 @@ function LobbyCode() {
         console.log(r)
         return <Room data={r} key={i}></Room>
     })
+    console.log(roomsArray)
 
     // useEffect(() => {
     //   console.log(roomsArray)

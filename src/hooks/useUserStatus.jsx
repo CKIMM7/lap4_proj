@@ -4,7 +4,7 @@ import { usersActions } from '../store/usersSlice';
 import { roomActions } from '../store/roomSlice';
 import { v4 as uuidv4 } from 'uuid';
 import { socket } from './socket';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const useUserStatus = (action) => {
 
@@ -19,7 +19,7 @@ const useUserStatus = (action) => {
   const createRoom = () => {
     let room = {
       id: uuidv4().slice(24),
-      users: [{name: '', isReady: false}],
+      users: [],
       messages: [
         {
           user: 'Admin',
@@ -27,12 +27,12 @@ const useUserStatus = (action) => {
         }
       ]
     }
-    socket.emit("create_room", room, socket.id)
+      socket.emit("create_room", room, { name: socket.id, isReady: false })
   };
 
   const joinRoom = (room) => {
     console.log(`${socket.id} has joined room: ${room.id}`)
-    socket.emit("join_room", room.id, socket.id)
+      socket.emit("join_room", room.id, { name: socket.id, isReady: false })
   };
 
   const leaveRoom = (room) => {
@@ -40,8 +40,8 @@ const useUserStatus = (action) => {
     socket.emit("leave_room", room.id, socket.id)
   };
 
-  const readyUp = (room) => {
-    socket.emit("ready", room.id, socket.id)
+  const readyUp = (room, user) => {
+    socket.emit("ready", room, user)
   }
 
   const sendMessage = (message, room) => {
@@ -69,11 +69,15 @@ const useUserStatus = (action) => {
           console.log(room)
           data.room = room.id
             dispatch(roomActions.setMessage(data, room))        
-          });          
+        });          
+        
+        socket.on("start", (room) => {
+            navigate('/game')
+        })
 
     }, [socket]);
 
-    return { createRoom, sendMessage, setMessage, message, joinRoom, leaveRoom }
+    return { createRoom, sendMessage, setMessage, message, joinRoom, leaveRoom, readyUp }
 }
 
 export default useUserStatus;

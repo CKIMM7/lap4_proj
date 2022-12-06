@@ -12,12 +12,15 @@ export default function Room({ data }) {
     const navigate = useNavigate()
     const { joinRoom, leaveRoom, sendMessage, setMessage, message } = useUserStatus()
 
-    const joinRoomHandler = () => {
+    const joinRoomHandler = (e) => {
+        e.preventDefault()
         joinRoom(data)
-        // navigate(`/rooms/${data}`)
+        navigate(`/room/${data.id}`)
     };
 
-    const leaveRoomHandler = () => {
+    const leaveRoomHandler = (e) => {
+        e.preventDefault()
+
         leaveRoom(data)
     };
 
@@ -40,7 +43,7 @@ export default function Room({ data }) {
             {console.log(data.messages)}
 
             <p>Users:</p>
-            {data.users.map((user, i) => <p key={i}>{`${user}`}</p>)}
+            {data.users.map((user, i) => <p key={i}>{`${user.name}`}</p>)}
 
             <p>Chatroom:</p>
             {data.messages.map((msg, i) => <p key={ i}>{`${msg.user} - ${msg.message}`}</p>)}

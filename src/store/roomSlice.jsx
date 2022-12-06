@@ -7,7 +7,7 @@ const roomSlice = createSlice({
     room: [
       {
         id: 'Default',
-        users: [{ name: '', isReady: false }],
+        users: [],
         messages: [
           {
             user: '',
@@ -23,7 +23,7 @@ const roomSlice = createSlice({
 
     setRoom(state, action) {
       state.room = action.payload
-      return state.room
+      // return state.room
     },
     
     setMessage(state, action) {
@@ -34,7 +34,7 @@ const roomSlice = createSlice({
 
       console.log(action.payload)
       state.room = tempRoom
-      return state.room
+      // return state.room
     },
 
   }
