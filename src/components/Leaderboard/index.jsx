@@ -2,16 +2,16 @@ import React, { useState, useEffect } from 'react';
 import './Leaderboard.css'
 
 let tempArr = [
-    { id: 1, name: 'a', score: 2131},
-    { id: 2, name: 'b', score: 200},
-    { id: 3, name: 'c', score: 2000},
-    { id: 4, name: 'd', score: 100},
-    { id: 5, name: 'e', score: 300}
+    { id: 1, name: 'a', diffifculty: 'easy', score: 2131 },
+    { id: 2, name: 'b', diffifculty: 'easy', score: 200 },
+    { id: 3, name: 'c', diffifculty: 'medium', score: 2000 },
+    { id: 4, name: 'd', diffifculty: 'easy', score: 100 },
+    { id: 5, name: 'e', diffifculty: 'hard', score: 2600 }
 ];
 
 
 //dataArray
-const Leaderboard = ( difficulty ) => {
+const Leaderboard = ( level ) => {
     // let sortedData = [];
     const [rank, setRank] = useState([])
 
@@ -57,9 +57,16 @@ const Leaderboard = ( difficulty ) => {
     //     }
     // }   
 
-    return <div id={`leaderboard-${difficulty}`}>
+    const displayLevelTitle = (type) => {
+        if(type === 'easy') return 'Beginner';
+        else if(type === 'medium') return 'Intermediate';
+        else if(type === 'hard') return 'Expert';
+        else return 'Error';
+    }
+
+    return <div id={`leaderboard-${level}`}>
         <h2>Leaderboard</h2>
-        <h2>Beginner</h2>
+        <h2>{displayLevelTitle(level)}</h2>
         <div id='leaderboard-rank-list'> 
             {/* { console.log(rank)} */}
             {rank.map((ele, index) => 

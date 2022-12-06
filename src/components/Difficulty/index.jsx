@@ -14,13 +14,6 @@ const Difficulty = ({ }) => {
     const [levelIcon, setLevelIcon] = useState();
     const [slide, setSlide] = useState(false);
 
-    // const navigate = useNavigate();
-
-    // // this is only temperory
-    // function Redirect(){
-    //     navigate('/leaderboard')
-    // }
-    
     function startGame(e, id) { 
         e.preventDefault()
         updateInput(e, id)
@@ -49,7 +42,7 @@ const Difficulty = ({ }) => {
         setSlide(false)
     }
 
-    return <div className='difficulty-screen'>
+    return <div id='difficulty-screen'>
         <div id="list-of-difficulty">
             <button type="button" className="choose-mode" onClick={e => startGame(e, 'easy')} id="easy" value={difficulty} >
                 Beginner
@@ -70,7 +63,7 @@ const Difficulty = ({ }) => {
         { console.log('slide: '+slide) }
         { levelIcon!==undefined && <div id='leaderboard-screen' className={slide ? "slide" : ""}> 
             <button id='x-btn' onClick={exitLeaderboard}>x btn icon</button>
-            <Leaderboard />
+            <Leaderboard level={levelIcon} />
         </div> }
     </div>
 }

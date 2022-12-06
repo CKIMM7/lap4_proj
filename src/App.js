@@ -38,7 +38,7 @@ return (
 
      <Route path='/lobby/:id' element={<LobbyCode/>}/>
      <Route path='/startgame' element={<Game />} />
-      <Route path='/leaderboard' element={<Leaderboard /> } />
+      <Route path='/difficulty' element={<Difficulty /> } />
      </Routes>
 
 )}
