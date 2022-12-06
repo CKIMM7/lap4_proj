@@ -1,21 +1,32 @@
 import React, { useState } from "react";
 import { Rockets, CreateName, Header } from "../../components"
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Start = () => {
 
-    const [show, setShow] = useState(false)
+    const [modalOpen, setModalOpen] = useState(false);
+
+    const close = () => setModalOpen(false);
+    const open = () => setModalOpen(true);
+
 
     return (
             <div className="other">
-                <Header show={show}/>
-            <div className="modal">
+                <Header />
+                
                 <div className="buttoncontainer">
-                <button type="button" class="nes-btn is-success" onClick={() => setShow(true)}>Play Now!</button>
+                    <button
+                    type="button"
+                    className="nes-btn is-success"
+                    onClick= {() => (modalOpen ? close() : open())}>Play Now!
+                    </button>
                 </div>
-                <CreateName onClose={() => setShow(false)} show={show} />
-            </div>
-
-            <Rockets />
+                <Rockets />
+                <AnimatePresence
+                    initial={false}
+                    exitBeforeEnter={true}>
+                    {modalOpen && <CreateName modalOpen={modalOpen} handleClose={close}/>}
+                </AnimatePresence>
             </div>
             
     )

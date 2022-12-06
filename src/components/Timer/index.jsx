@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-import React from "react";
-import { useState, useRef, useEffect } from "react"
-=======
 import React, { useEffect, useState, useRef } from "react";
->>>>>>> dfa363502e29e5caabe3d4fcbf0bd5e208dca0ed
 import './index.css'
 
 const Timer = () => {

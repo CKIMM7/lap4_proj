@@ -1,0 +1,32 @@
+#modalcontainer {
+  background-color: transparent;
+}
+
+.buttoncontainer {
+    margin: 20px auto;
+    width: 200px;
+    display: flex;
+}
+
+.buttons button {
+    margin: 10px;
+}
+
+label {
+    color: white;
+}
+  
+.nes-field {
+    width: 300px;
+    margin: 0 auto;
+}
+  
+input {
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.title {
+  background-color: #F07DEA !important;
+  font-size: 20px !important;
+}
