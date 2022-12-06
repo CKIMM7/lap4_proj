@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useNavigate } from 'react-router-dom'
 import useGetGames from '../../hooks/useGetGames';
 import { useDispatch, useSelector } from 'react-redux';
 import io from "socket.io-client";
@@ -13,7 +13,8 @@ import Room from '../room';
 function LobbyCode() {
 
     const dispatch = useDispatch();
-    const { createRoom, sendMessage, setMessage } = useUserStatus();
+    const naviate = useNavigate();
+    const { createRoom, sendMessage, setMessage, broadCastGame } = useUserStatus();
 
     const roomsArray = useSelector(state => state.room.room);
     const messageReceived = useSelector(state => state.room.messageReceived);
@@ -26,10 +27,14 @@ function LobbyCode() {
     })
     console.log(roomsArray)
 
+    const createLobbyHandler = () => {
+        naviate('/createlobby')
+    }
+
     return (
 
         <div className="App">
-            <button onClick={createRoom}> Create Room</button>
+            <button onClick={createLobbyHandler}> Create Room</button>
 
 
             {createdRooms}
