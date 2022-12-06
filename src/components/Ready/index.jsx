@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { socket } from "../../hooks/socket";
 import useUserStatus from "../../hooks/useUserStatus";
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
     
 const Ready = () => {
 
     const { id } = useParams()
-    const { joinRoom, sendMessage, setMessage, message, readyUp } = useUserStatus()
+    const navigate = useNavigate()
+    const { joinRoom, leaveRoom, sendMessage, setMessage, message, readyUp } = useUserStatus()
 
     const messageReceived = useSelector(state => state.room.messageReceived);
     console.log('message')
@@ -24,7 +25,6 @@ const Ready = () => {
         readyUp(id, socket.id)
     }
 
-    function handleChange() { }
 
     const sendMessageHandler = (e) => {
         e.preventDefault()
@@ -32,9 +32,16 @@ const Ready = () => {
         sendMessage(message, room)
     };
 
+    function leaveHandler(e) {
+        e.preventDefault()
+        leaveRoom(room)
+        navigate('/lobby/1')
+    }
+
     
     return (
         <div className="App">
+            <button onClick={leaveHandler}>Leave Lobby</button>
             <h1>Room - {id}</h1>
             <button onClick={ready}>Ready Up!</button>
             

@@ -6,43 +6,47 @@ import { useParams, useNavigate } from 'react-router-dom';
 export default function Room({ data }) {
     // console.log('room client js')
     // console.log(data)
+
+
     const { roomId } = useParams()
     const navigate = useNavigate()
-    const { joinRoom, sendMessage, setMessage, message } = useUserStatus()
+    const { joinRoom, leaveRoom, sendMessage, setMessage, message } = useUserStatus()
 
-    const joinRoomHandler = () => {
+    const joinRoomHandler = (e) => {
+        e.preventDefault()
         joinRoom(data)
-        navigate(`/rooms/${data}`)
+        navigate(`/room/${data.id}`)
+    };
+
+    const leaveRoomHandler = (e) => {
+        e.preventDefault()
+
+        leaveRoom(data)
     };
 
 
-    const sendMessageHandler = (e) => {
-        e.preventDefault()
+    const sendMessageHandler = () => {
         console.log(message)
+        console.log(data)
         sendMessage(message, data)
 
     };
 
     useEffect(() => {
-        // console.log(message)
+        console.log(message)
     }, [message])
 
     return (
         <div className='room'>
-            {data}<br/>
+            <p>Lobby : {data.id}</p>
+            {console.log(data)}
+            {console.log(data.messages)}
 
-        <input placeholder="Message..."
-               onChange={(event) => {
-               setMessage(event.target.value);
-        }}
-        /><br/>
-      <button onClick={sendMessageHandler}> Send Message</button>
-      <br/>
+            <p>Players: {data.users.length}/6</p>
 
-        <button onClick={joinRoomHandler}>
-            join room: {data}
-        </button>
+            <button id='join-button' onClick={joinRoomHandler}>Join</button>
+
+
         </div>
     )
-  }
-  
+}
