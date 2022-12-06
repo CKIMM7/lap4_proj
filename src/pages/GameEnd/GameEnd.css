@@ -1,17 +1,21 @@
-h2 {
+* {
     color: white;
     text-align: center;
 }
 
-#leaderboard-rank-list {
+h2 {
+    color: greenyellow
+}
+
+#show-winner-container {
     color: greenyellow;
     /* border: 2px solid red; */
     display: flex;
     flex-direction: column;
-    /* padding: 20px; */
+    padding: 20px;
 }
 
-#leaderboard-rank-list div ul {
+#show-winner-container div ul {
     /* border: 2px solid green; */
     display: flex;
     flex-direction: row;
@@ -19,11 +23,14 @@ h2 {
     margin: 10px;
 }
 
-#leaderboard-rank-list div ul p {
-    /* border: 2px solid green; */
-    /* display: flex;
-    flex-direction: row; */
+#show-winner-container div ul p {
+    /* border: 2px solid cyan; */
     width: 100px;
     margin: 10px;
     padding: 10px 20px;
+}
+
+button {
+    color: black;
+    margin: 10px;
 }

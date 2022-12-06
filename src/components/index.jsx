@@ -10,4 +10,5 @@ export { default as Leaderboard } from './Leaderboard';
 export { default as Category } from './Category';
 export { default as UsernameForm } from './UsernameForm';
 export { default as loadingSpinner } from './loadingSpinner';
-export { default as LobbyCode } from './LobbyCode'
+export { default as LobbyCode } from './LobbyCode';
+export { default as ShowWinner } from './ShowWinner';
