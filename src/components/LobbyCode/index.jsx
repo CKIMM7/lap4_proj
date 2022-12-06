@@ -15,9 +15,10 @@ function LobbyCode() {
     const dispatch = useDispatch();
     const { createRoom, sendMessage, setMessage } = useUserStatus();
 
-    const userData = useSelector(state => state.user.user);
     const roomsArray = useSelector(state => state.room.room);
     const messageReceived = useSelector(state => state.room.messageReceived);
+
+    console.log(roomsArray)
 
     let createdRooms = roomsArray.map((r, i) => {
         console.log(r)

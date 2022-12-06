@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { Rockets, CreateName, Header } from "../../components"
+import useUserStatus from "../../hooks/useUserStatus";
 
 const Start = () => {
 
     const [show, setShow] = useState(false)
+    const { createRoom, sendMessage, setMessage } = useUserStatus();
 
     return (
             <div className="other">

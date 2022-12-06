@@ -27,8 +27,6 @@ const CreateLobby = (room) => {
             category: category, 
             difficulty: difficulty, 
             choice: 'multiple'})
-
-        //navigate(`/lobby/${lobbyId}`)
     }
 
     return <div>

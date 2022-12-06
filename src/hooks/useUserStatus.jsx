@@ -60,20 +60,27 @@ const useUserStatus = (action) => {
         }
 
         socket.emit("create_room", room, socket.id, game)
-        navigate(`/lobby/${room.id}`)
+        console.log('create_room took place')
       };
 
     
     useEffect(() => {
+
+      console.log('useeffect useUserStatus')
+
         socket.off().on('connect', function() {
           console.log(`${socket.id} connected`)
           dispatch(usersActions.setUser(socket.id))
           socket.emit("get_rooms");
         });
 
-        socket.on("receive_rooms", (data) => {
+        socket.on("receive_rooms", (data, roomIdForHost) => {
             console.log(data);
-            dispatch(roomActions.setRoom(data))              
+            dispatch(roomActions.setRoom(data))
+
+            if(roomIdForHost)  {
+              navigate(`/lobby/${roomIdForHost}`, {state: { userId: socket.id }})
+            }            
           })
 
         socket.on("receive_message", (data, room) => {
@@ -81,12 +88,6 @@ const useUserStatus = (action) => {
             console.log(data)         
           });
 
-          // socket.on("receive_game", (data, room) => {
-          //   console.log("receive_game")
-          //   console.log(data)
-          //   dispatch(gamesActions.setGamesData(data))
-
-          // });
 
     }, [socket]);
 

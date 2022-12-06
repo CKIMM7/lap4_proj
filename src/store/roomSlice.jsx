@@ -23,14 +23,15 @@ const roomSlice = createSlice({
   },
   reducers: {
 
-    getQuestions(state, action) {
-      console.log(action.payload)
-      console.log(current(state.room)) 
+    removeQuestion(state, action) {
 
-      const findIndex = state.room.findIndex(obj => obj.id == action.payload)
 
-      console.log(findIndex)
-      //state.currentGame = 
+        console.log(action.payload)
+        const findIndex = state.room.findIndex(obj => obj.id == action.payload)
+        console.log(current(state.room[findIndex].users))
+
+        console.log(current(state.room[findIndex].game.shift()))
+
     },
 
     setRoom(state, action) {

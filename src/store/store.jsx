@@ -6,7 +6,6 @@ const gamesSlice = createSlice({
         users: [],
         searchValue: '',
         gamesData:[],
-        currentGame: [],
         textInput: '' ,
         searchArray: [],
         isLoading: false,
@@ -15,26 +14,7 @@ const gamesSlice = createSlice({
     },
     reducers: {
 
-      getQuestions(state, action) {
-        console.log(action.payload)
-        console.log(current(state.gamesData)) 
-
-        const findIndex = state.gamesData.findIndex(obj => {
-          console.log(obj.id)
-          //obj.id == action.payload
-        })
-
-        console.log(findIndex)
-        //state.currentGame = 
-      },
-
-      removeQuestion(state, action) {
-
-        console.log(current(state.gamesData))
-        console.log('remove')
-        state.gamesData.shift()
-      },
-
+  
       setGamesData(state, action) {
         state.gamesData = action.payload;
       },

@@ -22,22 +22,26 @@ io.on("connection", (socket) => {
 
   console.log(`User Connected: ${socket.id}`);
 
-  function joinRoom(room, userId) {
+  function joinRoom(room, user) {
 
-    console.log(roomsArray);
     const indexOfRoom = roomsArray.findIndex(obj => obj.id == room)
-    if (roomsArray[indexOfRoom].users.includes(userId)) return
+    
+
+    if (roomsArray[indexOfRoom].users.includes(user.username)) return
     socket.join(room);
 
     const tempArr = roomsArray
 
-    tempArr[indexOfRoom].users.push(userId)
+    tempArr[indexOfRoom].users.push({username: user.username, socre: 0})
     roomsArray = tempArr
    }
 
-   function updateData () {
+
+   function updateData (roomIdForHost) {
+
+
     //get updated array sent back to sender/host
-    socket.emit('receive_rooms', roomsArray)
+    socket.emit('receive_rooms', roomsArray, roomIdForHost)
 
     //get updated array sent back to other
     socket.broadcast.emit('receive_rooms', roomsArray)
@@ -46,28 +50,27 @@ io.on("connection", (socket) => {
 
   socket.on("create_room", async (data, userId, game) => {
     //update the array
-
-
     roomsArray.push(data);
 
     let searchUrl = `https://opentdb.com/api.php?amount=${game.num}&category=${game.category}&difficulty=${game.difficulty}&type=${game.choice}`
     const response = await axios.get(searchUrl);
     const gameArray = response.data.results
-    //console.log(response);
 
     const indexOfRoom = roomsArray.findIndex(obj => obj.id == data.id)
     let tempArr = roomsArray
 
     console.log(`indexOfRoom: ${indexOfRoom}`)
 
-    tempArr[indexOfRoom].game.push(gameArray)
+    tempArr[indexOfRoom].game = gameArray;
+    tempArr[indexOfRoom].users.push({username: userId, socre: 0})
+
     roomsArray = tempArr
 
     console.log(roomsArray);
 
     joinRoom(data.id, userId)
     
-    updateData()
+    updateData(data.id)
     
   });
 
@@ -75,16 +78,12 @@ io.on("connection", (socket) => {
 
   socket.on("get_rooms", () => {
     console.log('get_rooms');
-
-    console.log(roomsArray)
-    console.log(roomsArray);
     socket.emit('receive_rooms', roomsArray)
   });
 
   socket.on("join_room", (room, userId) => {
 
     joinRoom(room, userId)
-
     updateData()
 
   });

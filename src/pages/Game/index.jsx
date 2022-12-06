@@ -1,40 +1,40 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from "react-router-dom";
-import axios from 'axios';
 
-import useGetGames from "../../hooks/useGetGames"
 import { usersActions } from '../../store/usersSlice';
 import { gamesActions } from "../../store/store";
-import useUserStatus from "../../hooks/useUserStatus";
-//getGamesAxio
-
-import GameCard from "../GameCard";
 import { roomActions } from "../../store/roomSlice";
 
+import useUserStatus from "../../hooks/useUserStatus";
+
+import GameCard from "../GameCard";
+
+
 const Game = () => {
+
+    const location = useLocation()
+    const { userId } = location.state;
     const dispatch = useDispatch();
 
     const { lobbyId } = useParams()
-    console.log(lobbyId)
-    // let difficulty = useSelector(state => state.user.difficulty) //save var to here
-    // let category = useSelector(state => state.user.category) 
+    console.log(userId)
 
-    // let getGames = useGetGames(10, category, difficulty, 'multiple') //call ap
+    const currentGame = useSelector(state => state.room.room)
+    console.log(currentGame)
 
-    dispatch(roomActions.getQuestions(lobbyId))
+    const findIndex = currentGame.findIndex(obj => obj.id == lobbyId)
+    console.log(findIndex)
 
-
-
-    // let gameArray = game.map((q, index) => {
-    //     return <GameCard data={q} key={index}/>
-    // })
-
-
+    let gameArray = currentGame[findIndex].game.map((q, index) => {
+        return <GameCard data={q} id={lobbyId} username={'dd'} key={index} />
+    })
 
     return <div>
         <p>game page</p>
-        {/* <ul>{gameArray[0]}</ul> */}
+        <p>username: {userId}</p>
+        <ul>{gameArray[0]}</ul>
     </div>
 }
 
