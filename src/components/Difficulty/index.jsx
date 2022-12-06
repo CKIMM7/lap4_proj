@@ -12,7 +12,7 @@ const Difficulty = ({ }) => {
     const dispatch = useDispatch();
     let difficulty = useSelector(state => state.user.difficulty)
     const [levelIcon, setLevelIcon] = useState();
-    const [slide, setSlide] = useState(false);
+    // const [slide, setSlide] = useState(false);
 
     // const navigate = useNavigate();
 
@@ -40,13 +40,14 @@ const Difficulty = ({ }) => {
         let type = id.split('-')
         console.log(`leaderboard-icon: ${type[1]}`)
         setLevelIcon(type[1])
-        setSlide(true)
+        // setSlide(true)
+
     }
 
     function exitLeaderboard(e){
         e.preventDefault()
         setLevelIcon(undefined)
-        setSlide(false)
+        // setSlide(false)
     }
 
     return <div className='difficulty-screen'>
@@ -67,8 +68,7 @@ const Difficulty = ({ }) => {
             <button onClick={displayLeaderboard} id='leaderboard-hard'>*Leaderboard Icon*</button>
         </div>
         { console.log('lvlIcon: '+levelIcon) }
-        { console.log('slide: '+slide) }
-        { levelIcon!==undefined && <div id='leaderboard-screen' className={slide ? "slide" : ""}> 
+        { levelIcon!==undefined && <div id='leaderboard-screen'> 
             <button id='x-btn' onClick={exitLeaderboard}>x btn icon</button>
             <Leaderboard />
         </div> }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Leaderboard.css'
+import { motion } from 'framer-motion';
 
 let tempArr = [
     { id: 1, name: 'a', score: 2131},
