@@ -1,15 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
-import useGetGames from './hooks/useGetGames';
-import { useDispatch, useSelector } from 'react-redux';
-
-import Room from './pages/room';
-import useUserStatus from './hooks/useUserStatus';
-import { roomActions } from './store/roomSlice';
-
-import GameRoom from './pages/gameRoom';
 import { Start, Lobby, Game } from './pages'
-import CreateRoom from './pages/createRoom';
 
 
 import './App.css';
@@ -33,7 +24,7 @@ function App() {
 return (
      <Routes>
      <Route path="/" element={<Start/>}></Route>
-     <Route path="/createlobby" element={<CreateRoom/>}></Route>
+     <Route path="/joinorcreate" element={<LobbyCode/>}></Route>
      <Route path="/lobby" element={<Lobby/>}></Route>
 
      <Route path='/lobby/:id' element={<LobbyCode/>}/>

@@ -18,7 +18,7 @@ const Lobby = (room) => {
     let difficulty = useSelector(state => state.user.difficulty) //save var to here
     let category = useSelector(state => state.user.category) 
     const { state } = useLocation();
-    const { roomId } = state;
+    //const { roomId } = state;
 
     function Redirect(){
 
@@ -27,13 +27,13 @@ const Lobby = (room) => {
             {num: 10, 
             categoy: category, 
             difficulty: difficulty, 
-            choice: 'multiple'}, roomId)
+            choice: 'multiple'})
 
         navigate('/startgame')
     }
 
     console.log(`roomId`);
-    console.log(roomId);
+    //console.log(roomId);
 
     return <div>
         {!category && <Category /> }
