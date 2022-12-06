@@ -3,7 +3,7 @@ const app = express();
 const http = require("http");
 const { Server } = require("socket.io");
 const cors = require("cors");
-//const axios = require("axios")
+const axios = require("axios")
 
 app.use(cors());
 
@@ -93,9 +93,10 @@ io.on("connection", (socket) => {
   });
 
 
-  socket.on("broadcast_game", (game, room) => {
+  socket.on("broadcast_game", async (game, room) => {
 
-    //axios.get(gameamount, category, difficulty, type)
+    //const response = await axios.get(game.amount, game.category, game.difficulty, game.choice);
+    //const data = response.data();
 
     const indexOfRoom = roomsArray.findIndex(obj => obj.id == room)
     console.log(indexOfRoom);

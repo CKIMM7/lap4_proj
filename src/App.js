@@ -33,7 +33,7 @@ function App() {
 return (
      <Routes>
      <Route path="/" element={<Start/>}></Route>
-     <Route path="/createroom" element={<CreateRoom/>}></Route>
+     <Route path="/createlobby" element={<CreateRoom/>}></Route>
      <Route path="/lobby" element={<Lobby/>}></Route>
 
      <Route path='/lobby/:id' element={<LobbyCode/>}/>
