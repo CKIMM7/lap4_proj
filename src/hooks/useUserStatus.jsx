@@ -31,7 +31,7 @@ const useUserStatus = (action) => {
       ]
     }
     socket.emit("create_room", room, socket.id)
-    navigate(`/lobby`)
+    navigate(`/lobby`, { state: { roomId: id } })
   };
 
   const joinRoom = (room) => {
@@ -53,7 +53,7 @@ const useUserStatus = (action) => {
   };
       
     const broadCastGame = (game, room) => {
-      // console.log(message, room)
+        console.log(game, room)
         socket.emit("broadcast_game", game, room);
       };
 

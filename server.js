@@ -3,6 +3,7 @@ const app = express();
 const http = require("http");
 const { Server } = require("socket.io");
 const cors = require("cors");
+//const axios = require("axios")
 
 app.use(cors());
 
@@ -94,14 +95,17 @@ io.on("connection", (socket) => {
 
   socket.on("broadcast_game", (game, room) => {
 
-    const indexOfRoom = roomsArray.findIndex(obj => obj.id == room.id)
+    //axios.get(gameamount, category, difficulty, type)
 
+    const indexOfRoom = roomsArray.findIndex(obj => obj.id == room)
+    console.log(indexOfRoom);
     const tempArr = roomsArray
-    tempArr[indexOfRoom].game.push(game)
-    roomsArray = tempArr
 
-    socket.emit("receive_game", game, room)
-    socket.to(room.id).emit("receive_game", game, room);
+    // tempArr[indexOfRoom].game.push(game)
+    // roomsArray = tempArr
+
+    // socket.emit("receive_game", game, room)
+    // socket.to(room.id).emit("receive_game", game, room);
   });
 
 });
