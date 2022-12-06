@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
-import { Start, Lobby, Game } from './pages'
+import { Start, CreateLobby, Game } from './pages'
 
 
 import './App.css';
@@ -25,9 +25,8 @@ return (
      <Routes>
      <Route path="/" element={<Start/>}></Route>
      <Route path="/joinorcreate" element={<LobbyCode/>}></Route>
-     <Route path="/lobby" element={<Lobby/>}></Route>
+     <Route path="/createlobby" element={<CreateLobby/>}></Route>
 
-     <Route path='/lobby/:id' element={<LobbyCode/>}/>
      <Route path='/startgame' element={<Game />} />
       <Route path='/leaderboard' element={<Leaderboard /> } />
      </Routes>

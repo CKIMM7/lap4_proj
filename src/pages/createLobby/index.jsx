@@ -9,7 +9,7 @@ import useUserStatus from "../../hooks/useUserStatus";
 import useGetGames from "../../hooks/useGetGames";
 
 
-const Lobby = (room) => {
+const CreateLobby = (room) => {
 
     const navigate = useNavigate();
     const params = useParams()
@@ -42,4 +42,4 @@ const Lobby = (room) => {
     </div>
 }
 
-export default Lobby
+export default CreateLobby

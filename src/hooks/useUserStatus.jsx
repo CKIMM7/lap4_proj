@@ -31,7 +31,7 @@ const useUserStatus = (action) => {
       ]
     }
     socket.emit("create_room", room, socket.id)
-    navigate(`/lobby`, { state: { roomId: id } })
+    navigate(`/createlobby`, { state: { roomId: id } })
   };
 
   const joinRoom = (room) => {
