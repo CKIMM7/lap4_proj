@@ -17,28 +17,24 @@ const CreateLobby = (room) => {
 
     let difficulty = useSelector(state => state.user.difficulty) //save var to here
     let category = useSelector(state => state.user.category) 
-    const { state } = useLocation();
-    //const { roomId } = state;
+    // const { state } = useLocation();
+    // const { lobbyId } = state;
 
-    function Redirect(){
+    function makeRoom(){
 
-        //broadcast 
         broadCastGame(
             {num: 10, 
-            categoy: category, 
+            category: category, 
             difficulty: difficulty, 
             choice: 'multiple'})
 
-        navigate('/startgame')
+        //navigate(`/lobby/${lobbyId}`)
     }
-
-    console.log(`roomId`);
-    //console.log(roomId);
 
     return <div>
         {!category && <Category /> }
         {!difficulty && <Difficulty /> }
-        { difficulty && category && <button onClick={Redirect} >start game</button> }
+        { difficulty && category && <button onClick={makeRoom} >start game</button> }
     </div>
 }
 

@@ -16,16 +16,12 @@ function App() {
 
   
 
-  // useEffect(() => {
-  //   console.log(roomsArray)
-
-  // }, [roomsArray])
-
 return (
      <Routes>
      <Route path="/" element={<Start/>}></Route>
-     <Route path="/joinorcreate" element={<LobbyCode/>}></Route>
      <Route path="/createlobby" element={<CreateLobby/>}></Route>
+     <Route path="/lobby" element={<LobbyCode/>}></Route>
+     <Route path="/lobby/:lobbyId" element={<Game></Game>}></Route>
 
      <Route path='/startgame' element={<Game />} />
       <Route path='/leaderboard' element={<Leaderboard /> } />

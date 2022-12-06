@@ -16,12 +16,15 @@ const io = new Server(server, {
   },
 });
 
+let roomsArray = [];
 
 io.on("connection", (socket) => {
+
   console.log(`User Connected: ${socket.id}`);
 
   function joinRoom(room, userId) {
 
+    console.log(roomsArray);
     const indexOfRoom = roomsArray.findIndex(obj => obj.id == room)
     if (roomsArray[indexOfRoom].users.includes(userId)) return
     socket.join(room);
@@ -40,9 +43,27 @@ io.on("connection", (socket) => {
     socket.broadcast.emit('receive_rooms', roomsArray)
    }
 
-  socket.on("create_room", (data, userId) => {
+
+  socket.on("create_room", async (data, userId, game) => {
     //update the array
+
+
     roomsArray.push(data);
+
+    let searchUrl = `https://opentdb.com/api.php?amount=${game.num}&category=${game.category}&difficulty=${game.difficulty}&type=${game.choice}`
+    const response = await axios.get(searchUrl);
+    const gameArray = response.data.results
+    //console.log(response);
+
+    const indexOfRoom = roomsArray.findIndex(obj => obj.id == data.id)
+    let tempArr = roomsArray
+
+    console.log(`indexOfRoom: ${indexOfRoom}`)
+
+    tempArr[indexOfRoom].game.push(gameArray)
+    roomsArray = tempArr
+
+    console.log(roomsArray);
 
     joinRoom(data.id, userId)
     
@@ -52,8 +73,10 @@ io.on("connection", (socket) => {
 
   //get_rooms{}
 
-  socket.on("get_rooms", (data, callBack) => {
+  socket.on("get_rooms", () => {
     console.log('get_rooms');
+
+    console.log(roomsArray)
     console.log(roomsArray);
     socket.emit('receive_rooms', roomsArray)
   });
@@ -93,25 +116,31 @@ io.on("connection", (socket) => {
   });
 
 
-  socket.on("broadcast_game", async (game, room) => {
+  // socket.on("broadcast_game", async (game, room) => {
 
-    //const response = await axios.get(game.amount, game.category, game.difficulty, game.choice);
-    //const data = response.data();
+  //   let searchUrl = `https://opentdb.com/api.php?amount=${game.num}&category=${game.category}&difficulty=${game.difficulty}&type=${game.choice}`
+  //   const response = await axios.get(searchUrl);
+  //   const gameArray = response.data.results
+  //   //console.log(response);
 
-    const indexOfRoom = roomsArray.findIndex(obj => obj.id == room)
-    console.log(indexOfRoom);
-    const tempArr = roomsArray
+  //   const indexOfRoom = roomsArray.findIndex(obj => obj.id == room)
+  //   let tempArr = roomsArray
 
-    // tempArr[indexOfRoom].game.push(game)
-    // roomsArray = tempArr
 
-    // socket.emit("receive_game", game, room)
-    // socket.to(room.id).emit("receive_game", game, room);
-  });
+  //   tempArr[indexOfRoom].game.push(gameArray)
+  //   roomsArray = tempArr
+
+  //   console.log(`broadcast_game: roomsArray`)
+  //   //console.log(roomsArray[0].game)
+
+  //   socket.emit("receive_game", gameArray, room)
+  //   //socket.to(room.id).emit("receive_game", gameArray, room);
+
+  // });
 
 });
+const port = process.env.PORT || 3500
 
-
-server.listen(3001, () => {
+server.listen(port, () => {
   console.log("SERVER IS RUNNING ON http://localhost:3001");
 });
