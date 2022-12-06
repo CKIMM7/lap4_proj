@@ -13,13 +13,16 @@ export default function Room({ data }) {
     const navigate = useNavigate()
     const { joinRoom, leaveRoom, sendMessage, setMessage, message } = useUserStatus()
 
-    const joinRoomHandler = () => {
+    const joinRoomHandler = (e) => {
+        e.preventDefault()
         joinRoom(data)
         //leads to Game component
         navigate(`/lobby/${data.id}`, {state: { userId: socket.id }} )
     };
 
-    const leaveRoomHandler = () => {
+    const leaveRoomHandler = (e) => {
+        e.preventDefault()
+
         leaveRoom(data)
     };
 
@@ -38,21 +41,25 @@ export default function Room({ data }) {
             {data.id}<br />
 
             <p>Users:</p>
-            {data.users.map((user, i) => <p key={i}>{`${user.username}`}</p>)}
+            {data.users.map((user, i) => <p key={i}>{`${user.name}`}</p>)}
 
             <p>Chatroom:</p>
             {data.messages.map((msg, i) => <p key={ i}>{`${msg.user} - ${msg.message}`}</p>)}
 
-        <input placeholder="Message..."
-               onChange={(event) => {
-               setMessage(event.target.value);
-        }}
-        /><br/>
-      <button onClick={sendMessageHandler}> Send Message</button>
-      <br/>
+            <form name='message-form'>
+                <label htmlFor="message-input">Type to chat:</label>
+                <input id='message-input' placeholder="Message..."
+                    onChange={(event) => {
+                        setMessage(event.target.value);
+                    }}
+                /><br />
+                <button onClick={sendMessageHandler}> Send Message</button>
+                <br />
 
-            <button onClick={joinRoomHandler}>Join</button>
-            <button onClick={leaveRoomHandler}>Leave</button>
+                <button id='join-button' onClick={joinRoomHandler}>Join</button>
+                <button onClick={leaveRoomHandler}>Leave</button>
+            </form>
+            
         </div>
     )
   }

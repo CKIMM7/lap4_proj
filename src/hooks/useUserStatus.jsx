@@ -5,7 +5,6 @@ import { roomActions } from '../store/roomSlice';
 import { v4 as uuidv4 } from 'uuid';
 import { socket } from './socket';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { gamesActions } from '../store/store';
 
 const useUserStatus = (action) => {
 
@@ -18,22 +17,29 @@ const useUserStatus = (action) => {
     const room = useSelector(state => state.room.room);
 
   const createRoom = () => {
-
-    //socket.emit("create_room", room, socket.id)
-    navigate(`/createlobby`)
+    let room = {
+      id: uuidv4().slice(24),
+      users: [],
+      messages: [
+        {
+          user: 'Admin',
+          message: 'Welcome to the chat room!'
+        }
+      ]
+    }
+    socket.emit("create_room", room, socket.id)
   };
 
   const joinRoom = (room) => {
     console.log(`room`)
     console.log(`${socket.id} has joined room: ${room.id}`)
-    socket.emit("join_room", room.id, socket.id)
+      socket.emit("join_room", room.id, { name: socket.id, isReady: false })
   };
 
   const leaveRoom = (room) => {
     console.log(`${socket.id} has left room: ${room.id}`)
     socket.emit("leave_room", room.id, socket.id)
   };
-
 
   const sendMessage = (message, room) => {
     // console.log(message, room)
@@ -85,13 +91,15 @@ const useUserStatus = (action) => {
 
         socket.on("receive_message", (data, room) => {
             console.log("receive_message")
-            console.log(data)         
-          });
-
+            console.log(data)
+          console.log(room)
+          data.room = room.id
+            dispatch(roomActions.setMessage(data, room))        
+          });          
 
     }, [socket]);
 
-    return { createRoom, sendMessage, messageReceived, setMessageReceived, setMessage, message, joinRoom, broadCastGame }
+    return { createRoom, sendMessage, setMessage, message, joinRoom, leaveRoom, broadCastGame }
 }
 
 export default useUserStatus;

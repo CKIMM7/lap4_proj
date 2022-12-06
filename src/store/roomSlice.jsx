@@ -36,32 +36,20 @@ const roomSlice = createSlice({
 
     setRoom(state, action) {
       state.room = action.payload
+      // return state.room
     },
     
     setMessage(state, action) {
 
+      console.log(action.payload)
       let indexOfRoom = state.room.findIndex(room => room.id == action.payload.room)
       const tempRoom = state.room
+      console.log(indexOfRoom)
       tempRoom[indexOfRoom].messages.push({ user: action.payload.user, message: action.payload.message })
 
       console.log(action.payload)
       state.room = tempRoom
-
-    },
-
-    setIsLoading(state, action) {
-      //console.log(action.payload)
-      state.isLoading = action.payload
-    },
-
-    setIsError(state, action) {
-      //console.log(action.payload)
-      state.isError = action.payload
-    },
-
-    setError(state, action) {
-      //console.log(action.payload)
-      state.error = action.payload
+      // return state.room
     },
 
   }

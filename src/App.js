@@ -10,19 +10,21 @@ import "nes.css/css/nes.min.css";
 // const socket = io.connect("https://helpful-taffy-b1fa62.netlify.app/");
 
 
-import { Difficulty, Category, LobbyCode } from './components'
+import { Difficulty, Category, Leaderboard, LobbyCode } from './components'
+import Ready from './components/Ready';
 
 function App() {
 
-  
 
 return (
      <Routes>
      <Route path="/" element={<Start/>}></Route>
      <Route path="/createlobby" element={<CreateLobby/>}></Route>
+     
      <Route path="/lobby" element={<LobbyCode/>}></Route>
      <Route path="/lobby/:lobbyId" element={<Game></Game>}></Route>
 
+      <Route path="/room/:id" element={<Ready />}></Route>
 
       <Route path='/gameEnd' element={<GameEnd /> } />
      </Routes>
