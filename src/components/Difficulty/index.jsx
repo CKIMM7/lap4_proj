@@ -11,6 +11,7 @@ const Difficulty = ({ }) => {
 
     const dispatch = useDispatch();
     let difficulty = useSelector(state => state.user.difficulty)
+    const category = useSelector(state => state.user.category)
     const [levelIcon, setLevelIcon] = useState();
     const [slide, setSlide] = useState(false);
 
@@ -63,7 +64,7 @@ const Difficulty = ({ }) => {
         { console.log('slide: '+slide) }
         { levelIcon!==undefined && <div id='leaderboard-screen' className={slide ? "slide" : ""}> 
             <button id='x-btn' onClick={exitLeaderboard}>x btn icon</button>
-            <Leaderboard level={levelIcon} />
+            <Leaderboard level={levelIcon} category={category} />
         </div> }
     </div>
 }

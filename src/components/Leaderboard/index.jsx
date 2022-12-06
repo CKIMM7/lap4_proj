@@ -9,53 +9,28 @@ let tempArr = [
     { id: 5, name: 'e', diffifculty: 'hard', score: 2600 }
 ];
 
-
-//dataArray
-const Leaderboard = ( level ) => {
-    // let sortedData = [];
+const Leaderboard = ( level, category ) => {
     const [rank, setRank] = useState([])
+    const [dataArray, setDataArray] = useState([])
 
     useEffect(() => {
         let tempArray = []
         function populateTable(){
-            // sortScore();
-            
             for(let i=0; i < 10; i++){
               if(tempArr[i] !== undefined) tempArray.push(tempArr[i])
               else tempArray.push({ id: null, name: 'xxxx', score: i })
             }
             console.log(tempArray)
         }
+        // getData()
         populateTable()
         setRank(tempArray)
-    }, [])
+    }, []) 
 
-    // sort array of objects
-    // function compare( a, b ) {
-    //     if ( a.score < b.score ) return -1;
-    //     if ( a.score > b.score ) return 1;
-    //     return 0;
-    // }
+    // need to data from db then populate dataArray
+    function getData(){
 
-    // data will be sorted upon being added to database instead?
-
-    // function sortScore(){
-    //     for(let i=0; i<tempArr.length; i++){
-    //         if(i+1 < tempArr.length){ 
-    //             console.log('check: '+tempArr[i].score+' with: '+tempArr[i+1].score)
-    //             const type = compare(tempArr[i].score, tempArr[i+1].score)
-
-    //             if(type === 1 || type === 0) { 
-    //                 console.log('add: '+tempArr[i].score)
-    //                 sortedData[i] = tempArr[i]; 
-    //             }
-    //             else if(type === -1) { 
-    //                 console.log('add: '+tempArr[i+1])
-    //                 sortedData[i] = tempArr[i+1];
-    //             }
-    //         }
-    //     }
-    // }   
+    }
 
     const displayLevelTitle = (type) => {
         if(type === 'easy') return 'Beginner';

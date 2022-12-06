@@ -25,6 +25,10 @@ const ShowWinner = ({  }) => {
         setRank(tempArray)
     }, [])
 
+    function addData(){
+        
+    }
+
     return <div id='show-winner-container'>
         {rank.map((ele, index) => 
         <div id={`show-winner-${index+1}`} key={index}>
