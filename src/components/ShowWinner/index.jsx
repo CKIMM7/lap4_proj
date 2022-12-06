@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 
-// store the sessions current locally or database?
 const listOfPlayers = [
-    { id: 1, name: 'a', score: 2131 },
+    { id: 1, name: 'a', score: 101 },
     { id: 2, name: 'b', score: 200 },
-    { id: 3, name: 'c', score: 2000 }
+    { id: 3, name: 'c', score: 2100 },
+    { id: 4, name: 'd', score: 900 },
+    { id: 5, name: 'e', score: 5800 }
 ]
 
 const ShowWinner = ({  }) => {
@@ -12,21 +13,18 @@ const ShowWinner = ({  }) => {
     const [rank, setRank] = useState([])
 
     useEffect(() => {
-        let tempArray = []
-        function populateTable(){
-            // sortScore();
-            
-            for(let i=0; i < 10; i++){
-              if(listOfPlayers[i] !== undefined) tempArray.push(listOfPlayers[i])
-            }
-            console.log(tempArray)
-        }
-        populateTable()
-        setRank(tempArray)
+        setRank(listOfPlayers.sort(compare))
     }, [])
 
+        // sort array of objects
+    function compare( a, b ) {
+        if ( a.score > b.score ) return -1;
+        if ( a.score < b.score ) return 1;
+        return 0;
+    }
+
     function addData(){
-        
+
     }
 
     return <div id='show-winner-container'>
