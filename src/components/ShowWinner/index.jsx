@@ -27,7 +27,8 @@ const ShowWinner = ({  }) => {
 
     }
 
-    return <div id='show-winner-container'>
+    return <div id='show-winner-screen'>
+        <div id='show-winner-list'>
         {rank.map((ele, index) => 
         <div id={`show-winner-${index+1}`} data-testid={`show-winner-item-${index+1}`} key={index}>
             <ul>
@@ -37,6 +38,9 @@ const ShowWinner = ({  }) => {
             </ul>
         </div>
         )} 
+        </div>
+        <button>Exit Game Lobby</button>
+        <button>Return to party lobby</button>
     </div>
 }
 
