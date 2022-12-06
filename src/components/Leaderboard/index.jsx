@@ -70,9 +70,9 @@ const Leaderboard = ( level ) => {
         <div id='leaderboard-rank-list'> 
             {/* { console.log(rank)} */}
             {rank.map((ele, index) => 
-            <div id={`leaderboard-row-${index}`} key={index}>
+            <div id={`leaderboard-row-${index+1}`} key={index}>
                 <ul>
-                    <p>{index}</p>
+                    <p>{index+1}</p>
                     <p>{ele.name}</p>
                     <p>{ele.score}</p>
                 </ul>
