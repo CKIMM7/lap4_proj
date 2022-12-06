@@ -44,8 +44,7 @@ function LobbyCode() {
                 }}
             />
             <button onClick={sendMessage}> Send Message</button>
-            <h1> Message:</h1>
-            {messageReceived}
+
             {createdRooms}
         </div>
     )

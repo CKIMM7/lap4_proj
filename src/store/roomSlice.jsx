@@ -28,8 +28,10 @@ const roomSlice = createSlice({
     
     setMessage(state, action) {
 
+      console.log(action.payload)
       let indexOfRoom = state.room.findIndex(room => room.id == action.payload.room)
       const tempRoom = state.room
+      console.log(indexOfRoom)
       tempRoom[indexOfRoom].messages.push({ user: action.payload.user, message: action.payload.message })
 
       console.log(action.payload)

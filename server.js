@@ -101,8 +101,12 @@ io.on("connection", (socket) => {
 
   socket.on("send_message", (message, room) => {
 
+    console.log('Room')
+    console.log(room)
+    console.log('Array')
+    console.log(roomsArray)
     const indexOfRoom = roomsArray.findIndex(obj => obj.id == room.id)
-
+    console.log(indexOfRoom)
     const tempArr = roomsArray
     tempArr[indexOfRoom].messages.push({ user: message.user, message: message.message })
     roomsArray = tempArr
