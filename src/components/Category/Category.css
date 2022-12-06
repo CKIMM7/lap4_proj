@@ -1,10 +1,44 @@
-.category {
-    /* border: 2px solid red; */
-    height: 250px;
-    width: 300px;
+
+.choosecategory h1 {
+    text-align: center;
 }
 
-/* .category h3 {
-    color: black;
-} */
+.category {
+    height: 50px;
+    width: 200px;
+    margin: 0 auto;
+    position: relative;
+}
+
+#list-of-categories .nes-container {
+    background: darkgreen ;
+    padding: 1rem;
+    margin: 0 20px;
+    width: 400px;
+    max-width: 400px;
+    min-height: 150px;
+}
+
+
+
+.categorytitle {
+    position: relative;
+    width: 200px;
+    margin: 0 auto;
+    text-align: center;
+    font-family: 'Press Start 2P';
+}
+
+#list-of-categories {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin: 120px 0;
+}
+
+.description {
+    font-size: 20px;
+    font-family: 'Inconsolata';
+}
+
 

@@ -58,7 +58,7 @@ const Leaderboard = ( difficulty ) => {
     //     }
     // }   
 
-    return <div id={`leaderboard-${difficulty}`}>
+    return <div id={`leaderboard-${difficulty}`} className="leaderboarddisplay">
         <h2>Leaderboard</h2>
         <h2>Beginner</h2>
         <div id='leaderboard-rank-list'> 

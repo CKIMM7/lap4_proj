@@ -3,7 +3,7 @@ import React from "react";
 import { useSelector, dispatch } from "react-redux";
 import { useNavigate, useParams, useLocation } from 'react-router-dom'
 
-import {Category, Difficulty} from '../../components'
+import { Category, Difficulty } from '../../components'
 
 import useUserStatus from "../../hooks/useUserStatus";
 import useGetGames from "../../hooks/useGetGames";
@@ -37,7 +37,7 @@ const Lobby = (room) => {
 
     return <div>
         {!category && <Category /> }
-        {!difficulty && <Difficulty /> }
+        
         { difficulty && category && <button onClick={Redirect} >start game</button> }
     </div>
 }

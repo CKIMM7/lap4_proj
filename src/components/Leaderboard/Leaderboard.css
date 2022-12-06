@@ -28,8 +28,8 @@ h2 {
     /* transition-delay: 0s; */
 }
 
-#leaderboard-screen {
-    margin: 0 auto;
+.leaderboarddisplay {
+    width: 60%;
 }
 
 #leaderboard-rank-list {
