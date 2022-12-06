@@ -20,6 +20,8 @@ function LobbyCode() {
 
     console.log(roomsArray)
 
+    function joinRoom () {console.log('Join Room')}
+
     let createdRooms = roomsArray.map((r, i) => {
         console.log(r)
         return <Room data={r} key={i}></Room>
@@ -30,6 +32,7 @@ function LobbyCode() {
 
         <div className="App">
             <button onClick={createRoom}> Create Room</button>
+            <button onClick={joinRoom}>Join Room</button>
 
 
             {createdRooms}
