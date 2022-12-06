@@ -72,6 +72,7 @@ const useUserStatus = (action) => {
         });          
         
         socket.on("start", (room) => {
+            console.log("Start")
             navigate('/game')
         })
 

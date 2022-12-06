@@ -118,7 +118,7 @@ io.on("connection", (socket) => {
     if (!roomsArray[indexOfRoom].users.find(obj => obj.isReady == false)) {
       console.log('Start Game')
       socket.emit("start", 'room')
-      socket.to(room.id).emit("start", 'room');
+      socket.to(room).emit("start", 'room')
     }
     
 
