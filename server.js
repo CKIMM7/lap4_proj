@@ -50,11 +50,11 @@ io.on("connection", (socket) => {
    }
 
 
-  socket.on("create_room", async (data, userId, game) => {
+  socket.on("create_room", async (data, user, game) => {
     //update the array
     roomsArray.push(data);
     console.log('hey')
-    console.log(userId)
+    console.log(user)
 
     let searchUrl = `https://opentdb.com/api.php?amount=10&category=${game.category}&difficulty=${game.difficulty}&type=${game.choice}`
     const response = await axios.get(searchUrl);
@@ -66,13 +66,13 @@ io.on("connection", (socket) => {
     console.log(`indexOfRoom: ${indexOfRoom}`)
 
     tempArr[indexOfRoom].game = gameArray;
-    tempArr[indexOfRoom].users.push({username: userId, score: 0})
+    tempArr[indexOfRoom].users.push(user)
 
     roomsArray = tempArr
 
     console.log(roomsArray);
 
-    joinRoom(data.id, userId)
+    joinRoom(data.id, user)
     
     updateData(data.id)
     
@@ -152,7 +152,7 @@ io.on("connection", (socket) => {
       socket.emit("start", 'room')
       socket.to(room).emit("start", 'room')
     }
-    
+    updateData()
 
   })
 

@@ -4,7 +4,7 @@ import useUserStatus from "../../hooks/useUserStatus";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
     
-const Ready = () => {
+const Ready = ({ start, setStart }) => {
 
     const { id } = useParams()
     const navigate = useNavigate()
@@ -15,6 +15,9 @@ const Ready = () => {
     console.log(messageReceived)
     const roomsArray = useSelector(state => state.room.room);
     console.log(roomsArray)
+    const indexOfRoom = roomsArray.findIndex(obj => obj.id == id)
+    console.log(indexOfRoom)
+
     const room = roomsArray.filter(room => room.id == id)[0]
     console.log(room)
 
@@ -23,6 +26,11 @@ const Ready = () => {
         console.log('Ready up')
         console.log(id)
         readyUp(id, socket.id)
+        console.log(roomsArray[indexOfRoom].users)
+        if (!roomsArray[indexOfRoom].users.find(obj => obj.isReady == false)) {
+            console.log('Start Game')
+            setStart(true)
+        }
     }
 
 
@@ -46,7 +54,7 @@ const Ready = () => {
             <button onClick={ready}>Ready Up!</button>
             
             <h1> Users:</h1>
-            {room.users.map(user => <p>{ user.name }</p>)}
+            {room.users.map(user => <p>{ user.username }</p>)}
             <h1> Chatroom:</h1>
             { console.log(room.messages)}
             {room.messages.map(msg => <p>{msg.user} - {msg.message}</p>)}

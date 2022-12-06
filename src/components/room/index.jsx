@@ -15,7 +15,7 @@ export default function Room({ data }) {
     const joinRoomHandler = (e) => {
         e.preventDefault()
         joinRoom(data)
-        navigate(`/room/${data.id}`)
+        navigate(`/lobby/${data.id}`, { state: { userId: socket.id } })
     };
 
     const leaveRoomHandler = (e) => {

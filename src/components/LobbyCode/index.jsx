@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useNavigate } from 'react-router-dom'
 import useGetGames from '../../hooks/useGetGames';
 import { useDispatch, useSelector } from 'react-redux';
 import io from "socket.io-client";
@@ -13,14 +13,20 @@ import Room from '../room';
 function LobbyCode() {
 
     const dispatch = useDispatch();
-    const { createRoom, sendMessage, setMessage } = useUserStatus();
+    const naviate = useNavigate();
+    const { createRoom, sendMessage, setMessage, broadCastGame } = useUserStatus();
+    const [ showLobby, setShowLobby ] = useState()
 
     const roomsArray = useSelector(state => state.room.room);
     const messageReceived = useSelector(state => state.room.messageReceived);
 
     console.log(roomsArray)
 
-    function joinRoom () {console.log('Join Room')}
+    function joinRoom(e) {
+        e.preventDefault()
+        console.log('Join Room');
+        setShowLobby(!showLobby)
+    }
 
     let createdRooms = roomsArray.map((r, i) => {
         console.log(r)
@@ -28,14 +34,15 @@ function LobbyCode() {
     })
     console.log(roomsArray)
 
+    const createLobbyHandler = () => {
+        naviate('/createlobby')
+    }
+
     return (
 
         <div className="App">
-            <button onClick={createRoom}> Create Room</button>
-            <button onClick={joinRoom}>Join Room</button>
-
-
-            {createdRooms}
+            {showLobby ? <><button onClick={joinRoom}>Back</button> {roomsArray.length > 0 ? createdRooms : <p>No rooms</p>}</>  : <><button onClick={createLobbyHandler}> Create Room</button><button onClick={joinRoom}> Join Room</button></>}
+            
         </div>
     )
 }

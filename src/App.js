@@ -22,7 +22,7 @@ return (
      <Route path="/createlobby" element={<CreateLobby/>}></Route>
      
      <Route path="/lobby" element={<LobbyCode/>}></Route>
-     <Route path="/lobby/:lobbyId" element={<Game></Game>}></Route>
+     <Route path="/lobby/:id" element={<Game/>}></Route>
 
       <Route path="/room/:id" element={<Ready />}></Route>
 
