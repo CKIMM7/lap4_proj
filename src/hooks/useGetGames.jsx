@@ -19,9 +19,16 @@ const useGetGames = (amount=1, category=7, difficulty='easy', type='multiple') =
         const { signal } = controller;
     
         getGamesAxio(amount, category, difficulty, type)
-        .then(data => {
-            console.log(data); 
+        .then(data => { 
+            //console.log(data.results)
             setStatus(false)
+
+            let newArray = data.results.map(q => {
+                let newQ = {...q, ...{answered: false}}
+                return newQ
+
+            }) 
+            console.log(newArray) 
             dispatch(gamesActions.setGamesData(data.results))
             dispatch(gamesActions.setIsLoading(false))
             dispatch(gamesActions.setIsError(false))

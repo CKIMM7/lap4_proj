@@ -1,12 +1,6 @@
 import React, { useState } from "react";
 import { Rockets, CreateName, Header } from "../../components"
 
-
-
-
-
-
-
 const Start = () => {
 
     const [show, setShow] = useState(false)

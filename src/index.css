@@ -12,6 +12,10 @@ code {
     monospace;
 }
 
+.question {
+  margin-top: 20px;
+}
+
 .room {
   text-align: center;
   border: 3px solid yellow;
