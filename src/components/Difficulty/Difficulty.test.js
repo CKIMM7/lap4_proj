@@ -41,7 +41,6 @@ describe('Leaderboard', () => {
 
     beforeEach(() => {
         jest.resetAllMocks()
-        
         render(<MockDifficulty/>)
     })
 

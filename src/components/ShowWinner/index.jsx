@@ -16,7 +16,7 @@ const ShowWinner = ({  }) => {
         setRank(listOfPlayers.sort(compare))
     }, [])
 
-        // sort array of objects
+    // sort array of objects
     function compare( a, b ) {
         if ( a.score > b.score ) return -1;
         if ( a.score < b.score ) return 1;
@@ -29,7 +29,7 @@ const ShowWinner = ({  }) => {
 
     return <div id='show-winner-container'>
         {rank.map((ele, index) => 
-        <div id={`show-winner-${index+1}`} key={index}>
+        <div id={`show-winner-${index+1}`} data-testid={`show-winner-item-${index+1}`} key={index}>
             <ul>
                 <p>{index+1}</p>
                 <p>{ele.name}</p>
