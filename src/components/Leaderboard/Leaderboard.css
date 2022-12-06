@@ -14,12 +14,13 @@ h2 {
     /* border: 2px solid green; */
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-around;
 }
 
 #leaderboard-rank-list div ul p {
     /* border: 2px solid green; */
     /* display: flex;
     flex-direction: row; */
+    width: 100px;
     padding: 10px 20px;
 }
