@@ -1,5 +1,6 @@
 #modalcontainer {
   background-color: transparent;
+ 
 }
 
 .buttoncontainer {
@@ -24,9 +25,12 @@ label {
 input {
     text-align: center;
     text-transform: uppercase;
+    background-color: transparent;
+    color: aqua;
 }
 
 .title {
-  background-color: #F07DEA !important;
+  background-color: white !important;
+  color: black !important;
   font-size: 20px !important;
 }
