@@ -13,8 +13,10 @@ let tempArr = [
 const Leaderboard = ({ level, category }) => {
     const [rank, setRank] = useState([])
     const [dataArray, setDataArray] = useState([])
-
+    const [ hasData, setHasData ] = useState(false)
+    
     useEffect(() => {
+        
         let tempArray = []
         function populateTable(){
             for(let i=0; i < 10; i++){
@@ -26,28 +28,33 @@ const Leaderboard = ({ level, category }) => {
         setDataArray(getData)
         populateTable()
         setRank(tempArray)
-    }, []) 
+        console.log(dataArray)
+    }, [hasData]) 
 
     // need to data from db then populate dataArray
     async function getData(){
         try {
             console.log('getData')
             console.log('cate '+category)
-            console.log('level '+level)
+            console.log('level ' + level)
+            let arr = []
             
             const url = 'http://localhost:3600';
-            fetch('http://localhost:3600/leaderboard/History/easy')
+            fetch(`${url}/leaderboard/History/easy`)
                 .then(data => data.json())
-                .then(o => console.log(o))
+                .then(o => { arr = o; setHasData(true) })
 
             // const response = await fetch(`${url}/leaderboard/${category}/${level}`);
             const response = await fetch(`${url}/leaderboard/History/easy`);
             
-            console.log(response)
+            // console.log(response)
+            console.log("Data Array")
+            console.log(arr)
 
             const data = await response.json();
+            setHasData(true)
             // console.log(data)
-            return data[0]
+            return arr
         } catch(err){
             console.log(err)
             // res.status(500).json({err})
