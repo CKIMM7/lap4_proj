@@ -45,27 +45,37 @@ const Difficulty = ({ }) => {
 
     return <div id='difficulty-screen'>
         <div id="list-of-difficulty">
-            <button type="button" className="choose-mode" onClick={e => startGame(e, 'easy')} id="easy" value={difficulty} >
-                Beginner
-            </button>
-            <button type="button" className="choose-mode" onClick={e => startGame(e, 'medium')} id="medium" value={difficulty} >
-                Intermediate
-            </button>
-            <button type="button" className="choose-mode" onClick={e => startGame(e, 'hard')} id="hard" value={difficulty} >
-                Expert
-            </button>
+            <div className="diffcon" id="begin">
+                <i class="bi bi-cloud"></i>
+                <button type="button" className="choose-mode" onClick={e => startGame(e, 'easy')} id="easy" value={difficulty} >
+                    Beginner
+                </button>
+                <i class="bi bi-cloud"></i>
+                <button onClick={displayLeaderboard} className="leaderbtn" id='leaderboard-easy'><i class="bi bi-bar-chart"></i></button>
+            </div>
+            <div className="diffcon" id="interm">
+                <i class="bi bi-cloud-drizzle"></i>
+                <button type="button" className="choose-mode" onClick={e => startGame(e, 'medium')} id="medium" value={difficulty} >
+                    Intermediate
+                </button>
+                <i class="bi bi-cloud-drizzle"></i>
+                <button onClick={displayLeaderboard} className="leaderbtn" id='leaderboard-medium'><i class="bi bi-bar-chart"></i></button>
+            </div>
+            <div className="diffcon" id="expert">
+                <i class="bi bi-cloud-lightning-rain"></i>
+                <button type="button" className="choose-mode" onClick={e => startGame(e, 'hard')} id="hard" value={difficulty} >
+                    Expert
+                </button>
+                <i class="bi bi-cloud-lightning-rain"></i>
+                <button onClick={displayLeaderboard} className="leaderbtn" id='leaderboard-hard'><i class="bi bi-bar-chart"></i></button>
+            </div>
         </div>
         <div id='leaderboard-icons'>
             <button onClick={displayLeaderboard} id='leaderboard-easy'>*Leaderboard Icon*</button>
             <button onClick={displayLeaderboard} id='leaderboard-medium'>*Leaderboard Icon*</button>
             <button onClick={displayLeaderboard} id='leaderboard-hard'>*Leaderboard Icon*</button>
         </div>
-        { console.log('lvlIcon: '+levelIcon) }
-        { console.log('slide: '+slide) }
-        { levelIcon!==undefined && <div id='leaderboard-screen' className={slide ? "slide" : ""}> 
-            <button id='x-btn' onClick={exitLeaderboard}>x btn icon</button>
-            <Leaderboard level={levelIcon} category={category} />
-        </div> }
+        
     </div>
 }
 
