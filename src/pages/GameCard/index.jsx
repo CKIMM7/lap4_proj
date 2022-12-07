@@ -30,6 +30,9 @@ let shuffled = unshuffled
             console.log('correct answer')
             updateQuestionStatus(data, ans.ans)
         }
+        else {
+            updateQuestionStatus(data, false)
+        }
     }
 
 

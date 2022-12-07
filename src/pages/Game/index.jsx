@@ -14,6 +14,7 @@ const Game = () => {
     const dispatch = useDispatch();
     const [start, setStart] = useState(false)
     const [wait, setWaiting] = useState(false)
+    const [end, setEnd] = useState(false)
     const { id } = useParams()
     const roomsArray = useSelector(state => state.room.room)
     console.log(roomsArray)
@@ -27,6 +28,8 @@ const Game = () => {
     //console.log(currentGame[findIndex].users)
     //console.log(findIndexUser)
     useEffect(() => {
+        if (roomsArray[indexOfRoom].game.length == 0) setEnd(true)
+        else { 
         if (!roomsArray[indexOfRoom].users.find(obj => obj.isReady == false)) {
             console.log('Start Game')
             setStart(true)
@@ -35,10 +38,18 @@ const Game = () => {
             setWaiting(true)
         }
         else setWaiting(false)
+    }
 
     }, [roomsArray[indexOfRoom].users])
     return <div>{
-        start
+        end ? 
+            <>
+                <h1>Game Over</h1>
+                <h1>The Winner is:</h1>
+                {roomsArray[indexOfRoom].users.sort((a,b) => a.score > b.score)[0] }
+            </>
+            
+        :   start
             ? wait
                 ? <h1>Waiting for other players</h1>
                 : <>

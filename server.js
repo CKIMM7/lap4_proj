@@ -157,10 +157,12 @@ io.on("connection", (socket) => {
     //console.log(findIndex)
     //console.log(roomsArray[findIndex].game[0])
     console.log(roomsArray[findIndex].game[0].answered)
+    console.log(answer)
+    
     if (answer) {
       let userIndex = roomsArray[findIndex].users.findIndex(obj => obj.name == user)
       console.log(userIndex)
-      console.log(roomsArray[findIndex].users[userIndex].score += 10)
+      roomsArray[findIndex].users[userIndex].score += 10
     }
     if (roomsArray[findIndex].game[0].answered.length == roomsArray[findIndex].users.length) {
       console.log("Next question")
