@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from "react-router-dom";
 import { usersActions } from '../../store/usersSlice';
@@ -10,6 +10,7 @@ import Ready from "../../components/Ready";
 import GameCard from "../GameCard";
 const Game = () => {
     const location = useLocation()
+    const navigate = useNavigate('/lobby')
     const { userId } = location.state;
     const dispatch = useDispatch();
     const [start, setStart] = useState(false)
@@ -27,6 +28,16 @@ const Game = () => {
     const indexOfUser = roomsArray[indexOfRoom].users.findIndex(user => user.name == userId)
     //console.log(currentGame[findIndex].users)
     //console.log(findIndexUser)
+    function win(data) {
+        return (
+            <>
+                <p>{data.name}</p>
+                <p>Score: {data.score}</p>
+                <button onClick={() => navigate('/lobby')}>Back to Lobby</button>
+                <button>View Leaderboard</button>
+            </>
+        )
+    }
     useEffect(() => {
         if (roomsArray[indexOfRoom].game.length == 0) setEnd(true)
         else { 
@@ -38,7 +49,9 @@ const Game = () => {
             setWaiting(true)
         }
         else setWaiting(false)
-    }
+        }
+        
+        
 
     }, [roomsArray[indexOfRoom].users])
     return <div>{
@@ -46,7 +59,9 @@ const Game = () => {
             <>
                 <h1>Game Over</h1>
                 <h1>The Winner is:</h1>
-                {roomsArray[indexOfRoom].users.sort((a,b) => a.score > b.score)[0] }
+                {console.log(roomsArray[indexOfRoom].users.map(obj => obj.score))}
+                <p>{win(roomsArray[indexOfRoom].users.reduce((prev, current) => { return prev.score > current.score ? prev : current }))}</p>
+                {console.log(Math.max(...roomsArray[indexOfRoom].users.map(obj => obj.score)))}
             </>
             
         :   start
@@ -56,7 +71,7 @@ const Game = () => {
                 <p>game page</p>
                 <p>username: {userId}</p>
                 <p>score: {roomsArray[indexOfRoom].users[indexOfUser].score}</p>
-                <ul>{gameArray[0]}</ul></>
+                <ul>{gameArray.length > 0 && gameArray[0]}</ul></>
             : <Ready start={start} setStart={setStart} />}
         
     </div>
