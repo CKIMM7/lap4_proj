@@ -36,9 +36,9 @@ const Leaderboard = ({ level, category }) => {
             console.log('level '+level)
             
             const url = 'http://localhost:3600';
-            fetch(`${url}/leaderboard/History/easy`)
-                .then(data => console.log(data))
-                .catch(error => console.log(error))
+            fetch('http://localhost:3600/leaderboard/History/easy')
+                .then(data => data.json())
+                .then(o => console.log(o))
 
             // const response = await fetch(`${url}/leaderboard/${category}/${level}`);
             const response = await fetch(`${url}/leaderboard/History/easy`);
@@ -47,7 +47,7 @@ const Leaderboard = ({ level, category }) => {
 
             const data = await response.json();
             // console.log(data)
-            return data
+            return data[0]
         } catch(err){
             console.log(err)
             // res.status(500).json({err})
