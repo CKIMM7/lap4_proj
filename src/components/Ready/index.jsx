@@ -12,7 +12,7 @@ const Ready = ({ start, setStart }) => {
 
     const messageReceived = useSelector(state => state.room.messageReceived);
     console.log('message')
-    console.log(messageReceived)
+    // console.log(messageReceived)
     const roomsArray = useSelector(state => state.room.room);
     console.log(roomsArray)
     const indexOfRoom = roomsArray.findIndex(obj => obj.id == id)
@@ -54,7 +54,7 @@ const Ready = ({ start, setStart }) => {
             <button onClick={ready}>Ready Up!</button>
             
             <h1> Users:</h1>
-            {room.users.map(user => <p>{ user.username }</p>)}
+            {room.users.map(user => <p>{ user.name }</p>)}
             <h1> Chatroom:</h1>
             { console.log(room.messages)}
             {room.messages.map(msg => <p>{msg.user} - {msg.message}</p>)}

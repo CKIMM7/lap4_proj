@@ -27,18 +27,23 @@ const useUserStatus = (action) => {
         }
       ]
     }
-      socket.emit("create_room", room, { name: socket.id, isReady: false })
+      socket.emit("create_room", room, { name: socket.id, isReady: false, score: 0 })
   };
   
-    const readyUp = (room, user) => {
-        socket.emit("ready", room, user)
-    }
+  const readyUp = (room, user) => {
+    socket.emit("ready", room, user)
+  }
+  
+  const updateQuestionStatus = (game, answer) => {
+    console.log(answer)
+    socket.emit("update_game", game, socket.id, answer);
+  }
 
     
   const joinRoom = (room) => {
     console.log(`room`)
     console.log(`${socket.id} has joined room: ${room.id}`)
-      socket.emit("join_room", room.id, { name: socket.id, isReady: false })
+      socket.emit("join_room", room.id, { name: socket.id, isReady: false, score: 0 })
   };
 
   const leaveRoom = (room) => {
@@ -70,7 +75,7 @@ const useUserStatus = (action) => {
           game: []
         }
 
-        socket.emit("create_room", room, { name: socket.id, isReady: false }, game)
+        socket.emit("create_room", room, { name: socket.id, isReady: false, score: 0 }, game)
         console.log('create_room took place')
       };
 
@@ -108,7 +113,7 @@ const useUserStatus = (action) => {
 
     }, [socket]);
 
-    return { createRoom, sendMessage, setMessage, message, joinRoom, leaveRoom, broadCastGame, readyUp }
+    return { createRoom, sendMessage, setMessage, message, joinRoom, leaveRoom, broadCastGame, readyUp, updateQuestionStatus }
 }
 
 export default useUserStatus;

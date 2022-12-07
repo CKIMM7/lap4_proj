@@ -53,19 +53,24 @@ io.on("connection", (socket) => {
   socket.on("create_room", async (data, user, game) => {
     //update the array
     roomsArray.push(data);
-    console.log('hey')
+
     console.log(user)
 
     let searchUrl = `https://opentdb.com/api.php?amount=10&category=${game.category}&difficulty=${game.difficulty}&type=${game.choice}`
     const response = await axios.get(searchUrl);
     const gameArray = response.data.results
 
+    let newGameArray = gameArray.map((q) => {
+      //console.log(q)
+      { return { ...q, answered: [] } }
+    })
+
     const indexOfRoom = roomsArray.findIndex(obj => obj.id == data.id)
     let tempArr = roomsArray
 
     console.log(`indexOfRoom: ${indexOfRoom}`)
 
-    tempArr[indexOfRoom].game = gameArray;
+    tempArr[indexOfRoom].game = newGameArray;
     tempArr[indexOfRoom].users.push(user)
 
     roomsArray = tempArr
@@ -143,14 +148,36 @@ io.on("connection", (socket) => {
     socket.to(room.id).emit("receive_message", message, room);
   });
 
+  socket.on("update_game", (data, user, answer) => {
+    console.log('update_game');
+    console.log(user);
+    //console.log(answer);
+    //find id of the room,
+    let findIndex = roomsArray.findIndex(obj => obj.id == data.id)
+    //console.log(findIndex)
+    //console.log(roomsArray[findIndex].game[0])
+    console.log(roomsArray[findIndex].game[0].answered)
+    if (!roomsArray[findIndex].game[0].answered.includes(user)) {
+      roomsArray[findIndex].game[0].answered.push(user)
+    }
+    //console.log(roomsArray[findIndex].game[0])
+    if (answer) {
+      let userIndex = roomsArray[findIndex].users.findIndex(obj => obj.name == user)
+      console.log(userIndex)
+      console.log(roomsArray[findIndex].users[userIndex].score += 10)
+    }
+    if (roomsArray[findIndex].game[0].answered.length == roomsArray[findIndex].users.length) roomsArray[findIndex].game.shift()
+    updateData()
+  });
+
   socket.on("ready", (room, user) => {
     const indexOfRoom = roomsArray.findIndex(obj => obj.id == room)
     const indexOfUser = roomsArray[indexOfRoom].users.findIndex(obj => obj.name == user)
     roomsArray[indexOfRoom].users[indexOfUser].isReady = true
     if (!roomsArray[indexOfRoom].users.find(obj => obj.isReady == false)) {
       console.log('Start Game')
-      socket.emit("start", 'room')
-      socket.to(room).emit("start", 'room')
+      socket.emit("start", room)
+      socket.to(room).emit("start", room)
     }
     updateData()
 
