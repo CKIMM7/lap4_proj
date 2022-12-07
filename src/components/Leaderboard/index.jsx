@@ -1,15 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Leaderboard.css'
-import { motion } from 'framer-motion';
-
-// const db = require('../dbConfig');
-// import { getLeaderboard } from '../../../server/server';
-
-/** 
- * need to add the api backend routes 
- * cant import improve getLeaderboard, thats from backend
- * need to fetch the backend url/routes
- */
+// import { motion } from 'framer-motion';
 
 let tempArr = [
     { id: 1, name: 'a', diffifculty: 'easy', score: 2131 },
@@ -19,7 +10,7 @@ let tempArr = [
     { id: 5, name: 'e', diffifculty: 'hard', score: 2600 }
 ];
 
-const Leaderboard = ( level, category ) => {
+const Leaderboard = ({ level, category }) => {
     const [rank, setRank] = useState([])
     const [dataArray, setDataArray] = useState([])
 
@@ -27,26 +18,39 @@ const Leaderboard = ( level, category ) => {
         let tempArray = []
         function populateTable(){
             for(let i=0; i < 10; i++){
-              if(tempArr[i] !== undefined) tempArray.push(tempArr[i])
-              else tempArray.push({ id: null, name: 'xxxx', score: i })
+              if(dataArray[i] !== undefined) tempArray.push(dataArray[i])
+              else tempArray.push({ id: null, name: 'xxxx', score: 0 })
             }
-            console.log(tempArray)
+            // console.log(tempArray)
         }
-        // getData()
-        // populateTable()
-        // setRank(tempArray)
+        setDataArray(getData)
+        populateTable()
+        setRank(tempArray)
     }, []) 
 
     // need to data from db then populate dataArray
-    async function getData(req, res){
+    async function getData(){
         try {
+            console.log('getData')
+            console.log('cate '+category)
+            console.log('level '+level)
+            
             const url = 'http://localhost:3600';
-            const response = await fetch(`${url}/leaderboard`);
+            fetch(`${url}/leaderboard/History/easy`)
+                .then(data => console.log(data))
+                .catch(error => console.log(error))
+
+            // const response = await fetch(`${url}/leaderboard/${category}/${level}`);
+            const response = await fetch(`${url}/leaderboard/History/easy`);
+            
+            console.log(response)
+
             const data = await response.json();
-            console.log(data)
+            // console.log(data)
+            return data
         } catch(err){
             console.log(err)
-            res.status(500).json({err})
+            // res.status(500).json({err})
         }
     }
 
@@ -57,27 +61,11 @@ const Leaderboard = ( level, category ) => {
         else return 'Error';
     }
 
-<<<<<<< HEAD
-    //             if(type === 1 || type === 0) { 
-    //                 console.log('add: '+tempArr[i].score)
-    //                 sortedData[i] = tempArr[i]; 
-    //             }
-    //             else if(type === -1) { 
-    //                 console.log('add: '+tempArr[i+1])
-    //                 sortedData[i] = tempArr[i+1];
-    //             }
-    //         }
-    //     }
-    // }   
-
-    return <div id={`leaderboard-${difficulty}`} className="leaderboarddisplay">
-=======
     return <div id={`leaderboard-${level}`}>
->>>>>>> a96bd548ac89c19c05a45ff03abc7949a70d0e14
         <h2>Leaderboard</h2>
         <h2>{displayLevelTitle(level)}</h2>
         <div id='leaderboard-rank-list'> 
-            {/* { console.log(rank)} */}
+            { console.log(rank)}
             {rank.map((ele, index) => 
             <div id={`leaderboard-row-${index+1}`} key={index}>
                 <ul>

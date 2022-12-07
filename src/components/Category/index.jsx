@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import useGetGames from "../../hooks/useGetGames"
+import useGetGames from "../../hooks/useGetGames";
 import { usersActions } from '../../store/usersSlice';
 import { motion, LayoutGroup } from 'framer-motion';
 
@@ -14,6 +14,7 @@ const listOfCategory = [
 ]
 
 const Category = ({ }) => {
+    const [isOpen, setIsOpen] = useState(false);
     const dispatch = useDispatch();
     let category = useSelector(state => state.user.category);
 
@@ -34,9 +35,6 @@ const Category = ({ }) => {
             }
         })
     }
-
-    const [isOpen, setIsOpen] = useState(false);
-   
 
     const handleHover = (e) => {
         console.log(e.target.id)

@@ -33,13 +33,8 @@ const CreateLobby = (room) => {
 
     return <div>
         {!category && <Category /> }
-<<<<<<< HEAD:src/pages/Lobby/index.jsx
-        
-        { difficulty && category && <button onClick={Redirect} >start game</button> }
-=======
         {!difficulty && <Difficulty /> }
         { difficulty && category && <button onClick={makeRoom} >start game</button> }
->>>>>>> a96bd548ac89c19c05a45ff03abc7949a70d0e14:src/pages/createLobby/index.jsx
     </div>
 }
 

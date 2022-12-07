@@ -44,51 +44,51 @@ async function insertData() {
         
 INSERT INTO History (name, difficulty, score) 
 VALUES 
-('TEST', 'Easy', 9255),
-('TEST', 'Easy', 9255),
-('TEST', 'Easy', 9255),
-('TEST', 'Easy', 9255),
-('TEST', 'Medium', 9255),
-('TEST', 'Medium', 9255),
-('TEST', 'Medium', 8246),
-('TEST', 'Medium', 9200),
-('TEST', 'Hard', 9255),
-('TEST', 'Hard', 9255),
-('TEST', 'Hard', 9255),
-('TEST', 'Hard', 9255),
-('TEST', 'Hard', 9255);
+('TEST', 'easy', 9255),
+('TEST', 'easy', 9255),
+('TEST', 'easy', 9255),
+('TEST', 'easy', 9255),
+('TEST', 'medium', 9255),
+('TEST', 'medium', 9255),
+('TEST', 'medium', 8246),
+('TEST', 'medium', 9200),
+('TEST', 'hard', 9255),
+('TEST', 'hard', 9255),
+('TEST', 'hard', 9255),
+('TEST', 'hard', 9255),
+('TEST', 'hard', 9255);
 
 INSERT INTO Sports (name, difficulty, score) 
 VALUES 
-('TEST', 'Easy', 9255),
-('TEST', 'Easy', 9255),
-('TEST', 'Easy', 9255),
-('TEST', 'Easy', 9255),
-('TEST', 'Medium', 9255),
-('TEST', 'Medium', 9255),
-('TEST', 'Medium', 9255),
-('TEST', 'Medium', 9255),
-('TEST', 'Hard', 9255),
-('TEST', 'Hard', 9255),
-('TEST', 'Hard', 9255),
-('TEST', 'Hard', 9255),
-('TEST', 'Hard', 9255);
+('TEST', 'easy', 9255),
+('TEST', 'easy', 9255),
+('TEST', 'easy', 9255),
+('TEST', 'easy', 9255),
+('TEST', 'medium', 9255),
+('TEST', 'medium', 9255),
+('TEST', 'medium', 9255),
+('TEST', 'medium', 9255),
+('TEST', 'hard', 9255),
+('TEST', 'hard', 9255),
+('TEST', 'hard', 9255),
+('TEST', 'hard', 9255),
+('TEST', 'hard', 9255);
 
 INSERT INTO Science (name, difficulty, score) 
 VALUES 
-('TEST', 'Easy', 9255),
-('TEST', 'Easy', 9255),
-('TEST', 'Easy', 9255),
-('TEST', 'Easy', 9255),
-('TEST', 'Medium', 9255),
-('TEST', 'Medium', 9255),
-('TEST', 'Medium', 9255),
-('TEST', 'Medium', 9255),
-('TEST', 'Hard', 9255),
-('TEST', 'Hard', 9255),
-('TEST', 'Hard', 9255),
-('TEST', 'Hard', 9255),
-('TEST', 'Hard', 9255);
+('TEST', 'easy', 9255),
+('TEST', 'easy', 9255),
+('TEST', 'easy', 9255),
+('TEST', 'easy', 9255),
+('TEST', 'medium', 9255),
+('TEST', 'medium', 9255),
+('TEST', 'medium', 9255),
+('TEST', 'medium', 9255),
+('TEST', 'hard', 9255),
+('TEST', 'hard', 9255),
+('TEST', 'hard', 9255),
+('TEST', 'hard', 9255),
+('TEST', 'hard', 9255);
 
 `
         await client.query(query, (err, res) => {
@@ -116,7 +116,7 @@ async function showData() {
 async function ins(name, difficulty, score, category) {
     let results;
     try {
-        const query = (`INSERT INTO $1 (name. difficulty, score) VALUES ($2,$3,$4);`,[category, name, difficulty, score])
+        const query = (`INSERT INTO $1 (name, difficulty, score) VALUES ($2,$3,$4);`,[category, name, difficulty, score])
         await client.query(query, (err, res) => {
             console.log(err)
             console.log(res.rows)
@@ -128,24 +128,23 @@ async function ins(name, difficulty, score, category) {
     catch (err) { console.log(err) }
 }
 
-async function getLeaderboard(category, difficulty) {
+async function getLeaderboard(data) {
+    return new Promise (async (resolve, reject) => {
+        try {
+            const query = (`SELECT * FROM ${data.category} WHERE difficulty = '${data.difficulty}' ORDER BY score DESC;`)
+            // console.log(query)
 
-    let results;
-    try {
-        const query = (`SELECT * FROM ${category} WHERE difficulty = '${difficulty}' ORDER BY score DESC;`)
-        console.log(query)
-        await client.query(query, (err, res) => {
-            err ? console.log(err) : console.log(res.rows)
-            results = res.rows
-        })
-        return results
-
-    }
-    catch (err) { console.log(err) }
+            const response = await client.query(query)
+            console.log(response)
+            resolve(response)
+        } catch (err) { 
+            console.log(err) 
+        } 
+    })
 }
 // createTables()
 // insertData()
 // showData()
-getLeaderboard('History','Medium')
+// getLeaderboard('History','medium')
 
 module.exports = { createTables, getLeaderboard }

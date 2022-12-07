@@ -7,6 +7,12 @@ import { usersActions } from '../../store/usersSlice';
 import './Difficulty.css'
 import Leaderboard from '../Leaderboard';
 
+const listOfCategory = [
+    {id: 23, subject: 'History' },
+    {id: 17, subject: 'Science' },
+    {id: 21, subject: 'Sports'}
+]
+
 const Difficulty = ({ }) => {
 
     const dispatch = useDispatch();
@@ -44,6 +50,14 @@ const Difficulty = ({ }) => {
         // setSlide(false)
     }
 
+    function categoryString(){
+        let str = '';
+        for(let i=0; i<listOfCategory.length; i++){
+            if(listOfCategory[i].id === category) str = listOfCategory[i].subject;
+        }
+        return str;
+    }
+
     return <div id='difficulty-screen'>
         <div id="list-of-difficulty">
             <button type="button" className="choose-mode" onClick={e => startGame(e, 'easy')} id="easy" value={difficulty} >
@@ -64,7 +78,7 @@ const Difficulty = ({ }) => {
         { console.log('lvlIcon: '+levelIcon) }
         { levelIcon!==undefined && <div id='leaderboard-screen'> 
             <button id='x-btn' onClick={exitLeaderboard}>x btn icon</button>
-            <Leaderboard level={levelIcon} category={category} />
+            <Leaderboard level={levelIcon} category={categoryString()} />
         </div> }
     </div>
 }
