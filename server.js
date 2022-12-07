@@ -157,16 +157,22 @@ io.on("connection", (socket) => {
     //console.log(findIndex)
     //console.log(roomsArray[findIndex].game[0])
     console.log(roomsArray[findIndex].game[0].answered)
-    if (!roomsArray[findIndex].game[0].answered.includes(user)) {
-      roomsArray[findIndex].game[0].answered.push(user)
-    }
-    //console.log(roomsArray[findIndex].game[0])
     if (answer) {
       let userIndex = roomsArray[findIndex].users.findIndex(obj => obj.name == user)
       console.log(userIndex)
       console.log(roomsArray[findIndex].users[userIndex].score += 10)
     }
-    if (roomsArray[findIndex].game[0].answered.length == roomsArray[findIndex].users.length) roomsArray[findIndex].game.shift()
+    if (roomsArray[findIndex].game[0].answered.length == roomsArray[findIndex].users.length) {
+      console.log("Next question")
+      roomsArray[findIndex].game.shift()
+      updateData()
+      return
+    }
+    if (!roomsArray[findIndex].game[0].answered.includes(user)) {
+      roomsArray[findIndex].game[0].answered.push(user)
+    }
+    //console.log(roomsArray[findIndex].game[0])
+    
     updateData()
   });
 

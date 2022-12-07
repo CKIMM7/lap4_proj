@@ -31,7 +31,7 @@ const Game = () => {
             console.log('Start Game')
             setStart(true)
         }
-        if (roomsArray[indexOfRoom].game[0].length != roomsArray[indexOfRoom].users.length) {
+        if (roomsArray[indexOfRoom].game[0].answered.includes(userId) && (roomsArray[indexOfRoom].game[0].length != roomsArray[indexOfRoom].users.length)) {
             setWaiting(true)
         }
         else setWaiting(false)
