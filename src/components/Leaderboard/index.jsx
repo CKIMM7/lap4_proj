@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import './Leaderboard.css'
 
+// const db = require('../dbConfig');
+// import { getLeaderboard } from '../../../server/server';
+
+/** 
+ * need to add the api backend routes 
+ * cant import improve getLeaderboard, thats from backend
+ * need to fetch the backend url/routes
+ */
+
 let tempArr = [
     { id: 1, name: 'a', diffifculty: 'easy', score: 2131 },
     { id: 2, name: 'b', diffifculty: 'easy', score: 200 },
@@ -23,13 +32,21 @@ const Leaderboard = ( level, category ) => {
             console.log(tempArray)
         }
         // getData()
-        populateTable()
-        setRank(tempArray)
+        // populateTable()
+        // setRank(tempArray)
     }, []) 
 
     // need to data from db then populate dataArray
-    function getData(){
-
+    async function getData(req, res){
+        try {
+            const url = 'http://localhost:3600';
+            const response = await fetch(`${url}/leaderboard`);
+            const data = await response.json();
+            console.log(data)
+        } catch(err){
+            console.log(err)
+            res.status(500).json({err})
+        }
     }
 
     const displayLevelTitle = (type) => {

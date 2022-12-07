@@ -142,5 +142,5 @@ io.on("connection", (socket) => {
 const port = process.env.PORT || 3500
 
 server.listen(port, () => {
-  console.log("SERVER IS RUNNING ON http://localhost:3001");
+  console.log(`SERVER IS RUNNING ON http://localhost:${port}`);
 });
