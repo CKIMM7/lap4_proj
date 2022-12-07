@@ -1,4 +1,4 @@
-import client from './dbconfig'
+const client = require('./dbconfig')
 
 async function createTables() { 
     try {
@@ -148,4 +148,4 @@ async function getLeaderboard(category, difficulty) {
 // showData()
 getLeaderboard('History','Medium')
 
-module.exports = { getLeaderboard }
+module.exports = { createTables, getLeaderboard }

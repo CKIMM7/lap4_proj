@@ -1,4 +1,4 @@
-// const dbServer = require('../../../server/queryFunc');
+const dbServer = require('./queryFunc');
 
 // const { getLeaderboard } = dbServer()
 
