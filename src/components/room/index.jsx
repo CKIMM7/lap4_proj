@@ -7,7 +7,7 @@ export default function Room({ data }) {
     // console.log('room client js')
     // console.log(data)
 
-    
+
     const { roomId } = useParams()
     const navigate = useNavigate()
     const { joinRoom, leaveRoom, sendMessage, setMessage, message } = useUserStatus()
@@ -27,7 +27,9 @@ export default function Room({ data }) {
 
     const sendMessageHandler = () => {
         console.log(message)
+        console.log(data)
         sendMessage(message, data)
+
     };
 
     useEffect(() => {
@@ -36,31 +38,15 @@ export default function Room({ data }) {
 
     return (
         <div className='room'>
-            {data.id}<br />
+            <p>Lobby : {data.id}</p>
             {console.log(data)}
             {console.log(data.messages)}
 
-            <p>Users:</p>
-            {data.users.map((user, i) => <p key={i}>{`${user.name}`}</p>)}
+            <p>Players: {data.users.length}/6</p>
 
-            <p>Chatroom:</p>
-            {data.messages.map((msg, i) => <p key={ i}>{`${msg.user} - ${msg.message}`}</p>)}
+            <button id='join-button' onClick={joinRoomHandler}>Join</button>
 
-            <form name='message-form'>
-                <label htmlFor="message-input">Type to chat:</label>
-                <input id='message-input' placeholder="Message..."
-                    onChange={(event) => {
-                        setMessage(event.target.value);
-                    }}
-                /><br />
-                <button onClick={sendMessageHandler}> Send Message</button>
-                <br />
 
-                <button id='join-button' onClick={joinRoomHandler}>Join</button>
-                <button onClick={leaveRoomHandler}>Leave</button>
-            </form>
-            
         </div>
     )
-  }
-  
+}
