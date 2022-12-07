@@ -45,15 +45,27 @@ const Difficulty = ({ }) => {
 
     return <div id='difficulty-screen'>
         <div id="list-of-difficulty">
-            <button type="button" className="choose-mode" onClick={e => startGame(e, 'easy')} id="easy" value={difficulty} >
-                Beginner
-            </button>
-            <button type="button" className="choose-mode" onClick={e => startGame(e, 'medium')} id="medium" value={difficulty} >
-                Intermediate
-            </button>
-            <button type="button" className="choose-mode" onClick={e => startGame(e, 'hard')} id="hard" value={difficulty} >
-                Expert
-            </button>
+            <div className="diffcon" id="begin">
+                <i class="bi bi-cloud"></i>
+                <button type="button" className="choose-mode" onClick={e => startGame(e, 'easy')} id="easy" value={difficulty} >
+                    Beginner
+                </button>
+                <i class="bi bi-cloud"></i>
+            </div>
+            <div className="diffcon" id="interm">
+                <i class="bi bi-cloud-drizzle"></i>
+                <button type="button" className="choose-mode" onClick={e => startGame(e, 'medium')} id="medium" value={difficulty} >
+                    Intermediate
+                </button>
+                <i class="bi bi-cloud-drizzle"></i>
+            </div>
+            <div className="diffcon" id="expert">
+                <i class="bi bi-cloud-lightning-rain"></i>
+                <button type="button" className="choose-mode" onClick={e => startGame(e, 'hard')} id="hard" value={difficulty} >
+                    Expert
+                </button>
+                <i class="bi bi-cloud-lightning-rain"></i>
+            </div>
         </div>
         <div id='leaderboard-icons'>
             <button onClick={displayLeaderboard} id='leaderboard-easy'>*Leaderboard Icon*</button>
