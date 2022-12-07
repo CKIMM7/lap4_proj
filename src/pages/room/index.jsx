@@ -14,7 +14,7 @@ export default function Room({ data }) {
 
     const joinRoomHandler = () => {
         joinRoom(data)
-        navigate(`/rooms/${data}`)
+        navigate(`/lobby/${data.id}`)
     };
 
     const leaveRoomHandler = () => {

@@ -13,9 +13,7 @@ import Room from '../../pages/room';
 function LobbyCode() {
 
     const dispatch = useDispatch();
-    const { status } = useGetGames(10, 11, 'easy', 'multiple')
-
-    const { createRoom, sendMessage, setRoom, setMessage } = useUserStatus();
+    const { createRoom, sendMessage, setMessage } = useUserStatus();
 
     const userData = useSelector(state => state.user.user);
     const roomsArray = useSelector(state => state.room.room);
@@ -25,12 +23,6 @@ function LobbyCode() {
         console.log(r)
         return <Room data={r} key={i}></Room>
     })
-
-    // useEffect(() => {
-    //   console.log(roomsArray)
-
-    // }, [roomsArray])
-
 
     return (
 

@@ -9,7 +9,7 @@ import useUserStatus from "../../hooks/useUserStatus";
 import useGetGames from "../../hooks/useGetGames";
 
 
-const Lobby = (room) => {
+const CreateLobby = (room) => {
 
     const navigate = useNavigate();
     const params = useParams()
@@ -17,29 +17,30 @@ const Lobby = (room) => {
 
     let difficulty = useSelector(state => state.user.difficulty) //save var to here
     let category = useSelector(state => state.user.category) 
-    const { state } = useLocation();
-    const { roomId } = state;
+    // const { state } = useLocation();
+    // const { lobbyId } = state;
 
-    function Redirect(){
+    function makeRoom(){
 
-        //broadcast 
         broadCastGame(
             {num: 10, 
-            categoy: category, 
+            category: category, 
             difficulty: difficulty, 
-            choice: 'multiple'}, roomId)
+            choice: 'multiple'})
 
-        navigate('/startgame')
+        //navigate(`/lobby/${lobbyId}`)
     }
-
-    console.log(`roomId`);
-    console.log(roomId);
 
     return <div>
         {!category && <Category /> }
+<<<<<<< HEAD:src/pages/Lobby/index.jsx
         
         { difficulty && category && <button onClick={Redirect} >start game</button> }
+=======
+        {!difficulty && <Difficulty /> }
+        { difficulty && category && <button onClick={makeRoom} >start game</button> }
+>>>>>>> a96bd548ac89c19c05a45ff03abc7949a70d0e14:src/pages/createLobby/index.jsx
     </div>
 }
 
-export default Lobby
+export default CreateLobby

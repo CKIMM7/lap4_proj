@@ -5,6 +5,7 @@ import { roomActions } from '../store/roomSlice';
 import { v4 as uuidv4 } from 'uuid';
 import { socket } from './socket';
 import { Navigate, useNavigate } from 'react-router-dom';
+import { gamesActions } from '../store/store';
 
 const useUserStatus = (action) => {
 
@@ -18,23 +19,12 @@ const useUserStatus = (action) => {
 
   const createRoom = () => {
 
-    let id = uuidv4().slice(24)
-
-    let room = {
-      id: id,
-      users: [],
-      messages: [
-        {
-          user: 'Admin',
-          message: 'Welcome to the chat room!'
-        }
-      ]
-    }
-    socket.emit("create_room", room, socket.id)
-    navigate(`/lobby`, { state: { roomId: id } })
+    //socket.emit("create_room", room, socket.id)
+    navigate(`/createlobby`)
   };
 
   const joinRoom = (room) => {
+    console.log(`room`)
     console.log(`${socket.id} has joined room: ${room.id}`)
     socket.emit("join_room", room.id, socket.id)
   };
@@ -52,9 +42,25 @@ const useUserStatus = (action) => {
     socket.emit("send_message", { user: socket.id, message: message }, room );
   };
       
-    const broadCastGame = (game, room) => {
-        console.log(game, room)
-        socket.emit("broadcast_game", game, room);
+    const broadCastGame = (game) => {
+        console.log(game)
+
+        let id = uuidv4().slice(24)
+
+        let room = {
+          id: id,
+          users: [],
+          messages: [
+            {
+              user: 'Admin',
+              message: 'Welcome to the chat room!'
+            }
+          ],
+          game: []
+        }
+
+        socket.emit("create_room", room, socket.id, game)
+        navigate(`/lobby/${room.id}`)
       };
 
     
@@ -66,6 +72,7 @@ const useUserStatus = (action) => {
         });
 
         socket.on("receive_rooms", (data) => {
+            console.log(data);
             dispatch(roomActions.setRoom(data))              
           })
 
@@ -74,6 +81,12 @@ const useUserStatus = (action) => {
             console.log(data)         
           });
 
+          // socket.on("receive_game", (data, room) => {
+          //   console.log("receive_game")
+          //   console.log(data)
+          //   dispatch(gamesActions.setGamesData(data))
+
+          // });
 
     }, [socket]);
 

@@ -11,7 +11,7 @@ const CreateName = props => {
 
     const goHandler = () => {
         //save the username to redux and do something
-        navigate('/createroom')
+        navigate('/lobby')
     }
     
 
