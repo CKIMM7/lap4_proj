@@ -51,6 +51,7 @@ const Difficulty = ({ }) => {
                     Beginner
                 </button>
                 <i class="bi bi-cloud"></i>
+                <button onClick={displayLeaderboard} className="leaderbtn" id='leaderboard-easy'><i class="bi bi-bar-chart"></i></button>
             </div>
             <div className="diffcon" id="interm">
                 <i class="bi bi-cloud-drizzle"></i>
@@ -58,6 +59,7 @@ const Difficulty = ({ }) => {
                     Intermediate
                 </button>
                 <i class="bi bi-cloud-drizzle"></i>
+                <button onClick={displayLeaderboard} className="leaderbtn" id='leaderboard-medium'><i class="bi bi-bar-chart"></i></button>
             </div>
             <div className="diffcon" id="expert">
                 <i class="bi bi-cloud-lightning-rain"></i>
@@ -65,6 +67,7 @@ const Difficulty = ({ }) => {
                     Expert
                 </button>
                 <i class="bi bi-cloud-lightning-rain"></i>
+                <button onClick={displayLeaderboard} className="leaderbtn" id='leaderboard-hard'><i class="bi bi-bar-chart"></i></button>
             </div>
         </div>
         <div id='leaderboard-icons'>
@@ -72,12 +75,7 @@ const Difficulty = ({ }) => {
             <button onClick={displayLeaderboard} id='leaderboard-medium'>*Leaderboard Icon*</button>
             <button onClick={displayLeaderboard} id='leaderboard-hard'>*Leaderboard Icon*</button>
         </div>
-        { console.log('lvlIcon: '+levelIcon) }
-        { console.log('slide: '+slide) }
-        { levelIcon!==undefined && <div id='leaderboard-screen' className={slide ? "slide" : ""}> 
-            <button id='x-btn' onClick={exitLeaderboard}>x btn icon</button>
-            <Leaderboard level={levelIcon} category={category} />
-        </div> }
+        
     </div>
 }
 

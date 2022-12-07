@@ -34,6 +34,7 @@
     height: 100px;
     width: 120px;
     
+    
 }
 
 #leaderboard-screen {
@@ -88,7 +89,7 @@
     align-items: center;
     height: 150px;
     margin: 20px;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    
 }
 
 i {
@@ -99,6 +100,7 @@ i {
     height: 100%;
     font-size: 50px;
     padding: 5px 50px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 
@@ -125,5 +127,12 @@ i {
 
 #expert i {
     background-color: #8C2022;
+}
+
+.leaderbtn {
+    margin-left: 50px;
+    width: 150px !important;
+    background-color: transparent !important;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
