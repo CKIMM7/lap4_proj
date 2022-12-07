@@ -17,6 +17,7 @@ const roomSlice = createSlice({
         game:[]
       }
     ],
+    count: 10,
     searchValue: '',
     textInput: '',
     currentGame: []
@@ -50,6 +51,12 @@ const roomSlice = createSlice({
       console.log(action.payload)
       state.room = tempRoom
       // return state.room
+    },
+    setCountDown(state, action) {
+      console.log(action.payload)
+      state.count = action.payload.count;
+      console.log(state.count)
+
     },
 
   }

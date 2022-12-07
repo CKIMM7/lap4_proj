@@ -8,6 +8,8 @@ import { roomActions } from "../../store/roomSlice";
 import useUserStatus from "../../hooks/useUserStatus";
 import Ready from "../../components/Ready";
 import GameCard from "../GameCard";
+import ShowWinner from "../../components/ShowWinner";
+import Count from "../../components/Count";
 const Game = () => {
     const location = useLocation()
     const navigate = useNavigate('/lobby')
@@ -33,8 +35,7 @@ const Game = () => {
             <>
                 <p>{data.name}</p>
                 <p>Score: {data.score}</p>
-                <button onClick={() => navigate('/lobby')}>Back to Lobby</button>
-                <button>View Leaderboard</button>
+                
             </>
         )
     }
@@ -56,14 +57,7 @@ const Game = () => {
     }, [roomsArray[indexOfRoom].users])
     return <div>{
         end ? 
-            <>
-                <h1>Game Over</h1>
-                <h1>The Winner is:</h1>
-                {console.log(roomsArray[indexOfRoom].users.map(obj => obj.score))}
-                <p>{win(roomsArray[indexOfRoom].users.reduce((prev, current) => { return prev.score > current.score ? prev : current }))}</p>
-                {console.log(Math.max(...roomsArray[indexOfRoom].users.map(obj => obj.score)))}
-            </>
-            
+            <ShowWinner data={roomsArray[indexOfRoom].users } />
         :   start
             ? wait
                 ? <h1>Waiting for other players</h1>
@@ -71,6 +65,7 @@ const Game = () => {
                 <p>game page</p>
                 <p>username: {userId}</p>
                 <p>score: {roomsArray[indexOfRoom].users[indexOfUser].score}</p>
+                <Count/>
                 <ul>{gameArray.length > 0 && gameArray[0]}</ul></>
             : <Ready start={start} setStart={setStart} />}
         
