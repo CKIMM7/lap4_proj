@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { usersActions } from "../../store/usersSlice";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import "nes.css/css/nes.min.css";
 
 const CreateName = props => {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [ name, setName ] = useState('')
     const users = useSelector(state => state.users);
     if (!props.show) {
@@ -26,8 +27,9 @@ const CreateName = props => {
 
     function submit(e) {
         e.preventDefault()
-        usersActions.setUser(name)
-        console.log(users)
+        console.log(name)
+        dispatch(usersActions.setUser(name))
+        // console.log(users)
         console.log("Hey")
     }
     

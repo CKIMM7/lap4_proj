@@ -28,6 +28,7 @@ const userSlice = createSlice({
       },
 
       setUser(state, action) {
+        console.log('Test')
         console.log(action.payload)
         // let indexOfRoom = state.room.findIndex(room => room.id == action.payload.room)
         // const tempRoom = state.room
