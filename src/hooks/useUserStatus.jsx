@@ -105,6 +105,9 @@ const useUserStatus = (action) => {
         socket.emit("ready", room, user)
       })
 
+      socket.on("test", () => {
+        console.log("Connected to IF")
+      })
 
     }, [socket]);
 

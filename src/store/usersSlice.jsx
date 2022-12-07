@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const userSlice = createSlice({
     name: 'users',
     initialState: {
-        user: '',
+        users: [],
         difficulty: '',
         category: '',
         messageReceived: '',
@@ -28,7 +28,15 @@ const userSlice = createSlice({
       },
 
       setUser(state, action) {
-        state.user = action.payload;
+        console.log(action.payload)
+        // let indexOfRoom = state.room.findIndex(room => room.id == action.payload.room)
+        // const tempRoom = state.room
+        // console.log(indexOfRoom)
+        // tempRoom[indexOfRoom].messages.push({ user: action.payload.user, message: action.payload.message })
+
+        // console.log(action.payload)
+        // state.room = tempRoom
+        state.users = action.payload;
       },
   
       setIsLoading(state, action) {

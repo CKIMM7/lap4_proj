@@ -23,14 +23,15 @@ io.on("connection", (socket) => {
   console.log(`User Connected: ${socket.id}`);
 
   function joinRoom(room, user) {
-    console.log(user)
-    console.log(roomsArray)
+    // console.log(user)
+    // console.log(roomsArray)
     const indexOfRoom = roomsArray.findIndex(obj => obj.id == room)
     console.log(roomsArray[indexOfRoom].users)
     if (roomsArray[indexOfRoom].users.find(obj => obj.name == user.name)) return
     if (roomsArray[indexOfRoom].users.length >= 6) { console.log('Lobby is full'); return }
     socket.join(room);
 
+    console.log("Test")
     const tempArr = roomsArray
 
     //tempArr[indexOfRoom].users.push({username: user.username, socre: 0})
@@ -70,13 +71,15 @@ io.on("connection", (socket) => {
     console.log(`indexOfRoom: ${indexOfRoom}`)
 
     tempArr[indexOfRoom].game = newGameArray;
-    tempArr[indexOfRoom].users.push(user)
 
     roomsArray = tempArr
 
-    console.log(roomsArray);
+    // console.log(roomsArray);
 
+    console.log('before')
     joinRoom(data.id, user)
+    console.log('after')
+
     
     updateData(data.id)
     
@@ -220,6 +223,7 @@ io.on("connection", (socket) => {
 
     console.log(roomsArray[indexOfRoom].users)
     if (!roomsArray[indexOfRoom].users.find(obj => obj.isReady == false)) {
+      socket.emit("test")
       console.log("Inside Users")
       console.log(roomsArray[indexOfRoom].users)
       let countdown = 10;
