@@ -16,29 +16,20 @@ const useUserStatus = (action) => {
 
     const room = useSelector(state => state.room.room);
 
-  const createRoom = () => {
-    let room = {
-      id: uuidv4().slice(24),
-      users: [],
-      messages: [
-        {
-          user: 'Admin',
-          message: 'Welcome to the chat room!'
-        }
-      ]
-    }
-      socket.emit("create_room", room, { name: socket.id, isReady: false })
-  };
+  const readyUp = (room, user) => {
+    socket.emit("ready", room, user)
+  }
   
-    const readyUp = (room, user) => {
-        socket.emit("ready", room, user)
-    }
+  const updateQuestionStatus = (game, answer) => {
+    console.log(answer)
+    socket.emit("update_game", game, socket.id, answer);
+  }
 
     
   const joinRoom = (room) => {
     console.log(`room`)
     console.log(`${socket.id} has joined room: ${room.id}`)
-      socket.emit("join_room", room.id, { name: socket.id, isReady: false })
+      socket.emit("join_room", room.id, { name: socket.id, isReady: false, score: 0 })
   };
 
   const leaveRoom = (room) => {
@@ -70,7 +61,7 @@ const useUserStatus = (action) => {
           game: []
         }
 
-        socket.emit("create_room", room, { name: socket.id, isReady: false }, game)
+        socket.emit("create_room", room, { name: socket.id, isReady: false, score: 0 }, game)
         console.log('create_room took place')
       };
 
@@ -102,13 +93,22 @@ const useUserStatus = (action) => {
             dispatch(roomActions.setMessage(data, room))        
         });          
         
-        socket.on("start", (room) => {
-            console.log("Start")
-        })
+      socket.on("receive_countdown", (data, room) => {
+        console.log("receive_countdown")
+        let countData = { count: data, room: room }
+        console.log(countData)
+        dispatch(roomActions.setCountDown(countData))
+      });
+
+      socket.on("ready_again", (room, user) => {
+        console.log("ready_again")
+        socket.emit("ready", room, user)
+      })
+
 
     }, [socket]);
 
-    return { createRoom, sendMessage, setMessage, message, joinRoom, leaveRoom, broadCastGame, readyUp }
+    return { sendMessage, setMessage, message, joinRoom, leaveRoom, broadCastGame, readyUp, updateQuestionStatus }
 }
 
 export default useUserStatus;

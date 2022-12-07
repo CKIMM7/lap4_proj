@@ -3,11 +3,12 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { gamesActions } from "../../store/store";
 import { roomActions } from "../../store/roomSlice";
+import useUserStatus from '../../hooks/useUserStatus'
 
 const GameCard = (data) => {
 
     console.log(data.username)
-
+    const { updateQuestionStatus } = useUserStatus()
     const dispatch = useDispatch()
     let unshuffled = [...data.data.incorrect_answers]
     unshuffled.push({ answer: data.data.correct_answer })
@@ -19,16 +20,19 @@ let shuffled = unshuffled
     .map(({ value }) => value)
 
     const answerHandler = (ans) => {
-
-        console.log(ans.ans)
-        //find the user, mark the answer and remove the question
-    
-        //users: [{username: userId, score: score}]
-        if(ans.ans) {
-            console.log('remove question')
-            dispatch(roomActions.removeQuestion(data.id))
+        //wrong answer
+        // dispatch(roomActions.updateQuestionState(data.id))
+        //update status in the server
+        updateQuestionStatus(data)
+        console.log(ans)
+        //right answer
+        if (ans.ans) {
+            console.log('correct answer')
+            updateQuestionStatus(data, ans.ans)
         }
-
+        else {
+            updateQuestionStatus(data, false)
+        }
     }
 
 

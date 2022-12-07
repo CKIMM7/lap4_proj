@@ -11,6 +11,8 @@ const AnswerButton = (ans) => {
         console.log(ans)
     }
 
+    
+
     console.log(ans)
 
     return (
