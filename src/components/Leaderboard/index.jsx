@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Leaderboard.css'
+import { motion } from 'framer-motion';
 
 // const db = require('../dbConfig');
 // import { getLeaderboard } from '../../../server/server';
@@ -56,7 +57,23 @@ const Leaderboard = ( level, category ) => {
         else return 'Error';
     }
 
+<<<<<<< HEAD
+    //             if(type === 1 || type === 0) { 
+    //                 console.log('add: '+tempArr[i].score)
+    //                 sortedData[i] = tempArr[i]; 
+    //             }
+    //             else if(type === -1) { 
+    //                 console.log('add: '+tempArr[i+1])
+    //                 sortedData[i] = tempArr[i+1];
+    //             }
+    //         }
+    //     }
+    // }   
+
+    return <div id={`leaderboard-${difficulty}`} className="leaderboarddisplay">
+=======
     return <div id={`leaderboard-${level}`}>
+>>>>>>> a96bd548ac89c19c05a45ff03abc7949a70d0e14
         <h2>Leaderboard</h2>
         <h2>{displayLevelTitle(level)}</h2>
         <div id='leaderboard-rank-list'> 

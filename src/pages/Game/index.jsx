@@ -1,7 +1,11 @@
 import React from "react";
 import { useSelector, useDispatch } from 'react-redux';
+<<<<<<< HEAD
+
+=======
 import { useParams } from "react-router-dom";
 import axios from 'axios';
+>>>>>>> a96bd548ac89c19c05a45ff03abc7949a70d0e14
 
 import useGetGames from "../../hooks/useGetGames"
 import { usersActions } from '../../store/usersSlice';

@@ -3,6 +3,35 @@ h2 {
     text-align: center;
 }
 
+#leaderboard-icons {
+    /* border: 2px solid red; */
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+
+#leaderboard-icons button {
+    height: 100px;
+    width: 120px;
+    margin: 10px;
+}
+
+#leaderboard-screen {
+    border: 2px solid orange;
+    position: absolute;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 10px 40%;
+    background: white;
+    width: 200px;
+    /* transition: all ease-in 0.2s; */
+    /* transition-delay: 0s; */
+}
+
+.leaderboarddisplay {
+    width: 60%;
+}
+
 #leaderboard-rank-list {
     color: greenyellow;
     /* border: 2px solid red; */
@@ -27,3 +56,4 @@ h2 {
     margin: 10px;
     padding: 10px 20px;
 }
+

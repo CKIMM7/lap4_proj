@@ -20,35 +20,12 @@
     margin: 10px;
 }
 
-#leaderboard-icons {
-    /* border: 2px solid red; */
-    display: flex;
-    flex-direction: column;
-    margin: 20px;
-}
 
-#leaderboard-icons button {
-    height: 100px;
-    width: 120px;
-    margin: 10px;
-}
-
-#leaderboard-screen {
-    border: 2px solid orange;
-    position: relative;
-    overflow: hidden;
-    right: 10000px;
-    padding: 10px 40%;
-    background: white;
-    transition: all ease-in 0.2s;
-    /* transition-delay: 0s; */
-}
-
-#x-btn {
+/* #x-btn {
     
-}
+} */
 
-.slide {
+/* .slide {
     position:absolute;
     border: 2px solid blue;
     left: -40%;
@@ -56,9 +33,9 @@
     -webkit-animation-delay: 0s;
     animation: slide 0.8s reverse;
     animation-delay: 0s;
-}
+} */
 
-@-webkit-keyframes slide {
+/* @-webkit-keyframes slide {
     0% { 
         right: 100000px; 
         opacity: 0;
@@ -78,4 +55,4 @@
         left: 0; 
         opacity: 100;
     } 
-} 
+}  */
