@@ -30,8 +30,8 @@ const Difficulty = ({ }) => {
         async function fetchLeaderboard(category, level) {
             try {
                 console.log('fetchLeaderboard')
-                console.log(categoryString())
-                console.log(levelIcon)
+                // console.log(categoryString())
+                // console.log(levelIcon)
                 const url = 'http://localhost:3600'
                 fetch(`http://localhost:3600/leaderboard/${category}/${level}`)
                     .then(data => data.json())
@@ -52,12 +52,12 @@ const Difficulty = ({ }) => {
     function startGame(e, id) { 
         e.preventDefault()
         updateInput(e, id)
-        console.log(`start ${difficulty} game`)
+        // console.log(`start ${difficulty} game`)
         difficulty = '';
     }
 
     function updateInput(e, id){
-        console.log(`${id} game selected`)
+        // console.log(`${id} game selected`)
         difficulty = id
         dispatch(usersActions.setDifficulty(difficulty))
     }
@@ -66,7 +66,7 @@ const Difficulty = ({ }) => {
         e.preventDefault()
         let id = e.target.id
         let type = id.split('-')
-        console.log(`leaderboard-icon: ${type[1]}`)
+        // console.log(`leaderboard-icon: ${type[1]}`)
         // setData(renderFirst)
         setLevelIcon(type[1])
         setShowBoard(true)

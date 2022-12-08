@@ -30,8 +30,9 @@ describe('Category', () => {
     })
 
     test('all 3 categories are displayed', () => {
-        const btnElements = screen.getAllByRole('button');
-        expect(btnElements).toBeTruthy();
+        // const btnElements = screen.getAllByRole('button');
+        const elements = screen.getAllByRole('heading')
+        expect(elements).toBeTruthy();
     }) 
 
     test('one topic has been clicked', () => {
