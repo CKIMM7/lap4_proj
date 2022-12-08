@@ -8,21 +8,6 @@ const gamesStatsSlice = createSlice({
         textInput: '' 
     },
     reducers: {
-      setIsLoading(state, action) {
-        //console.log(action.payload)
-        state.isLoading = action.payload
-      },
-  
-      setIsError(state, action) {
-        //console.log(action.payload)
-        state.isError = action.payload
-      },
-  
-      setError(state, action) {
-        //console.log(action.payload)
-        state.error = action.payload
-      },
-
     },
 });
 
