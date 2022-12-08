@@ -31,9 +31,19 @@ describe('CreateName', () => {
         render(<MockCreateName/>)
     })
 
-    test('create username', () => {
+    test('modalcontainer', async () => {
+        const div = await screen.findByTestId(`modalcontainer`)
+        expect(div).toBeInTheDocument();
+    }) 
+
+    test('create username not displayed intially', () => {
         const txt = screen.getByText(/Create a 4-letter username!/i)
-        expect(txt).toBeTruthy(); 
+        expect(txt).toBeFalsey();
+    }) 
+
+    test('your name label not displayed intially', () => {
+        const label = screen.getByText(/Your name/i)
+        expect(label).toBeFalsey();
     }) 
 
     test('2 buttons displayed and click to redirect', () => {

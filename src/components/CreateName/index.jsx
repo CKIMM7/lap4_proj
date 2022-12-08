@@ -16,7 +16,7 @@ const CreateName = props => {
     
 
     return (
-        <div className="nes-container with-title is-centered" id="modalcontainer">
+        <div className="nes-container with-title is-centered" id="modalcontainer" data-testid='modalcontainer' >
             <p className="title">Create a 4-letter username!</p>
             <div class="nes-field">
                 <label htmlFor="username">Your name</label>
