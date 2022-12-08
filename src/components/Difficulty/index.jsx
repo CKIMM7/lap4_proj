@@ -7,6 +7,7 @@ import { usersActions } from '../../store/usersSlice';
 import './Difficulty.css'
 import Leaderboard from '../Leaderboard';
 import { fetchLeaderboard } from '../../api/requests';
+import { useEffect } from 'react';
 
 const listOfCategory = [
     {id: 23, subject: 'History' },
@@ -19,8 +20,34 @@ const Difficulty = ({ }) => {
     const dispatch = useDispatch();
     let difficulty = useSelector(state => state.user.difficulty)
     const category = useSelector(state => state.user.category)
-    const [levelIcon, setLevelIcon] = useState();
-    // const [data, setData] = useState([]);
+    const [levelIcon, setLevelIcon] = useState('');
+    const [data, setData] = useState([]);
+    const [hasData, setHasData] = useState(false);
+    const [ showBoard, setShowBoard ] = useState(false)
+
+
+    useEffect(() => {
+        async function fetchLeaderboard(category, level) {
+            try {
+                console.log('fetchLeaderboard')
+                console.log(categoryString())
+                console.log(levelIcon)
+                const url = 'http://localhost:3600'
+                fetch(`http://localhost:3600/leaderboard/${category}/${level}`)
+                    .then(data => data.json())
+                    .then(o => { setData(o); setHasData(true) })
+
+                // const response = await fetch(`${url}/leaderboard/${category}/${level}`);
+                // const scoreArray = await response.json();
+                // console.log(scoreArray)
+                // setData(scoreArray)
+                // return scoreArray
+            } catch (err) {
+                console.log(err)
+            }
+        }
+        fetchLeaderboard(categoryString(), levelIcon)
+    },[showBoard, levelIcon, hasData])
 
     function startGame(e, id) { 
         e.preventDefault()
@@ -42,12 +69,16 @@ const Difficulty = ({ }) => {
         console.log(`leaderboard-icon: ${type[1]}`)
         // setData(renderFirst)
         setLevelIcon(type[1])
+        setShowBoard(true)
+
     }
 
     function exitLeaderboard(e){
         e.preventDefault()
         // setData([])
-        setLevelIcon(undefined)
+        setLevelIcon('')
+        setShowBoard(false)
+
     }
 
     function categoryString(){
@@ -80,10 +111,10 @@ const Difficulty = ({ }) => {
             <button onClick={displayLeaderboard} id='leaderboard-hard'>*Leaderboard Icon*</button>
         </div>
         { console.log('lvlIcon: '+levelIcon) }
-        { levelIcon!==undefined && <div id='leaderboard-screen'> 
+        { showBoard && <div id='leaderboard-screen'> 
             { console.log('---leaderboadr rendered') }
             <button id='x-btn' onClick={exitLeaderboard}>x btn icon</button>
-            <Leaderboard level={levelIcon} data={fetchLeaderboard(categoryString(), levelIcon)} />
+            <Leaderboard data={data} level={ levelIcon} />
         </div> }
     </div>
 }

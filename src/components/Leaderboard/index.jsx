@@ -12,18 +12,18 @@ let tempArr = [
 ];
 
 // fetch outside component then pass the data to here
-const Leaderboard = ({ level, dataArray }) => {
+const Leaderboard = ({ data, level }) => {
     const [rank, setRank] = useState([])
     // const [dataArray, setDataArray] = useState([])
     const [ hasData, setHasData ] = useState(false)
         // const [runOnce, setRunOnce] = useState(false)
-    // const [isEmpty, setIsEmpty] = useState(true)
 
+    
     useEffect(() => {
         let tempArray = []
         function populateTable(){
             for(let i=0; i < 10; i++){
-              if(dataArray[i] !== undefined) tempArray.push(dataArray[i])
+              if(data[i] !== undefined) tempArray.push(data[i])
               else tempArray.push({ id: null, name: 'xxxx', score: 0 })
             }
             // console.log(tempArray)
@@ -32,7 +32,7 @@ const Leaderboard = ({ level, dataArray }) => {
         populateTable()
         setRank(tempArray)
         console.log('level: '+level)
-    }, []) 
+    }, [data]) 
 
     const displayLevelTitle = (type) => {
         if(type === 'easy') return 'Beginner';
