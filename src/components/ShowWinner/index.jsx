@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { updateWinner } from '../../api/requests';
 
 const listOfPlayers = [
     { id: 1, name: 'a', score: 101 },
@@ -15,7 +16,9 @@ const listOfCategory = [
     {id: 21, subject: 'Sports'}
 ]
 
-const ShowWinner = ({ category, difficulty }) => {
+// data = is the data array.
+// replace with listOfPlayers and comment out above listOfPlayers
+const ShowWinner = ({ category, data }) => {
 
     const [rank, setRank] = useState([])
 
@@ -42,30 +45,29 @@ const ShowWinner = ({ category, difficulty }) => {
     async function addData(data){
         // adds per row/player?
         for(let i=0; i<data.length; i++){
-            update(categoryString(), data[i])
+            updateWinner(data[i])
         }
     }
 
-    async function update(categoryStr, data){
-        try {
-            console.log('showWinner')
-            const url = 'http://localhost:3600';
+    // async function update(data){
+    //     try {
+    //         console.log('showWinner')
+    //         const url = 'http://localhost:3600';
 
-            // const response = await fetch(`${url}/gameEnd/${categoryStr}/${difficulty}/${data.name}/${data.score}`, {
-            const response = await fetch(`${url}/gameEnd`, {
-                method: 'POST',
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data)
-            })
-            console.log(response)
+    //         const response = await fetch(`${url}/gameEnd`, {
+    //             method: 'POST',
+    //             headers: { "Content-Type": "application/json" },
+    //             body: JSON.stringify(data)
+    //         })
+    //         console.log(response)
 
-            const result = await response.json();
-            // console.log(data)
-            return result
-        } catch(err) {
-            console.log(err)
-        }
-    }
+    //         const result = await response.json();
+    //         // console.log(data)
+    //         return result
+    //     } catch(err) {
+    //         console.log(err)
+    //     }
+    // }
 
     return <div id='show-winner-screen'>
         <div id='show-winner-list'>

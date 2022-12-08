@@ -18,7 +18,8 @@ async function fetchLeaderboard(category, level){
     }
 }
 
-async function updateWinner(categoryStr, data){
+// tried to use this instead in ShowWinner but get a fetch error
+async function updateWinner(data){
     try {
         console.log('showWinner')
         const url = 'http://localhost:3600';
@@ -28,6 +29,7 @@ async function updateWinner(categoryStr, data){
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data)
         })
+        // const response = await fetch(`${url}/gameEnd`)
         console.log(response)
 
         const result = await response.json();
