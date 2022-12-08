@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { usersActions } from "../../store/usersSlice";
 import { useSelector, useDispatch } from 'react-redux';
+import { socket } from "../../hooks/socket";
 import "nes.css/css/nes.min.css";
 
 const CreateName = props => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [ name, setName ] = useState('')
-    const users = useSelector(state => state.users);
+    const users = useSelector(state => state);
     if (!props.show) {
         return null
     }
@@ -28,8 +29,8 @@ const CreateName = props => {
     function submit(e) {
         e.preventDefault()
         console.log(name)
-        dispatch(usersActions.setUser(name))
-        // console.log(users)
+        dispatch(usersActions.setUser({id: socket.id, name: name }))
+        console.log(users)
         console.log("Hey")
     }
     

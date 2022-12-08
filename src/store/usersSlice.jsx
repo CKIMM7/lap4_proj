@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const userSlice = createSlice({
-    name: 'users',
+    name: 'user',
     initialState: {
         users: [],
         difficulty: '',
@@ -13,31 +13,33 @@ const userSlice = createSlice({
         difficulty: '',
         category: '',
     },
-    reducers: {
+  reducers: {
 
-      setCategory(state, action) {
-        state.category = action.payload;
-      },
+    setCategory(state, action) {
+      state.category = action.payload;
+    },
       
-      setDifficulty(state, action) {
-        state.difficulty = action.payload;
-      },
+    setDifficulty(state, action) {
+      state.difficulty = action.payload;
+    },
 
-      setSocket(state, action) {
-        state.socket = action.payload;
-      },
+    setSocket(state, action) {
+      state.socket = action.payload;
+    },
 
-      setUser(state, action) {
-        console.log('Test')
-        console.log(action.payload)
-        // let indexOfRoom = state.room.findIndex(room => room.id == action.payload.room)
-        // const tempRoom = state.room
-        // console.log(indexOfRoom)
-        // tempRoom[indexOfRoom].messages.push({ user: action.payload.user, message: action.payload.message })
+    setUser(state, action) {
+      console.log('Set User')
+      console.log(action.payload)
+      let arr = state.users
+      arr.push(action.payload)
+      // let indexOfRoom = state.room.findIndex(room => room.id == action.payload.room)
+      // const tempRoom = state.room
+      // console.log(indexOfRoom)
+      // tempRoom[indexOfRoom].messages.push({ user: action.payload.user, message: action.payload.message })
 
-        // console.log(action.payload)
-        // state.room = tempRoom
-        state.users = action.payload;
+      // console.log(action.payload)
+      // state.room = tempRoom
+      state.users = arr
       },
   
       setIsLoading(state, action) {
