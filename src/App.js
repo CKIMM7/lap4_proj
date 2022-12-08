@@ -10,7 +10,7 @@ import "nes.css/css/nes.min.css";
 // const socket = io.connect("https://helpful-taffy-b1fa62.netlify.app/");
 
 
-import { Difficulty, Category, LobbyCode } from './components'
+import { Difficulty, LobbyCode } from './components'
 
 function App() {
 
