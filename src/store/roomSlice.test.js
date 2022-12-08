@@ -1,41 +1,71 @@
 import { render, screen } from '@testing-library/react';
-import App from './App';
-import roomActions from './roomSlice'
+import App from '../App';
+import { roomActions } from './roomSlice'
 
 
 describe('Room Slice', () => {
 
-    beforeEach(() => {
-        render(<roomSlice />)
-    })
+  beforeEach(() => {
+    // render(<roomSlice />)
+  })
 
-    test( 'sets room data in state' , () => {
-        const testState = {
-            room: [
-              {
-                id: 'Default',
-                users: [],
-                messages: [
-                  {
-                    user: '',
-                    message: ''
-                  }
-                ]
-              }
-            ],
-            searchValue: '',
-            textInput: '' 
+  test('sets room data in state', () => {
+    const testState = {
+      room: [{
+        id: 'Test Room',
+        users: [],
+        messages: [
+          {
+            user: '',
+            message: ''
           }
-          roomActions.setRoom(testState, testAction)
-          expect(testState.room[0].id).toBe('Default')
+        ]
+      }],
+      searchValue: '',
+      textInput: ''
+    }
+    const testAction = {
+      payload: [{
+        id: '',
+        users: [],
+        messages: [{
+          user: 'Admin',
+          message: 'Welcome to the chat room!'
+        }]
+      }]
+    }
 
-    })
+    expect(testState.room).toBe(roomActions.setRoom(testState, testAction).payload.room)
+  })
+
+  test('sets message', () => {
+    const testState = {
+      room: [{
+        id: 'Test Room',
+        users: [],
+        messages: [
+          {
+            user: '',
+            message: ''
+          }
+        ]
+      }],
+      searchValue: '',
+      textInput: ''
+    }
+    const testAction = {
+      payload: [{
+        id: '',
+        users: [],
+        messages: [{
+          user: 'Admin',
+          message: 'Welcome to the chat room!'
+        }]
+      }]
+    }
+
+    expect(testState.room).toBe(roomActions.setMessage(testState, testAction).payload.room)
+  })
 
 
-
-    test('renders learn react link', () => {
-        render(<App />);
-        const linkElement = screen.getByText(/learn react/i);
-        expect(linkElement).toBeInTheDocument();
-      });
 })
