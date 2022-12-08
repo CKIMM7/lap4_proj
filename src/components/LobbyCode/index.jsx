@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Routes, Route } from 'react-router-dom'
 import useGetGames from '../../hooks/useGetGames';
@@ -26,7 +26,7 @@ function LobbyCode() {
 
     return (
 
-        <div className="App">
+        <div id='lobbies' className="App">
             <button onClick={createRoom}> Create Room</button>
             <input
                 placeholder="Message..."
