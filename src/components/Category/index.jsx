@@ -43,7 +43,7 @@ const Category = ({ }) => {
 
     return (
         <main>
-            <div className="choosecategory">
+            <div id='choosecategory' className="choosecategory">
                 <h1>Pick a Category!</h1>
                 <h2>Test your wit with three categories to choose from.</h2>
             </div>

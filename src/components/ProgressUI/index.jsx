@@ -12,8 +12,8 @@ const Progress = () => {
         }
     },[filled, isRunning])
 return (
-        <div className="progresscontainer">
-            <div className="progressbar">
+    <div id="progresscontainer" className="progresscontainer">
+        <div id="progressbar" className="progressbar">
                 <div style={{
                     height: "100%",
                     width: `${filled}`,
