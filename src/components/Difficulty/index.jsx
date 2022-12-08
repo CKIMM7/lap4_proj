@@ -6,6 +6,7 @@ import { usersActions } from '../../store/usersSlice';
 
 import './Difficulty.css'
 import Leaderboard from '../Leaderboard';
+import { fetchLeaderboard } from '../../api/requests';
 
 const listOfCategory = [
     {id: 23, subject: 'History' },
@@ -17,19 +18,20 @@ const Difficulty = ({ }) => {
 
     const arr = []
     const [ data, setData ] = useState()
-        
+    const dispatch = useDispatch();
+    let difficulty = useSelector(state => state.user.difficulty)
+    const category = useSelector(state => state.user.category)
+    const [levelIcon, setLevelIcon] = useState();
+
     useEffect(() => {
         const url = 'http://localhost:3600';
         fetch(`${url}/leaderboard/History/easy`)
             .then(data => data.json())
             .then(obj => { setData(obj) })
-    }, []) 
+    }, [levelIcon,category]) 
 
-    const dispatch = useDispatch();
-    let difficulty = useSelector(state => state.user.difficulty)
-    const category = useSelector(state => state.user.category)
-    const [levelIcon, setLevelIcon] = useState();
-    // const [slide, setSlide] = useState(false);
+    
+    // const [data, setData] = useState([]);
 
     function startGame(e, id) { 
         e.preventDefault()
@@ -49,15 +51,14 @@ const Difficulty = ({ }) => {
         let id = e.target.id
         let type = id.split('-')
         console.log(`leaderboard-icon: ${type[1]}`)
+        // setData(renderFirst)
         setLevelIcon(type[1])
-        // setSlide(true)
-
     }
 
     function exitLeaderboard(e){
         e.preventDefault()
+        // setData([])
         setLevelIcon(undefined)
-        // setSlide(false)
     }
 
     function categoryString(){
@@ -67,6 +68,10 @@ const Difficulty = ({ }) => {
         }
         return str;
     }
+
+    // function renderFirst(){
+    //     return fetchLeaderboard(categoryString(), levelIcon)
+    // }
 
     return <div id='difficulty-screen'>
         <div id="list-of-difficulty">
@@ -87,8 +92,9 @@ const Difficulty = ({ }) => {
         </div>
         { console.log('lvlIcon: '+levelIcon) }
         { levelIcon!==undefined && <div id='leaderboard-screen'> 
+            { console.log('---leaderboadr rendered') }
             <button id='x-btn' onClick={exitLeaderboard}>x btn icon</button>
-            <Leaderboard data={data} />
+            <Leaderboard level={levelIcon} category={ 'History'} />
         </div> }
     </div>
 }

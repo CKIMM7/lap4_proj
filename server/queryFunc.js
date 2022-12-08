@@ -112,7 +112,6 @@ async function showData() {
     catch (err) { console.log(err) }
 }
 
-
 async function ins(data) {
     return new Promise (async (resolve, reject) => {
         try {
