@@ -59,7 +59,7 @@ const Game = () => {
     }, [roomsArray[indexOfRoom].users])
     return <div>{
         end ? 
-            <ShowWinner data={roomsArray[indexOfRoom].users } />
+            <ShowWinner data={roomsArray[indexOfRoom].users} />
         :   start
             ? wait
                 ? <h1>Waiting for other players</h1>

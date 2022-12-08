@@ -16,6 +16,23 @@ const getLeaderboard = async (req, res) => {
     }
 }
 
+const test = async (req, res) => {
+    try {
+        let arr = []
+        const getData = await dbServer.test();
+        console.log('controller')
+        getData.rows.map(obj => arr.push(obj))
+
+        console.log('controller pass ')
+
+        console.log(arr)
+        res.status(200).json(arr);
+    } catch (err) {
+        res.status(500).send(err);
+    }
+}
+
+
 const insert = async (req, res) => {
     try {
         console.log(req.body)
@@ -28,4 +45,4 @@ const insert = async (req, res) => {
     }
 }
 
-module.exports = { getLeaderboard, insert }
+module.exports = { getLeaderboard, insert, test }

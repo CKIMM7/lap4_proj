@@ -17,30 +17,59 @@ const listOfCategory = [
     { id: 21, subject: 'Sports' }
 ]
 
-const ShowWinner = ({ data: listOfPlayers }) => {
+const ShowWinner = ({ data }) => {
 
     const userArray = useSelector(state => state.user.users);
+    const userState = useSelector(state => state.user);
     const navigate = useNavigate()
     const [rank, setRank] = useState([])
     let category = 'easy'
 
-    // useEffect(() => {
-    //     let tempArray = []
-    //     function populateTable(){
-    //         // sortScore();
-            
-    //         for(let i=0; i < 10; i++){
-    //           if(listOfPlayers[i] !== undefined) tempArray.push(listOfPlayers[i])
-    //         }
-    //         console.log(tempArray)
-    //     }
-    //     populateTable()
-    //     setRank(tempArray)
-    // }, [])
     useEffect(() => {
-        setRank(listOfPlayers.sort(compare))
-        addData(listOfPlayers)
+        let tempArray = []
+        function populateTable() {
+            // sortScore();
+            
+            for (let i = 0; i < 10; i++) {
+                if (listOfPlayers[i] !== undefined) tempArray.push(listOfPlayers[i])
+            }
+            console.log(tempArray)
+        }
+        populateTable()
+        console.log('zx')
+        console.log(data.length)
+        console.log()
+        data.map(user => {
+            console.log(user);
+            updateWinner({
+                name: userArray.filter(obj => obj.id == user.name)[0].name,
+                category: listOfCategory.filter(obj => obj.id == userState.category)[0].subject,
+                difficulty: userState.difficulty,
+                score: user.score
+            })
+        })
+        
+        setRank(tempArray)
     }, [])
+    // useEffect(() => {
+    //     // setRank(listOfPlayers.sort(compare))
+    //     // addData(listOfPlayers)
+    //     // if (end) updateWinner(
+    //     //     {
+    //     //         name: "LOOL",
+    //     //         category: "Science",
+    //     //         difficulty: "easy",
+    //     //         score: 123
+    //     //     }
+    //     // )
+    //     console.log(data)
+    // }, [])
+    console.log(listOfCategory.filter(obj => obj.id == userState.category)[0].subject)
+    console.log(userState.difficulty)
+    console.log(userArray.filter(obj => obj.id == data[0].name)[0].name)
+    console.log(data[0].score)
+    console.log('Test')
+
 
     async function addData(data) {
         // adds per row/player?
@@ -85,7 +114,7 @@ const ShowWinner = ({ data: listOfPlayers }) => {
     }
 
     return <div id='show-winner-container'>
-        {rank.map((player, index) => 
+        {data.map((player, index) => 
             <div id={`show-winner-${index + 1}`} key={index}>
                 <h1>Lobby Leaderboard</h1>
             <ul>
