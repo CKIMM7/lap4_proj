@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
 import useGetGames from "../../hooks/useGetGames"
@@ -14,6 +14,16 @@ const listOfCategory = [
 ]
 
 const Difficulty = ({ }) => {
+
+    const arr = []
+    const [ data, setData ] = useState()
+        
+    useEffect(() => {
+        const url = 'http://localhost:3600';
+        fetch(`${url}/leaderboard/History/easy`)
+            .then(data => data.json())
+            .then(obj => { setData(obj) })
+    }, []) 
 
     const dispatch = useDispatch();
     let difficulty = useSelector(state => state.user.difficulty)
@@ -78,7 +88,7 @@ const Difficulty = ({ }) => {
         { console.log('lvlIcon: '+levelIcon) }
         { levelIcon!==undefined && <div id='leaderboard-screen'> 
             <button id='x-btn' onClick={exitLeaderboard}>x btn icon</button>
-            <Leaderboard level={levelIcon} category={categoryString()} />
+            <Leaderboard data={data} />
         </div> }
     </div>
 }

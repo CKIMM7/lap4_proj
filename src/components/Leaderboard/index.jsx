@@ -10,11 +10,14 @@ let tempArr = [
     { id: 5, name: 'e', difficulty: 'hard', score: 2600 }
 ];
 
-const Leaderboard = ({ level, category }) => {
+const Leaderboard = ({ data }) => {
     const [rank, setRank] = useState([])
     const [dataArray, setDataArray] = useState([])
     const [ hasData, setHasData ] = useState(false)
-    
+    console.log(data)
+    // setDataArray(data)
+    let level;
+    let category;
     useEffect(() => {
         
         let tempArray = []
@@ -27,8 +30,8 @@ const Leaderboard = ({ level, category }) => {
         }
         setDataArray(getData)
         populateTable()
-        setRank(tempArray)
-    }, [level]) 
+        setRank(data)
+    }, []) 
 
     // need to data from db then populate dataArray
     async function getData(){
