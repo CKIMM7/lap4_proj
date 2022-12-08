@@ -103,7 +103,7 @@ describe('Category', () => {
             fireEvent.click(btnElement)
     
             btnElement.id = mockOneCategory.subject;
-            expect(btnElement.id).toBe('science')
+            expect(btnElement.id).toBe('history')
         })
     
         test('updateInput sets the category selected successfully', () => {
@@ -111,7 +111,7 @@ describe('Category', () => {
             fireEvent.click(btnElement)
     
             btnElement.value = mockOneCategory.id;
-            expect(btnElement.value).toBe(21)
+            expect(btnElement.value).toBe(23)
         })
     }) 
 
