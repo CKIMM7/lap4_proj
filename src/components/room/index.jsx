@@ -10,31 +10,13 @@ export default function Room({ data }) {
 
     const { roomId } = useParams()
     const navigate = useNavigate()
-    const { joinRoom, leaveRoom, sendMessage, setMessage, message } = useUserStatus()
+    const { joinRoom } = useUserStatus()
 
     const joinRoomHandler = (e) => {
         e.preventDefault()
         joinRoom(data)
         navigate(`/lobby/${data.id}`, { state: { userId: socket.id } })
     };
-
-    const leaveRoomHandler = (e) => {
-        e.preventDefault()
-
-        leaveRoom(data)
-    };
-
-
-    const sendMessageHandler = () => {
-        console.log(message)
-        console.log(data)
-        sendMessage(message, data)
-
-    };
-
-    useEffect(() => {
-        console.log(message)
-    }, [message])
 
     return (
         <div className='room'>
