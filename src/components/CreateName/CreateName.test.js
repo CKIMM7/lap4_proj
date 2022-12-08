@@ -22,15 +22,16 @@
     )
 }
 
+const navigate = jest.fn()
+
 describe('CreateName', () => {
-    // const navigate = useNavigate()
 
     beforeEach(() => {
         jest.resetAllMocks()
         render(<MockCreateName/>)
     })
 
-    test('div', () => {
+    test('create username', () => {
         const txt = screen.getByText(/Create a 4-letter username!/i)
         expect(txt).toBeTruthy(); 
     }) 
@@ -44,4 +45,11 @@ describe('CreateName', () => {
         expect(btn1).toBeTruthy()
         expect(btn2).toBeTruthy()
     }) 
+
+    test('goHandler', () => {
+        const goHandler = jest.fn();
+        // const mockRoute = '/lobby'
+
+        expect(goHandler).toBeTruthy()
+    })
 }) 
