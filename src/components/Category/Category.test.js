@@ -49,4 +49,16 @@ describe('Category', () => {
         btnElement.value = mockOneCategory.id;
         expect(btnElement.value).toBe(23)
     })
+    
+    test('display categories', () => {
+        const divElement = screen.findByTestId(`list-of-categories`)
+        expect(divElement).toBeTruthy();
+
+    })
+
+    test('display heading for categories', () => {
+        const divElement = screen.findByTestId(`choosecategory`)
+        expect(divElement).toBeTruthy();
+
+    })
 })
