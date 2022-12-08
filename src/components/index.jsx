@@ -4,7 +4,6 @@ export { default as Timer } from './Timer'
 export { default as Progress } from './ProgressUI'
 export { default as Header } from './Header'
 export { default as Difficulty } from './Difficulty';
-export { default as JoinLobbyForm } from './JoinLobbyForm';
 export { default as Leaderboard } from './Leaderboard';
 export { default as Category } from './Category';
 export { default as UsernameForm } from './UsernameForm';

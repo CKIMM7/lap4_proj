@@ -32,7 +32,7 @@ export default function Room({ data }) {
     }, [message])
 
     return (
-        <div className='room'>
+        <div id='room' className='room'>
             {data.id}<br />
             {console.log(data)}
             {console.log(data.messages)}

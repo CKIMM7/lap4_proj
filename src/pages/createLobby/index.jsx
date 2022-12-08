@@ -6,8 +6,6 @@ import { useNavigate, useParams, useLocation } from 'react-router-dom'
 import { Category, Difficulty } from '../../components'
 
 import useUserStatus from "../../hooks/useUserStatus";
-import useGetGames from "../../hooks/useGetGames";
-
 
 const CreateLobby = (room) => {
 
