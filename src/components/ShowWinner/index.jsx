@@ -34,13 +34,13 @@ const ShowWinner = ({ category, data }) => {
         return 0;
     }
 
-    function categoryString(){
-        let str = '';
-        for(let i=0; i<listOfCategory.length; i++){
-            if(listOfCategory[i].id === category) str = listOfCategory[i].subject;
-        }
-        return str;
-    }
+    // function categoryString(){
+    //     let str = '';
+    //     for(let i=0; i<listOfCategory.length; i++){
+    //         if(listOfCategory[i].id === category) str = listOfCategory[i].subject;
+    //     }
+    //     return str;
+    // }
 
     async function addData(data){
         // adds per row/player?

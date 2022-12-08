@@ -50,23 +50,73 @@ describe('Leaderboard', () => {
     })
 
     test('all 3 levels are displayed', () => {
-        const btnElements = screen.getAllByRole('button');
-        expect(btnElements).toBeTruthy();
+        const btn1Element = screen.getByRole('button', {name: 'Beginner'} );
+        const btn2Element = screen.getByRole('button', {name: 'Intermediate'} );
+        const btn3Element = screen.getByRole('button', {name: 'Expert'} );
+
+        expect(btn1Element).toBeTruthy();
+        expect(btn2Element).toBeTruthy();
+        expect(btn3Element).toBeTruthy();
     }) 
 
-    test('one mode has been selected and starts game', () => {
-        const btnElement = screen.getByText(/Beginner/i);
-        fireEvent.click(btnElement)
-        expect(btnElement.id).toBe('easy');
+    test('all 3 leaderboard icons are displayed', () => {
+        const divElement = screen.getByTestId('leaderboard-icons')
+        expect(divElement).toBeTruthy();
     })
 
-    test('updateInput sets level selected successfully', async () => {
-        const btnElement = screen.getByText(/Beginner/i);
-        await expect(btnElement.value).toBe('easy')
+    describe('Beginner button', () => {
+        test('easy mode has been selected and starts game', () => {
+            const btnElement = screen.getByText(/Beginner/i);
+            fireEvent.click(btnElement)
+            expect(btnElement.id).toBe('easy');
+        })
+    
+        test('updateInput sets level selected successfully', async () => {
+            const btnElement = screen.getByText(/Beginner/i);
+            await expect(btnElement.value).toBe('easy')
+        })
+    })
+    
+    describe('Intermediate button', () => {
+        test('medium mode has been selected and starts game', () => {
+            const btnElement = screen.getByText(/Intermediate/i);
+            fireEvent.click(btnElement)
+            expect(btnElement.id).toBe('medium');
+        })
+
+        test('updateInput sets level selected successfully', async () => {
+            const btnElement = screen.getByText(/Intermediate/i);
+            await expect(btnElement.value).toBe('medium')
+        })
     })
 
-    test('it makes a request to http://localhost:3600/leaderboard/${category}/${level}', async () => {
-        fetchLeaderboard('History', 'easy')
+    describe('Expert button', () => {
+        test('hard mode has been selected and starts game', () => {
+            const btnElement = screen.getByText(/Expert/i);
+            fireEvent.click(btnElement)
+            expect(btnElement.id).toBe('hard');
+        })
+
+        test('updateInput sets level selected successfully', async () => {
+            const btnElement = screen.getByText(/Expert/i);
+            await expect(btnElement.value).toBe('hard')
+        })
+    })
+
+    describe('Leaderboard Icon', () => {
+        test('..has been clicked', () => {
+            const btnElements = screen.getAllByRole('button', '*Leaderboard Icon*');
+
+            btnElements.forEach(btn => {
+                fireEvent.click(btn)
+                expect(btn).toBeTruthy();
+            })
+        })
+    })
+
+    describe('fetch', () => {
+        test('it makes a request to http://localhost:3600/leaderboard/${category}/${level}', async () => {
+        // const mockFetch = await fetchLeaderboard('History', 'easy')
         expect(fetch).toHaveBeenCalled();
         expect(fetchLeaderboard('History', 'easy').then(mockJson)).toBeTruthy();
         expect(fetchLeaderboard('History', 'easy').then(mockJson).then(mockRes)).toBeTruthy();
@@ -79,4 +129,6 @@ describe('Leaderboard', () => {
     //     // expect(fetch).toHaveBeenCalledWith(200);
     //     // expect(mockJson).toHaveBeenCalledWith(testData);
     // })
+    })
+    
 })

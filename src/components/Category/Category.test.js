@@ -25,7 +25,6 @@ describe('Category', () => {
     const mockOneCategory = {id: 23, subject: 'history', desc: 'history desc...' }
     beforeEach(() => {
         jest.resetAllMocks()
-        
         render(<MockCategory/>)
     })
 

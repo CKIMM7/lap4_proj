@@ -105,7 +105,7 @@ const Difficulty = ({ }) => {
                 Expert
             </button>
         </div>
-        <div id='leaderboard-icons'>
+        <div id='leaderboard-icons' data-testid='leaderboard-icons'>
             <button onClick={displayLeaderboard} id='leaderboard-easy'>*Leaderboard Icon*</button>
             <button onClick={displayLeaderboard} id='leaderboard-medium'>*Leaderboard Icon*</button>
             <button onClick={displayLeaderboard} id='leaderboard-hard'>*Leaderboard Icon*</button>
