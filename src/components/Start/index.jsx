@@ -4,7 +4,7 @@ import Rockets from "../../components/Rockets"
 
 const Start = () => {
     return (
-        <div className="start">
+        <div id="welcome-div" className="start">
             <div className="header">
                 <h1>Welcome to Quiz Game</h1>
                 <h3>

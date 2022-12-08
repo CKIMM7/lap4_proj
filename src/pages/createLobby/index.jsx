@@ -31,7 +31,7 @@ const CreateLobby = (room) => {
         //navigate(`/lobby/${lobbyId}`)
     }
 
-    return <div>
+    return <div id="dashboard">
         {!category && <Category /> }
         {!difficulty && <Difficulty /> }
         { difficulty && category && <button onClick={makeRoom} >start game</button> }
