@@ -118,6 +118,7 @@ async function ins(data) {
             let results;
             
             console.log(data)
+            resolve(data)
 
             const { name, category, difficulty, score } = data;
 

@@ -15,12 +15,11 @@ let tempArr = [
 const Leaderboard = ({ level, dataArray }) => {
     const [rank, setRank] = useState([])
     // const [dataArray, setDataArray] = useState([])
-    // const [runOnce, setRunOnce] = useState(false)
+    const [ hasData, setHasData ] = useState(false)
+        // const [runOnce, setRunOnce] = useState(false)
     // const [isEmpty, setIsEmpty] = useState(true)
 
     useEffect(() => {
-        // setDataArray(data)
-        console.log(dataArray)
         let tempArray = []
         function populateTable(){
             for(let i=0; i < 10; i++){
