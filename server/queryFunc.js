@@ -117,14 +117,17 @@ async function ins(data) {
     return new Promise (async (resolve, reject) => {
         try {
             let results;
+            
             console.log(data)
             resolve(data)
 
-            // const query = (`INSERT INTO $1 (name, difficulty, score) VALUES ($2,$3,$4);`,[category, name, difficulty, score])
-            
-            // const response = await client.query(query)
+            const { name, category, difficulty, score } = data;
+
+            const query = (`INSERT INTO ${category} (name, difficulty, score) VALUES ('${name}', '${difficulty}', ${score});` )
+            console.log(query)
+            const response = await client.query(query)
             // console.log(response)
-            // resolve(response.rows[0]) //update one row
+            resolve(data) //update one row
             
             // await client.query(query, (err, res) => {
             //     console.log(err)

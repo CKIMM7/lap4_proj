@@ -3,11 +3,11 @@ import './Leaderboard.css'
 // import { motion } from 'framer-motion';
 
 let tempArr = [
-    { id: 1, name: 'a', diffifculty: 'easy', score: 2131 },
-    { id: 2, name: 'b', diffifculty: 'easy', score: 200 },
-    { id: 3, name: 'c', diffifculty: 'medium', score: 2000 },
-    { id: 4, name: 'd', diffifculty: 'easy', score: 100 },
-    { id: 5, name: 'e', diffifculty: 'hard', score: 2600 }
+    { id: 1, name: 'a', difficulty: 'easy', score: 2131 },
+    { id: 2, name: 'b', difficulty: 'easy', score: 200 },
+    { id: 3, name: 'c', difficulty: 'medium', score: 2000 },
+    { id: 4, name: 'd', difficulty: 'easy', score: 100 },
+    { id: 5, name: 'e', difficulty: 'hard', score: 2600 }
 ];
 
 const Leaderboard = ({ level, category }) => {
