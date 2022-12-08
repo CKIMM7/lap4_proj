@@ -6,6 +6,7 @@ import { usersActions } from '../../store/usersSlice';
 import { gamesActions } from "../../store/store";
 import { roomActions } from "../../store/roomSlice";
 import useUserStatus from "../../hooks/useUserStatus";
+import { socket } from "../../hooks/socket";
 import Ready from "../../components/Ready";
 import GameCard from "../GameCard";
 import ShowWinner from "../../components/ShowWinner";
@@ -19,6 +20,7 @@ const Game = () => {
     const [wait, setWaiting] = useState(false)
     const [end, setEnd] = useState(false)
     const { id } = useParams()
+    const userArray = useSelector(state => state.user.users)
     const roomsArray = useSelector(state => state.room.room)
     console.log(roomsArray)
     const indexOfRoom = roomsArray.findIndex(obj => obj.id == id)
@@ -63,7 +65,7 @@ const Game = () => {
                 ? <h1>Waiting for other players</h1>
                 : <>
                 <p>game page</p>
-                <p>username: {userId}</p>
+                        <p>username: {userArray.filter(obj => obj.id == userId)[0].name}</p>
                 <p>score: {roomsArray[indexOfRoom].users[indexOfUser].score}</p>
                 <Count/>
                 <ul>{gameArray.length > 0 && gameArray[0]}</ul></>

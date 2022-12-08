@@ -204,7 +204,7 @@ io.on("connection", (socket) => {
       socket.emit("receive_countdown", seconds, room)
       socket.to(room).emit("receive_countdown", seconds, room);
       console.log(roomsArray[indexOfRoom])
-      if (roomsArray[indexOfRoom].game[0].answered.length == roomsArray[indexOfRoom].users.length) {
+      if (roomsArray[indexOfRoom].game.length > 0 && roomsArray[indexOfRoom].game[0].answered.length == roomsArray[indexOfRoom].users.length) {
         socket.emit("receive_countdown", 10, room)
         socket.to(room).emit("receive_countdown", 10, room);
 

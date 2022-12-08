@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 // store the sessions current locally or database?
 // const listOfPlayers = [
@@ -9,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 const ShowWinner = ({ data: listOfPlayers }) => {
 
+    const userArray = useSelector(state => state.user.users);
     const navigate = useNavigate()
     const [rank, setRank] = useState([])
 
@@ -36,7 +38,7 @@ const ShowWinner = ({ data: listOfPlayers }) => {
                 <h1>Lobby Leaderboard</h1>
             <ul>
                 <p>{index+1}</p>
-                <p>{player.name}</p>
+                    <p>{userArray.filter(obj => obj.id == player.name)[0].name}</p>
                 <p>{player.score}</p>
                 </ul>
                 <button onClick={() => navigate('/lobby')}>Back to Lobby</button>

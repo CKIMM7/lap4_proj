@@ -33,7 +33,6 @@ const CreateName = props => {
         console.log(name)
         const user = { id: socket.id, name: name }
         createUser(user)
-        console.log(users)
         navigate('/lobby')
     }
     

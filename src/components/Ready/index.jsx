@@ -56,7 +56,7 @@ const Ready = ({ start, setStart }) => {
             <button onClick={ready}>Ready Up!</button>
             
             <h1>Players:</h1>
-            {room.users.map(user => <p>{userArray.filter(obj => obj.id == user.name)[0].name}</p>)}
+            {room.users.map(user => <p>{userArray.filter(obj => obj.id == user.name)[0].name }</p>)}
             <h1> Chatroom:</h1>
             { console.log(room.messages)}
             {room.messages.map(msg => <p>{userArray.filter(obj => obj.id == msg.user)[0].name} - {msg.message}</p>)}
