@@ -28,8 +28,7 @@ const Leaderboard = ({ level, category }) => {
         setDataArray(getData)
         populateTable()
         setRank(tempArray)
-        console.log(dataArray)
-    }, [hasData]) 
+    }, [level]) 
 
     // need to data from db then populate dataArray
     async function getData(){

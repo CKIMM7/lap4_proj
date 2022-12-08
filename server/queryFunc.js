@@ -102,7 +102,7 @@ VALUES
 
 async function showData() {
     try {
-        const query = 'SELECT * FROM History'
+        const query = 'SELECT * FROM History;'
         await client.query(query, (err, res) => {
             console.log(err)
             console.log(res.rows)
@@ -113,19 +113,29 @@ async function showData() {
 }
 
 
-async function ins(name, difficulty, score, category) {
-    let results;
-    try {
-        const query = (`INSERT INTO $1 (name, difficulty, score) VALUES ($2,$3,$4);`,[category, name, difficulty, score])
-        await client.query(query, (err, res) => {
-            console.log(err)
-            console.log(res.rows)
-            results = res.rows
-        })
-        return results
+async function ins(data) {
+    return new Promise (async (resolve, reject) => {
+        try {
+            let results;
+            console.log(data)
+            resolve(data)
 
-    }
-    catch (err) { console.log(err) }
+            // const query = (`INSERT INTO $1 (name, difficulty, score) VALUES ($2,$3,$4);`,[category, name, difficulty, score])
+            
+            // const response = await client.query(query)
+            // console.log(response)
+            // resolve(response.rows[0]) //update one row
+            
+            // await client.query(query, (err, res) => {
+            //     console.log(err)
+            //     console.log(res.rows)
+            //     results = res.rows
+            // })
+            // return results
+        } catch (err) { 
+            console.log(err) 
+        }
+    })
 }
 
 async function getLeaderboard(data) {
@@ -147,4 +157,4 @@ async function getLeaderboard(data) {
 // showData()
 // getLeaderboard('History','medium')
 
-module.exports = { createTables, getLeaderboard }
+module.exports = { createTables, ins, getLeaderboard }

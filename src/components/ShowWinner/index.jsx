@@ -8,12 +8,20 @@ const listOfPlayers = [
     { id: 5, name: 'e', score: 5800 }
 ]
 
-const ShowWinner = ({  }) => {
+// need this to convert number to string
+const listOfCategory = [
+    {id: 23, subject: 'History' },
+    {id: 17, subject: 'Science' },
+    {id: 21, subject: 'Sports'}
+]
+
+const ShowWinner = ({ category, difficulty }) => {
 
     const [rank, setRank] = useState([])
 
     useEffect(() => {
         setRank(listOfPlayers.sort(compare))
+        addData(listOfPlayers)
     }, [])
 
     // sort array of objects
@@ -23,8 +31,40 @@ const ShowWinner = ({  }) => {
         return 0;
     }
 
-    function addData(){
+    function categoryString(){
+        let str = '';
+        for(let i=0; i<listOfCategory.length; i++){
+            if(listOfCategory[i].id === category) str = listOfCategory[i].subject;
+        }
+        return str;
+    }
 
+    async function addData(data){
+        // adds per row/player?
+        for(let i=0; i<data.length; i++){
+            update(categoryString(), data[i])
+        }
+    }
+
+    async function update(categoryStr, data){
+        try {
+            console.log('showWinner')
+            const url = 'http://localhost:3600';
+
+            // const response = await fetch(`${url}/gameEnd/${categoryStr}/${difficulty}/${data.name}/${data.score}`, {
+            const response = await fetch(`${url}/gameEnd`, {
+                method: 'POST',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            })
+            console.log(response)
+
+            const result = await response.json();
+            // console.log(data)
+            return result
+        } catch(err) {
+            console.log(err)
+        }
     }
 
     return <div id='show-winner-screen'>

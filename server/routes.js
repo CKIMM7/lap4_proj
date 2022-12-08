@@ -3,11 +3,10 @@ const router = express.Router();
 
 const controller = require('./controller');
 
-// router.get('/', controller.createTables)
-// router.get('/leaderboard/', controller.getLeaderboard);
 router.get('/leaderboard/:category/:difficulty', controller.getLeaderboard);
 
-// router.post('/leaderboard/:', controller.);
+router.post('/gameEnd', controller.insert);
+// router.post('/gameEnd/:category/:difficulty/:name/:score', controller.insert);
 
 module.exports = router;
 
