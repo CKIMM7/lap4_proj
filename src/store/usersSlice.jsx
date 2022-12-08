@@ -1,9 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, current } from '@reduxjs/toolkit';
 
 const userSlice = createSlice({
-    name: 'users',
+    name: 'user',
     initialState: {
-        user: '',
+        users: [],
         difficulty: '',
         category: '',
         messageReceived: '',
@@ -13,22 +13,30 @@ const userSlice = createSlice({
         difficulty: '',
         category: '',
     },
-    reducers: {
+  reducers: {
 
-      setCategory(state, action) {
-        state.category = action.payload;
-      },
+    setCategory(state, action) {
+      state.category = action.payload;
+    },
       
-      setDifficulty(state, action) {
-        state.difficulty = action.payload;
-      },
+    setDifficulty(state, action) {
+      state.difficulty = action.payload;
+    },
 
-      setSocket(state, action) {
-        state.socket = action.payload;
-      },
+    setSocket(state, action) {
+      state.socket = action.payload;
+    },
 
-      setUser(state, action) {
-        state.user = action.payload;
+    setUser(state, action) {
+      console.log('Set User')
+      console.log(action.payload)
+      // let arr = state.users
+      // console.log(arr)
+
+      // arr.push(action.payload)
+      // console.log(arr)
+
+      state.users = action.payload
       },
   
       setIsLoading(state, action) {

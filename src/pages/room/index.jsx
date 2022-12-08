@@ -1,12 +1,13 @@
 import { useEffect } from 'react';
 import { socket } from '../../hooks/socket';
 import useUserStatus from '../../hooks/useUserStatus'
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 
 export default function Room({ data }) {
     // console.log('room client js')
     // console.log(data)
 
+    console.log(data)
     
     const { roomId } = useParams()
     const navigate = useNavigate()
@@ -15,7 +16,8 @@ export default function Room({ data }) {
     const joinRoomHandler = (e) => {
         e.preventDefault()
         joinRoom(data)
-        navigate(`/room/${data.id}`)
+        //leads to Game component
+        navigate(`/lobby/${data.id}`, {state: { userId: socket.id }} )
     };
 
     const leaveRoomHandler = (e) => {
@@ -37,8 +39,6 @@ export default function Room({ data }) {
     return (
         <div className='room'>
             {data.id}<br />
-            {console.log(data)}
-            {console.log(data.messages)}
 
             <p>Users:</p>
             {data.users.map((user, i) => <p key={i}>{`${user.name}`}</p>)}

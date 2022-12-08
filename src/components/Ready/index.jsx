@@ -4,7 +4,7 @@ import useUserStatus from "../../hooks/useUserStatus";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
     
-const Ready = () => {
+const Ready = ({ start, setStart }) => {
 
     const { id } = useParams()
     const navigate = useNavigate()
@@ -12,9 +12,13 @@ const Ready = () => {
 
     const messageReceived = useSelector(state => state.room.messageReceived);
     console.log('message')
-    console.log(messageReceived)
+    // console.log(messageReceived)
+    const userArray = useSelector(state => state.user.users);
     const roomsArray = useSelector(state => state.room.room);
     console.log(roomsArray)
+    const indexOfRoom = roomsArray.findIndex(obj => obj.id == id)
+    console.log(indexOfRoom)
+
     const room = roomsArray.filter(room => room.id == id)[0]
     console.log(room)
 
@@ -23,6 +27,11 @@ const Ready = () => {
         console.log('Ready up')
         console.log(id)
         readyUp(id, socket.id)
+        console.log(roomsArray[indexOfRoom].users)
+        if (!roomsArray[indexOfRoom].users.find(obj => obj.isReady == false)) {
+            console.log('Start Game')
+            setStart(true)
+        }
     }
 
 
@@ -30,6 +39,7 @@ const Ready = () => {
         e.preventDefault()
         console.log(message)
         sendMessage(message, room)
+        setMessage('')
     };
 
     function leaveHandler(e) {
@@ -45,13 +55,14 @@ const Ready = () => {
             <h1>Room - {id}</h1>
             <button onClick={ready}>Ready Up!</button>
             
-            <h1> Users:</h1>
-            {room.users.map(user => <p>{ user.name }</p>)}
+            <h1>Players:</h1>
+            {room.users.map(user => <p>{userArray.filter(obj => obj.id == user.name)[0].name }</p>)}
             <h1> Chatroom:</h1>
             { console.log(room.messages)}
-            {room.messages.map(msg => <p>{msg.user} - {msg.message}</p>)}
+            {room.messages.map(msg => <p>{userArray.filter(obj => obj.id == msg.user)[0].name} - {msg.message}</p>)}
             <input
                 placeholder="Message..."
+                value={ message}
                 onChange={(event) => {
                     setMessage(event.target.value);
                 }}

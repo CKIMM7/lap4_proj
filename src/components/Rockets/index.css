@@ -19,6 +19,10 @@
     
 }
 
+i {
+    box-shadow: none !important;
+}
+
 .rockets li{
     text-align: center;
     color: aqua;

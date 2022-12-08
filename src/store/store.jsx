@@ -14,13 +14,7 @@ const gamesSlice = createSlice({
     },
     reducers: {
 
-      removeQuestion(state, action) {
-
-        console.log(current(state.gamesData))
-        console.log('remove')
-        state.gamesData.shift()
-      },
-
+  
       setGamesData(state, action) {
         state.gamesData = action.payload;
       },

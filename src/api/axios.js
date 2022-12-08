@@ -1,3 +1,4 @@
+
 import axios from 'axios';
 
 export const getGamesAxio = async(amount, category, difficulty, type) => {

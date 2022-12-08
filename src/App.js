@@ -1,16 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
-import useGetGames from './hooks/useGetGames';
-import { useDispatch, useSelector } from 'react-redux';
+import { Start, CreateLobby, Game, GameEnd } from './pages'
 
-import Room from './pages/room';
-import useUserStatus from './hooks/useUserStatus';
-import { roomActions } from './store/roomSlice';
-import CreateRoom from './pages/createRoom';
-import GameSettings from './pages/gameSettings';
-import Nav from './pages/navBar';
-import GameRoom from './pages/gameRoom';
-import { Start, Lobby, Game } from './pages'
 
 import './App.css';
 import "nes.css/css/nes.min.css";
@@ -24,16 +15,11 @@ import Ready from './components/Ready';
 
 function App() {
 
-  
-
-  // useEffect(() => {
-  //   console.log(roomsArray)
-
-  // }, [roomsArray])
 
 return (
      <Routes>
      <Route path="/" element={<Start/>}></Route>
+<<<<<<< HEAD
      <Route path="/Lobby" element={"<Lobby/>"}></Route>
      <Route path='/lobby/:id' element={<LobbyCode/> } />
      <Route path="/Topic" element={"<Topic/>"}></Route>
@@ -63,15 +49,19 @@ return (
   //   </div>
 )}
 //   const { status, category, difficulty } = useGetGames()
+=======
+     <Route path="/createlobby" element={<CreateLobby/>}></Route>
+     
+     <Route path="/lobby" element={<LobbyCode/>}></Route>
+     <Route path="/lobby/:id" element={<Game/>}></Route>
 
-//   return (
-//     <div className="App">
-//       <h1>GAME</h1>
-//       <Difficulty level={difficulty} />
-//       <Topic topic={category} />
-//       <Leaderboard />
-//     </div>
-//   );
-// }
+      <Route path="/room/:id" element={<Ready />}></Route>
+
+      <Route path='/gameEnd' element={<GameEnd /> } />
+     </Routes>
+
+)}
+>>>>>>> game
+
 
 export default App;

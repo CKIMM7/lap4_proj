@@ -11,15 +11,29 @@ const roomSlice = createSlice({
         messages: [
           {
             user: '',
-            message: ''
+            message: '',
           }
-        ]
+        ],
+        game:[]
       }
     ],
+    count: 10,
     searchValue: '',
-    textInput: ''
+    textInput: '',
+    currentGame: []
   },
   reducers: {
+
+    removeQuestion(state, action) {
+
+
+        console.log(action.payload)
+        const findIndex = state.room.findIndex(obj => obj.id == action.payload)
+        console.log(current(state.room[findIndex].users))
+
+        console.log(current(state.room[findIndex].game.shift()))
+
+    },
 
     setRoom(state, action) {
       state.room = action.payload
@@ -37,6 +51,12 @@ const roomSlice = createSlice({
       console.log(action.payload)
       state.room = tempRoom
       // return state.room
+    },
+    setCountDown(state, action) {
+      console.log(action.payload)
+      state.count = action.payload.count;
+      console.log(state.count)
+
     },
 
   }
