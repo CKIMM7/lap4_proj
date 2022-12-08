@@ -15,9 +15,9 @@ const UsernameForm = () => {
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
+            <form role='form' onSubmit={handleSubmit}>
                 <label htmlFor="username-input">Enter Username:</label>
-                <input id="username-input" type="text" value={ textInput } onChange={ handleChange } />
+                <input role='input' id="username-input" type="text" value={ textInput } onChange={ handleChange } />
                 <input type="submit" value="Enter" />
             </form>
         </>
