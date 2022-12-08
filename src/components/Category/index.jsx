@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import useGetGames from "../../hooks/useGetGames";
 import { usersActions } from '../../store/usersSlice';
 import { motion, LayoutGroup } from 'framer-motion';
 

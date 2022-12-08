@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
-import useGetGames from "../../hooks/useGetGames"
 import { usersActions } from '../../store/usersSlice';
 
 import './Difficulty.css'
