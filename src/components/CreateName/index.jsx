@@ -20,7 +20,7 @@ const CreateName = props => {
             <p className="title">Create a 4-letter username!</p>
             <div class="nes-field">
                 <label htmlFor="username">Your name</label>
-                <input type="text" id="username" class="nes-input" maxLength={4}></input>
+                <input type="text" id="username" class="nes-input" maxLength={4} placeholder='XXXX'></input>
             </div>
             <div className="buttons">
                 <button type="button" class="nes-btn is-error" onClick={props.onClose}>Close</button>

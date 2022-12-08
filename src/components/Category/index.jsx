@@ -36,10 +36,10 @@ const Category = ({ }) => {
         })
     }
 
-    const handleHover = (e) => {
-        console.log(e.target.id)
-        setIsOpen(!isOpen)
-    }
+    // const handleHover = (e) => {
+    //     console.log(e.target.id)
+    //     setIsOpen(!isOpen)
+    // }
 
     return (
         <main>
