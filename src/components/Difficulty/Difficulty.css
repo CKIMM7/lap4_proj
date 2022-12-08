@@ -1,19 +1,13 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css");
 
-#difficulty-screen {
-    /* border: 2px solid pink; */
-    /* position: absolute; */
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    /* transition: all ease-in 0.2s; */
-}
+
 
 #list-of-difficulty {
-    /* border: 2px solid red; */
+    width: 890px;
+    height: 570px;
     display: flex;
     flex-direction: column;
-    margin: 20px;
+    margin: 0 auto;
 }
 
 #list-of-difficulty button {
@@ -24,7 +18,7 @@
 }
 
 #leaderboard-icons {
-    /* border: 2px solid red; */
+
     display: flex;
     flex-direction: column;
     margin: 20px;
@@ -33,8 +27,8 @@
 #leaderboard-icons button {
     height: 100px;
     width: 120px;
-    
-    
+
+
 }
 
 #leaderboard-screen {
@@ -51,7 +45,7 @@
 
 
 .slide {
-    position:absolute;
+    position: absolute;
     border: 2px solid blue;
     left: -40%;
     -webkit-animation: slide 0.5s reverse;
@@ -61,26 +55,28 @@
 }
 
 @-webkit-keyframes slide {
-    0% { 
-        right: 100000px; 
+    0% {
+        right: 100000px;
         opacity: 0;
     }
-    100% { 
-        left: 0; 
+
+    100% {
+        left: 0;
         opacity: 100;
-    } 
+    }
 }
 
 @keyframes slide {
-    0% { 
-        right: 100000px; 
+    0% {
+        right: 100000px;
         opacity: 0;
     }
-    100% { 
-        left: 0; 
+
+    100% {
+        left: 0;
         opacity: 100;
-    } 
-} 
+    }
+}
 
 .diffcon {
     display: flex;
@@ -89,7 +85,7 @@
     align-items: center;
     height: 150px;
     margin: 20px;
-    
+
 }
 
 i {
@@ -135,4 +131,3 @@ i {
     background-color: transparent !important;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
-

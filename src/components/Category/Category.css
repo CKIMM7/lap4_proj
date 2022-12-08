@@ -1,3 +1,12 @@
+#creategame {
+    margin-top: 30px;
+}
+
+#instructions {
+    margin-top: 50px;
+    color: white;
+}
+
 #listofcategories {
     display: flex;
     justify-content: space-evenly;
@@ -11,7 +20,7 @@
     justify-content: center;
     width: 400px;
     height: 500px;
-    margin: 200px 0;
+    margin: 50px 0;
     background-color: #E76E55;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
@@ -48,15 +57,14 @@
     font-family: 'Space Mono';
     padding: 0 5px;
     margin: 0;
-    text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
+    font-size: 20px;
+    text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
 }
 
 .catcont button {
     position: relative;
     width: 90%;
     margin: 0 0 15px;
-    
+
 
 }
-
-
