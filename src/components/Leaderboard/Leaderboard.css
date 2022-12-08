@@ -1,0 +1,29 @@
+h2 {
+    color: white;
+    text-align: center;
+}
+
+#leaderboard-rank-list {
+    color: greenyellow;
+    /* border: 2px solid red; */
+    display: flex;
+    flex-direction: column;
+    /* padding: 20px; */
+}
+
+#leaderboard-rank-list div ul {
+    /* border: 2px solid green; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 10px;
+}
+
+#leaderboard-rank-list div ul p {
+    /* border: 2px solid green; */
+    /* display: flex;
+    flex-direction: row; */
+    width: 100px;
+    margin: 10px;
+    padding: 10px 20px;
+}
