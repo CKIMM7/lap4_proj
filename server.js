@@ -16,7 +16,8 @@ const io = new Server(server, {
   },
 });
 
-let roomsArray = [];
+let roomsArray = []
+let userArray = []
 
 io.on("connection", (socket) => {
 
@@ -179,7 +180,7 @@ io.on("connection", (socket) => {
       roomsArray[findIndex].game[0].answered.push(user)
     }
     //console.log(roomsArray[findIndex].game[0])
-    
+    updateCountdown(10, roomsArray[findIndex].id, findIndex, user)
     updateData()
   });
 
@@ -202,6 +203,14 @@ io.on("connection", (socket) => {
       console.log(seconds)
       socket.emit("receive_countdown", seconds, room)
       socket.to(room).emit("receive_countdown", seconds, room);
+      console.log(roomsArray[indexOfRoom])
+      if (roomsArray[indexOfRoom].game[0].answered.length == roomsArray[indexOfRoom].users.length) {
+        socket.emit("receive_countdown", 10, room)
+        socket.to(room).emit("receive_countdown", 10, room);
+
+        clearInterval(setIntervalId)
+        updateData()
+      }
       if (seconds == 0) {
         //set everyone's 'answered' property to be true and count reaches 0
         //and get current question
@@ -210,8 +219,18 @@ io.on("connection", (socket) => {
         updateData()
         clearInterval(setIntervalId)
         seconds = 10
-        socket.emit("ready_again", room, user)
-        // socket.to(room).emit("ready_again", user);
+
+        if (roomsArray[indexOfRoom].game.length == 0) {
+          console.log('end of game')
+          console.log(`clean up users`)
+          return;
+
+        } else {
+
+          console.log(roomsArray.length);
+          socket.emit("ready_again", room, user)
+        }
+
       }
     }, 1000);
   }
@@ -239,6 +258,15 @@ io.on("connection", (socket) => {
       
     }
     updateData()
+  })
+
+  socket.on('create_user', (user) => {
+    console.log(user)
+    userArray.push(user)
+    socket.emit('receive_user', userArray)
+
+    //get updated array sent back to other
+    socket.broadcast.emit('receive_user', userArray)
   })
 
 });

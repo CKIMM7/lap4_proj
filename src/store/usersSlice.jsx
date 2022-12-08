@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, current } from '@reduxjs/toolkit';
 
 const userSlice = createSlice({
     name: 'user',
@@ -30,16 +30,13 @@ const userSlice = createSlice({
     setUser(state, action) {
       console.log('Set User')
       console.log(action.payload)
-      let arr = state.users
-      arr.push(action.payload)
-      // let indexOfRoom = state.room.findIndex(room => room.id == action.payload.room)
-      // const tempRoom = state.room
-      // console.log(indexOfRoom)
-      // tempRoom[indexOfRoom].messages.push({ user: action.payload.user, message: action.payload.message })
+      // let arr = state.users
+      // console.log(arr)
 
-      // console.log(action.payload)
-      // state.room = tempRoom
-      state.users = arr
+      // arr.push(action.payload)
+      // console.log(arr)
+
+      state.users = action.payload
       },
   
       setIsLoading(state, action) {

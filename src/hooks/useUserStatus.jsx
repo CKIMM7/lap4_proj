@@ -14,7 +14,8 @@ const useUserStatus = (action) => {
     const [messageReceived, setMessageReceived] = useState("");
 
 
-    const room = useSelector(state => state.room.room);
+  const st = useSelector(state => state.user.users);
+  const room = useSelector(state => state.room.room);
 
   const readyUp = (room, user) => {
     socket.emit("ready", room, user)
@@ -52,18 +53,17 @@ const useUserStatus = (action) => {
         let room = {
           id: id,
           users: [],
-          messages: [
-            {
-              user: 'Admin',
-              message: 'Welcome to the chat room!'
-            }
-          ],
+          messages: [],
           game: []
         }
 
         socket.emit("create_room", room, { name: socket.id, isReady: false, score: 0 }, game)
         console.log('create_room took place')
-      };
+  };
+  
+  function createUser(user) { 
+    socket.emit("create_user", user)
+  }
 
     
     useEffect(() => {
@@ -72,7 +72,7 @@ const useUserStatus = (action) => {
 
         socket.off().on('connect', function() {
           console.log(`${socket.id} connected`)
-          dispatch(usersActions.setUser(socket.id))
+          // dispatch(usersActions.setUser(socket.id))
           socket.emit("get_rooms");
         });
 
@@ -105,13 +105,19 @@ const useUserStatus = (action) => {
         socket.emit("ready", room, user)
       })
 
+      socket.on("receive_user", (data) => {
+        console.log(data)
+        dispatch(usersActions.setUser(data))
+        console.log(st)
+      })
+
       socket.on("test", () => {
         console.log("Connected to IF")
       })
 
     }, [socket]);
 
-    return { sendMessage, setMessage, message, joinRoom, leaveRoom, broadCastGame, readyUp, updateQuestionStatus }
+    return { sendMessage, setMessage, message, joinRoom, leaveRoom, broadCastGame, readyUp, updateQuestionStatus, createUser }
 }
 
 export default useUserStatus;
