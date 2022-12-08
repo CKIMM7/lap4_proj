@@ -18,9 +18,11 @@ function LobbyCode() {
     const { createRoom, sendMessage, setMessage, broadCastGame } = useUserStatus();
     const [ showLobby, setShowLobby ] = useState()
 
+    const userArray = useSelector(state => state.user.users);
     const roomsArray = useSelector(state => state.room.room);
     const messageReceived = useSelector(state => state.room.messageReceived);
 
+    console.log(userArray)
     console.log(roomsArray)
 
     function joinRoom(e) {
