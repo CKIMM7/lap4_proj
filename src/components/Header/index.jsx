@@ -5,7 +5,7 @@ const Header = props => {
     
 
     return (
-            <div className="start">
+            <div id="welcome-div" className="start">
                 <div className="header">
                     <h1>Welcome to Quiz Game</h1>
                 <div class="nes-container is-rounded is-dark">

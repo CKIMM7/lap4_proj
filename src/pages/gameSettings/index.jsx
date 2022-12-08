@@ -35,7 +35,7 @@ export default function GameSettings ({ data }) {
         </ul>
     </>
     return (
-        <div className="gameSettings">
+        <div id='game-settings' className="gameSettings">
             <h2>game settings</h2>
             {chosenTopic}
             {!chosenTopic && chooseTopic}

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
 import { Routes, Route } from 'react-router-dom'
-import useGetGames from '../../hooks/useGetGames';
 import { useDispatch, useSelector } from 'react-redux';
 import io from "socket.io-client";
 import useUserStatus from '../../hooks/useUserStatus';
