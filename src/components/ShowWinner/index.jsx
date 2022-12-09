@@ -80,11 +80,11 @@ const ShowWinner = ({ data }) => {
     //     }
     // }
 
-    // function compare(a, b) {
-    //     if (a.score > b.score) return -1;
-    //     if (a.score < b.score) return 1;
-    //     return 0;
-    // }
+    function compare(a, b) {
+        if (a.score > b.score) return -1;
+        if (a.score < b.score) return 1;
+        return 0;
+    }
 
     async function updateWinner(data) {
         try {
@@ -118,7 +118,8 @@ const ShowWinner = ({ data }) => {
     return <div id='show-winner-container'>
         {console.log('tt')}
         {console.log(data)}
-        {/* {data.sort((a, b) => a.score - b.score)} */}
+        {data.map(obj => console.log(obj.score))}
+        {console.log(data.sort((a, b) => a.score - b.score))}
         {console.log(data)}
 
         {data.map((player, index) => 
