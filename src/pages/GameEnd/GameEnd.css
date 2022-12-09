@@ -1,13 +1,14 @@
 * {
     text-align: center;
+
 }
 
 h2 {
-    color: greenyellow
+    color: white
 }
 
 #show-winner-container {
-    color: greenyellow;
+    color: white;
     /* border: 2px solid red; */
     display: flex;
     flex-direction: column;
