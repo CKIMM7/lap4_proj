@@ -59,7 +59,12 @@ const Game = () => {
     }, [roomsArray[indexOfRoom].users])
     return <div>{
         end ? 
-            <ShowWinner data={roomsArray[indexOfRoom].users} />
+            <>
+                <h1>Lobby Leaderboard</h1>
+                <ShowWinner data={roomsArray[indexOfRoom].users} />
+                <button onClick={() => navigate('/lobby')}>Back to Lobby</button>
+            </>
+            
         :   start
             ? wait
                 ? <h1>Waiting for other players</h1>
