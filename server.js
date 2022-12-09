@@ -345,9 +345,6 @@ app.post('/', (req, res) => {
 })
 
 
-server.listen(3500, () => {
-  console.log(`SERVER IS RUNNING ON http://localhost:${port}`);
-});
 
 app.listen(3600, () => {
   console.log(`SERVER IS RUNNING ON http://localhost:${port}`);
