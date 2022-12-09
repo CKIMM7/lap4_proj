@@ -18,6 +18,7 @@
     margin: 30px;
     border: 3px white solid;
     transition: 0.5s;
+    color: white;
 }
 
 .jorccont:hover {
@@ -41,6 +42,7 @@ button.roomselect {
     background-color: #006BB3;
     border: none;
     font-size: 30px;
+    color: white;
 }
 
 #createbtn {

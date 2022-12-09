@@ -67,7 +67,8 @@ const Ready = ({ start, setStart }) => {
                         <p>{userArray.filter(obj => obj.id == msg.user)[0].name} - {msg.message}</p>)}
                 </div>
                 <input
-                    placeholder="Type a message..."
+                    style={{ fontFamily: "Space Mono" }}
+                    placeholder="Message here"
                     className="nes-input is-warning"
                     value={message}
                     onChange={(event) => {
