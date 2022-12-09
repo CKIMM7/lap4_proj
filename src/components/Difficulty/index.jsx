@@ -16,6 +16,8 @@ const Difficulty = ({ }) => {
     const [levelIcon, setLevelIcon] = useState();
     const [slide, setSlide] = useState(false);
 
+
+
     function startGame(e, id) {
         e.preventDefault()
         updateInput(e, id)

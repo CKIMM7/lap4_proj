@@ -1,0 +1,30 @@
+#speechbubble p {
+    color: black;
+}
+
+.App {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+
+}
+
+.roomsection {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+    width: 30%;
+    height: 500px;
+    border: 1px solid red;
+}
+
+
+
+#chatroominfo input {
+    position: relative;
+    width: 50%;
+
+}

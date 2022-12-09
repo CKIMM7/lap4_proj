@@ -34,29 +34,10 @@ const dropIn = {
 
 
 
-const CreateName = ({ handleClose }) => {
-
-    const navigate = useNavigate()
-    const dispatch = useDispatch()
-    const [name, setName] = useState('')
-    const { createUser } = useUserStatus()
-    const users = useSelector(state => state);
+const ConfirmGame = ({ handleClose }) => {
     // if (!props.show) {
     //     return null
     // }
-
-    function handleChange(e) {
-        setName(e.target.value)
-        console.log(name)
-    }
-
-    function submit(e) {
-        e.preventDefault()
-        console.log(name)
-        const user = { id: socket.id, name: name }
-        createUser(user)
-        navigate('/lobby')
-    }
 
     return (
         <Backdrop onClick={handleClose}>
@@ -68,18 +49,14 @@ const CreateName = ({ handleClose }) => {
                 initial="hidden"
                 animate="visible"
                 exit="exit">
-                <p className="title">Create a 4-letter username!</p>
-                <div className="nes-field">
-                    <label htmlFor="username">Your name</label>
-                    <input type="text" id="username" className="nes-input" onChange={handleChange} value={name} maxLength={4}></input>
-                </div>
+                <p className="title">Are you ready to start the game?</p>
                 <div className="buttons">
-                    <button onClick={submit} type="button" className="nes-btn is-primary">Go!</button>
-                    <button type="button" className="nes-btn is-error" onClick={handleClose}>Close</button>
+                    <button type="button" className="nes-btn is-primary">Start</button>
+                    <button type="button" className="nes-btn is-error" onClick={handleClose}>Cancel</button>
                 </div>
             </motion.div>
         </Backdrop>
     )
 }
 
-export default CreateName;
+export default ConfirmGame;

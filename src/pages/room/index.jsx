@@ -8,7 +8,7 @@ export default function Room({ data }) {
     // console.log(data)
 
     console.log(data)
-    
+
     const { roomId } = useParams()
     const navigate = useNavigate()
     const { joinRoom, leaveRoom, sendMessage, setMessage, message } = useUserStatus()
@@ -17,7 +17,7 @@ export default function Room({ data }) {
         e.preventDefault()
         joinRoom(data)
         //leads to Game component
-        navigate(`/lobby/${data.id}`, {state: { userId: socket.id }} )
+        navigate(`/lobby/${data.id}`, { state: { userId: socket.id } })
     };
 
     const leaveRoomHandler = (e) => {
@@ -44,7 +44,7 @@ export default function Room({ data }) {
             {data.users.map((user, i) => <p key={i}>{`${user.name}`}</p>)}
 
             <p>Chatroom:</p>
-            {data.messages.map((msg, i) => <p key={ i}>{`${msg.user} - ${msg.message}`}</p>)}
+            {data.messages.map((msg, i) => <p key={i}>{`${msg.user} - ${msg.message}`}</p>)}
 
             <form name='message-form'>
                 <label htmlFor="message-input">Type to chat:</label>
@@ -59,8 +59,7 @@ export default function Room({ data }) {
                 <button id='join-button' onClick={joinRoomHandler}>Join</button>
                 <button onClick={leaveRoomHandler}>Leave</button>
             </form>
-            
+
         </div>
     )
-  }
-  
+}
