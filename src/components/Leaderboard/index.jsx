@@ -9,23 +9,26 @@ let tempArr = [
     { id: 5, name: 'e', diffifculty: 'hard', score: 2600 }
 ];
 
-const Leaderboard = ( level, category ) => {
+const Leaderboard = ({data, level}) => {
     const [rank, setRank] = useState([])
-    const [dataArray, setDataArray] = useState([])
+    // const [dataArray, setDataArray] = useState([])
+    const [hasData, setHasData] = useState(false)
+    const [slide, setSlide] = useState(false)
 
     useEffect(() => {
         let tempArray = []
-        function populateTable(){
-            for(let i=0; i < 10; i++){
-              if(tempArr[i] !== undefined) tempArray.push(tempArr[i])
-              else tempArray.push({ id: null, name: 'xxxx', score: i })
+        function populateTable() {
+            for (let i = 0; i < 10; i++) {
+                if (data[i] !== undefined) tempArray.push(data[i])
+                else tempArray.push({ id: null, name: 'xxxx', score: 0 })
             }
-            console.log(tempArray)
+            // console.log(tempArray)
         }
-        // getData()
+
         populateTable()
         setRank(tempArray)
-    }, []) 
+        console.log('level: ' + level)
+    }, [data]) 
 
     // need to data from db then populate dataArray
     function getData(){
@@ -39,20 +42,40 @@ const Leaderboard = ( level, category ) => {
         else return 'Error';
     }
 
+    // return <div id={`leaderboard-${level}`}>
+    //     <h2>Leaderboard</h2>
+    //     <h2>{displayLevelTitle(level)}</h2>
+    //     <div id='leaderboard-rank-list'> 
+    //         {/* { console.log(rank)} */}
+    //         {rank.map((ele, index) => 
+    //         <div id={`leaderboard-row-${index+1}`} key={index}>
+    //             <ul>
+    //                 <p>{index+1}</p>
+    //                 <p>{ele.name}</p>
+    //                 <p>{ele.score}</p>
+    //             </ul>
+    //         </div>
+    //         )} 
+    //     </div>
+    // </div>
     return <div id={`leaderboard-${level}`}>
         <h2>Leaderboard</h2>
         <h2>{displayLevelTitle(level)}</h2>
-        <div id='leaderboard-rank-list'> 
-            {/* { console.log(rank)} */}
-            {rank.map((ele, index) => 
-            <div id={`leaderboard-row-${index+1}`} key={index}>
-                <ul>
-                    <p>{index+1}</p>
-                    <p>{ele.name}</p>
-                    <p>{ele.score}</p>
-                </ul>
-            </div>
-            )} 
+        <div id='leaderboard-rank-list'>
+
+            {console.log('rankArr')}
+            {console.log(rank)}
+
+            {rank.map((ele, index) =>
+                <div id={`leaderboard-row-${index + 1}`} key={index}>
+                    <ul>
+                        <p>{index + 1}</p>
+                        <p>{ele.name}</p>
+                        <p>{ele.score}</p>
+                    </ul>
+                </div>
+            )}
+
         </div>
     </div>
 }

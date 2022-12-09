@@ -61,12 +61,17 @@ const Game = () => {
     }, [roomsArray[indexOfRoom].users])
     return <div>{
         end ?
-            <ShowWinner data={roomsArray[indexOfRoom].users} />
+            <>
+                <h1>Lobby Leaderboard</h1>
+                <ShowWinner data={roomsArray[indexOfRoom].users} />
+                <button onClick={() => navigate('/lobby')}>Back to Lobby</button>
+            </>
+
             : start
                 ? wait
                     ? <h1>Waiting for other players</h1>
                     : <>
-                        <h1>Quizcade</h1>
+                        <p>Quizcade</p>
                         <p id="usernametitle">Username: {userArray.filter(obj => obj.id == userId)[0].name}</p>
                         <p id="scorecount">Score: {roomsArray[indexOfRoom].users[indexOfUser].score}</p>
                         <Count />

@@ -33,14 +33,9 @@ describe('Room Component', () => {
         );
     });
 
-    test('it renders a form', () => {
-        let form = screen.getByRole('form');
-        expect(form).toBeInTheDocument();;
-    });
-
     test('join button exists', () => {
-        const button = screen.findByTestId('join-button');
-        expect(button).toBeInTheDocument();
+        const button = screen.getByRole('button');
+        expect(button).toBeTruthy();
     })
 
 })

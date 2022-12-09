@@ -33,13 +33,18 @@
 
 #leaderboard-screen {
     border: 2px solid orange;
-    position: relative;
+    position: absolute;
     overflow: hidden;
-    right: 10000px;
+    width: 50%;
+    /* right: 10000px; */
     padding: 10px 40%;
-    background: white;
+    background: blue;
     transition: all ease-in 0.2s;
-    /* transition-delay: 0s; */
+    top: 20%;
+    margin: 0 auto;
+    left: 50%;
+    transform: translateX(-50%);
+        /* transition-delay: 0s; */
 }
 
 
