@@ -292,7 +292,7 @@ io.on("connection", (socket) => {
   })
 
 });
-const port = process.env.PORT || 3500
+
 
 const bodyParser = require('body-parser')
 app.use(bodyParser.json())
