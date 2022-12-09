@@ -48,7 +48,7 @@ const Ready = ({ start, setStart }) => {
     function leaveHandler(e) {
         e.preventDefault()
         leaveRoom(room)
-        navigate('/lobby/1')
+        navigate('/lobby')
     }
 
 

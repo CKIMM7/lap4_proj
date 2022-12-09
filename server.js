@@ -157,48 +157,18 @@ io.on("connection", (socket) => {
     updateData()
   });
 
-  // socket.on("update_game", (data, user, answer) => {
 
-  //   console.log('update_game');
+  socket.on("broadcast_game", (game, room) => {
 
-  //   let findIndex = roomsArray.findIndex(obj => obj.id == data.id)
+    const indexOfRoom = roomsArray.findIndex(obj => obj.id == room.id)
 
-  //   if (answer) {
+    const tempArr = roomsArray
+    tempArr[indexOfRoom].game.push(game)
+    roomsArray = tempArr
 
-  //     console.log('right answer')
-
-  //     let userIndex = roomsArray[findIndex].users.findIndex(obj => obj.name == user)
-  //     roomsArray[findIndex].users[userIndex].score += 10
-  //   }
-
-
-  //   if (roomsArray[findIndex].game[0].answered.length == roomsArray[findIndex].users.length) {
-  //     console.log("Everyone answered Next question")
-  //     console.log("reset current timer")
-  //     roomsArray[findIndex].game.shift()
-
-
-  //     updateData()
-  //     //clearInterval(setIntervalId)
-  //     socket.emit("ready_again", roomsArray[findIndex].id, roomsArray[findIndex].users[0].name)
-
-  //     return
-  //   }
-
-  //   //if this user already has not answered yet
-  //   if (!roomsArray[findIndex].game[0].answered.includes(user)) {
-
-  //     console.log(`${user}has been added to array of ppl who answered`)
-  //     //clearInterval(setIntervalId)
-
-  //     roomsArray[findIndex].game[0].answered.push(user)
-  //     //console.log(roomsArray[findIndex].game[0].answered)
-  //   }
-
-
-
-  //   updateData()
-  // });
+    socket.emit("receive_game", game, room)
+    socket.to(room.id).emit("receive_game", game, room);
+  });
 
   socket.on("update_game", (data, user, answer) => {
     console.log('update_game');
@@ -320,7 +290,38 @@ io.on("connection", (socket) => {
     //get updated array sent back to other
     socket.broadcast.emit('receive_user', userArray)
   })
+
+});
+
+
+const bodyParser = require('body-parser')
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+
+const { Client } = require('pg')
+const client = new Client('postgresql://bradley:99DLsT1U7bF2UCDFvKlEyg@basic-yak-3859.6zw.cockroachlabs.cloud:26257/quizdb?sslmode=verify-full')
+client.connect()
+
+const routes = require('./routes');
+app.use(cors())
+app.use('/', routes)
+
+app.get('/', (req, res) => {
+  console.log(req)
+  res.send('Hey')
 })
-server.listen(port, () => {
+
+app.post('/', (req, res) => {
+  console.log(req.body)
+  res.send(req.body)
+})
+
+
+server.listen(3500, () => {
   console.log(`SERVER IS RUNNING ON http://localhost:${port}`);
 });
+
+app.listen(3600, () => {
+  console.log(`SERVER IS RUNNING ON http://localhost:${port}`);
+});
+module.exports = app;
