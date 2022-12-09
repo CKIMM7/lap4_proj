@@ -32,9 +32,9 @@ const Difficulty = ({ }) => {
                 // console.log(categoryString())
                 // console.log(levelIcon)
                 const url = 'http://localhost:3600'
-                fetch(`http://localhost:3600/leaderboard/${category}/${level}`)
+                fetch(`${url}/leaderboard/${category}/${level}`)
                     .then(data => data.json())
-                    .then(o => { setData(o); setHasData(true) })
+                    .then(obj => { setData(obj); setHasData(true) })
 
                 // const response = await fetch(`${url}/leaderboard/${category}/${level}`);
                 // const scoreArray = await response.json();
