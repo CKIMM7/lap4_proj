@@ -23,7 +23,7 @@ const ShowWinner = ({ data }) => {
     const userState = useSelector(state => state.user);
     const navigate = useNavigate()
     const [rank, setRank] = useState([])
-    let category = 'easy'
+
 
     useEffect(() => {
         let tempArray = []
@@ -39,7 +39,7 @@ const ShowWinner = ({ data }) => {
         console.log('zx')
         console.log(data.length)
         console.log()
-        data.map(user => {
+        userState.category && userState.difficulty && data.map(user => {
             console.log(user);
             updateWinner({
                 name: userArray.filter(obj => obj.id == user.name)[0].name,
@@ -64,27 +64,27 @@ const ShowWinner = ({ data }) => {
     //     // )
     //     console.log(data)
     // }, [])
-    console.log('zz')
-    console.log(userState)
-    console.log(listOfCategory.filter(obj => obj.id == userState.category)[0].subject)
-    console.log(userState.difficulty)
-    console.log(userArray.filter(obj => obj.id == data[0].name)[0].name)
-    console.log(data[0].score)
-    console.log('Test')
+    // console.log('zz')
+    // console.log(userState)
+    // console.log(listOfCategory.filter(obj => obj.id == userState.category)[0].subject)
+    // console.log(userState.difficulty)
+    // console.log(userArray.filter(obj => obj.id == data[0].name)[0].name)
+    // console.log(data[0].score)
+    // console.log('Test')
 
 
-    async function addData(data) {
-        // adds per row/player?
-        for (let i = 0; i < data.length; i++) {
-            updateWinner(data[i])
-        }
-    }
+    // async function addData(data) {
+    //     // adds per row/player?
+    //     for (let i = 0; i < data.length; i++) {
+    //         updateWinner(data[i])
+    //     }
+    // }
 
-    function compare(a, b) {
-        if (a.score > b.score) return -1;
-        if (a.score < b.score) return 1;
-        return 0;
-    }
+    // function compare(a, b) {
+    //     if (a.score > b.score) return -1;
+    //     if (a.score < b.score) return 1;
+    //     return 0;
+    // }
 
     async function updateWinner(data) {
         try {
@@ -107,15 +107,20 @@ const ShowWinner = ({ data }) => {
         }
     }
 
-    function categoryString() {
-        let str = '';
-        for (let i = 0; i < listOfCategory.length; i++) {
-            if (listOfCategory[i].id === category) str = listOfCategory[i].subject;
-        }
-        return str;
-    }
+    // function categoryString() {
+    //     let str = '';
+    //     for (let i = 0; i < listOfCategory.length; i++) {
+    //         if (listOfCategory[i].id === category) str = listOfCategory[i].subject;
+    //     }
+    //     return str;
+    // }
 
     return <div id='show-winner-container'>
+        {console.log('tt')}
+        {console.log(data)}
+        {/* {data.sort((a, b) => a.score - b.score)} */}
+        {console.log(data)}
+
         {data.map((player, index) => 
             <div id={`show-winner-${index + 1}`} key={index}>
             <ul>
