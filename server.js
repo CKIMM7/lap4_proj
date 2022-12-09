@@ -322,6 +322,31 @@ io.on("connection", (socket) => {
 });
 const port = process.env.PORT || 3500
 
-server.listen(port, () => {
+const bodyParser = require('body-parser')
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+
+const { Client } = require('pg')
+const client = new Client('postgresql://bradley:99DLsT1U7bF2UCDFvKlEyg@basic-yak-3859.6zw.cockroachlabs.cloud:26257/quizdb?sslmode=verify-full')
+client.connect()
+
+const routes = require('./routes');
+app.use(cors())
+app.use('/', routes)
+
+app.get('/', (req, res) => {
+  console.log(req)
+  res.send('Hey')
+})
+
+app.post('/', (req, res) => {
+  console.log(req.body)
+  res.send(req.body)
+})
+
+
+app.listen(port, () => {
   console.log(`SERVER IS RUNNING ON http://localhost:${port}`);
 });
+
+module.exports = app;
