@@ -157,20 +157,6 @@ io.on("connection", (socket) => {
     updateData()
   });
 
-<<<<<<< HEAD
-
-  socket.on("broadcast_game", (game, room) => {
-
-    const indexOfRoom = roomsArray.findIndex(obj => obj.id == room.id)
-
-    const tempArr = roomsArray
-    tempArr[indexOfRoom].game.push(game)
-    roomsArray = tempArr
-
-    socket.emit("receive_game", game, room)
-    socket.to(room.id).emit("receive_game", game, room);
-  });
-=======
   // socket.on("update_game", (data, user, answer) => {
 
   //   console.log('update_game');
@@ -213,7 +199,6 @@ io.on("connection", (socket) => {
 
   //   updateData()
   // });
->>>>>>> game
 
   socket.on("update_game", (data, user, answer) => {
     console.log('update_game');
@@ -260,7 +245,7 @@ io.on("connection", (socket) => {
   // })
 
   function updateCountdown(seconds, room, indexOfRoom, user) {
-      setIntervalId = setInterval(function () {
+    setIntervalId = setInterval(function () {
       seconds--;
       console.log(seconds)
       socket.emit("receive_countdown", seconds, room)

@@ -98,7 +98,7 @@ const Difficulty = ({ }) => {
                 <button type="button" className="choose-mode" onClick={e => startGame(e, 'easy')} id="easy" value={difficulty} >
                     Beginner
                 </button>
-                <i  class="bi bi-cloud"></i>
+                <i class="bi bi-cloud"></i>
                 <button className="leaderbtn" ><i onClick={displayLeaderboard} id='leaderboard-easy' class="bi bi-bar-chart"></i></button>
             </div>
             <div className="diffcon" id="interm">
@@ -124,11 +124,12 @@ const Difficulty = ({ }) => {
             <button onClick={displayLeaderboard} id='leaderboard-medium'>*Leaderboard Icon*</button>
             <button onClick={displayLeaderboard} id='leaderboard-hard'>*Leaderboard Icon*</button>
         </div> */}
-        {showBoard && <div id='leaderboard-screen'>
+        {showBoard && <div id="backdrop"><div id='leaderboard-screen'>
             {console.log('---leaderboadr rendered')}
-            <button id='x-btn' onClick={exitLeaderboard}>x btn icon</button>
+
             <Leaderboard data={data} level={levelIcon} />
-        </div>}
+            <button id='x-btn' className="nes-btn is-error" onClick={exitLeaderboard}>Close</button>
+        </div></div>}
 
     </div>
 }

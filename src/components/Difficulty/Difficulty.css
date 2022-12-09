@@ -31,21 +31,36 @@
 
 }
 
+#x-btn {
+    text-align: center;
+    float: left;
+}
+
+#leaderboard-screen i {
+    font-size: 20px;
+}
+
+#difficulty-screen h2 {
+    color: white;
+}
+
 #leaderboard-screen {
-    border: 2px solid orange;
-    position: absolute;
-    overflow: hidden;
-    width: 50%;
-    /* right: 10000px; */
-    padding: 10px 40%;
-    background: blue;
-    transition: all ease-in 0.2s;
-    top: 20%;
-    margin: 0 auto;
+    border: 3px solid white;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    padding: 10px;
+    background: #209CEE;
+    top: 1%;
     left: 50%;
     transform: translateX(-50%);
-        /* transition-delay: 0s; */
 }
+
+#leaderboarddata {
+    padding: 0;
+}
+
 
 
 
@@ -88,12 +103,18 @@
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
-    height: 150px;
+    height: 160px;
     margin: 20px;
+    transition: 0.5s;
+
 
 }
 
-i {
+.diffcon:hover {
+    transform: translateX(15px);
+}
+
+#list-of-difficulty i {
     display: flex;
     justify-content: center;
     align-items: center;

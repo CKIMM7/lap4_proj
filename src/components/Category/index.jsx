@@ -4,6 +4,7 @@ import useGetGames from "../../hooks/useGetGames"
 import { usersActions } from '../../store/usersSlice';
 import Rockets from '../Rockets'
 import { motion } from 'framer-motion';
+import { BallBasketball } from 'tabler-icons-react';
 
 import './Category.css'
 

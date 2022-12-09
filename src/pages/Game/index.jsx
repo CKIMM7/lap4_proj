@@ -12,6 +12,7 @@ import GameCard from "../GameCard";
 import ShowWinner from "../../components/ShowWinner";
 import Count from "../../components/Count";
 import './index.css';
+import { Rockets } from '../../components'
 
 const Game = () => {
     const location = useLocation()
@@ -61,23 +62,26 @@ const Game = () => {
     }, [roomsArray[indexOfRoom].users])
     return <div>{
         end ?
-            <>
+            <div id="gameend">
                 <h1>Lobby Leaderboard</h1>
-                <ShowWinner data={roomsArray[indexOfRoom].users} />
-                <button onClick={() => navigate('/lobby')}>Back to Lobby</button>
-            </>
+                <div id="endcontent">
+                    <ShowWinner data={roomsArray[indexOfRoom].users} />
+                    <button className="nes-btn is-primary" onClick={() => navigate('/lobby')}>Back to Lobby</button>
+                </div>
+            </div>
 
             : start
                 ? wait
                     ? <h1>Waiting for other players</h1>
                     : <>
-                        <p>Quizcade</p>
+                        <h1>Quizcade</h1>
                         <p id="usernametitle">Username: {userArray.filter(obj => obj.id == userId)[0].name}</p>
                         <p id="scorecount">Score: {roomsArray[indexOfRoom].users[indexOfUser].score}</p>
                         <Count />
                         <div className="choices">
-                            <ul>{gameArray.length > 0 && gameArray[0]}</ul>
-                        </div></>
+                            <div>{gameArray.length > 0 && gameArray[0]}</div>
+                        </div>
+                        <Rockets /> </>
                 : <Ready start={start} setStart={setStart} />}
 
     </div>

@@ -7,10 +7,10 @@ import { Category, Difficulty } from '../../components'
 
 import useUserStatus from "../../hooks/useUserStatus";
 import useGetGames from "../../hooks/useGetGames";
+import './index.css'
 
 
 const CreateLobby = (room) => {
-
     const navigate = useNavigate();
     const params = useParams()
     const { broadCastGame } = useUserStatus()
@@ -34,7 +34,8 @@ const CreateLobby = (room) => {
     return <div>
         {!category && <Category />}
         {!difficulty && category && <Difficulty />}
-        {difficulty && category && <button onClick={makeRoom} >start game</button>}
+        {difficulty && category && <div id="startgamebtn"><h1>Complete game creation?</h1><button onClick={makeRoom} className="nes-btn is-success" >Create</button>
+            <button onClick={() => navigate(-1)} className="nes-btn is-error">Back</button></div>}
     </div>
 }
 
