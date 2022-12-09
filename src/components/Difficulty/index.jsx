@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
 import useGetGames from "../../hooks/useGetGames"
 import { usersActions } from '../../store/usersSlice';
+import Rockets from '../Rockets';
 
 import './Difficulty.css'
 import Leaderboard from '../Leaderboard';
@@ -15,20 +16,20 @@ const Difficulty = ({ }) => {
     const [levelIcon, setLevelIcon] = useState();
     const [slide, setSlide] = useState(false);
 
-    function startGame(e, id) { 
+    function startGame(e, id) {
         e.preventDefault()
         updateInput(e, id)
         console.log(`start ${difficulty} game`)
         difficulty = '';
     }
 
-    function updateInput(e, id){
+    function updateInput(e, id) {
         console.log(`${id} game selected`)
         difficulty = id
         dispatch(usersActions.setDifficulty(difficulty))
     }
 
-    function displayLeaderboard(e) { 
+    function displayLeaderboard(e) {
         e.preventDefault()
         let id = e.target.id
         let type = id.split('-')
@@ -37,13 +38,15 @@ const Difficulty = ({ }) => {
         setSlide(true)
     }
 
-    function exitLeaderboard(e){
+    function exitLeaderboard(e) {
         e.preventDefault()
         setLevelIcon(undefined)
         setSlide(false)
     }
 
     return <div id='difficulty-screen'>
+        <h1 id="creategame">Create Game</h1>
+        <h2 id="instructions">Now, select the game difficulty</h2>
         <div id="list-of-difficulty">
             <div className="diffcon" id="begin">
                 <i class="bi bi-cloud"></i>
@@ -70,12 +73,12 @@ const Difficulty = ({ }) => {
                 <button onClick={displayLeaderboard} className="leaderbtn" id='leaderboard-hard'><i class="bi bi-bar-chart"></i></button>
             </div>
         </div>
+        <Rockets />
         <div id='leaderboard-icons'>
             <button onClick={displayLeaderboard} id='leaderboard-easy'>*Leaderboard Icon*</button>
             <button onClick={displayLeaderboard} id='leaderboard-medium'>*Leaderboard Icon*</button>
             <button onClick={displayLeaderboard} id='leaderboard-hard'>*Leaderboard Icon*</button>
         </div>
-        
     </div>
 }
 

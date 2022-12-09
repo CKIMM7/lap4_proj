@@ -3,7 +3,7 @@
 .rocket{
     background: transparent; 
     width: 100%;
-    height:100vh;
+    height:100%;
     
    
 }
@@ -17,6 +17,10 @@
     overflow: hidden;
     z-index: -1;
     
+}
+
+i {
+    box-shadow: none !important;
 }
 
 .rockets li{
