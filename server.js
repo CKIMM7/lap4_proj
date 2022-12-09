@@ -18,6 +18,7 @@ const io = new Server(server, {
 
 let roomsArray = []
 let userArray = []
+let setIntervalId
 
 io.on("connection", (socket) => {
 
@@ -154,6 +155,49 @@ io.on("connection", (socket) => {
     updateData()
   });
 
+  // socket.on("update_game", (data, user, answer) => {
+
+  //   console.log('update_game');
+
+  //   let findIndex = roomsArray.findIndex(obj => obj.id == data.id)
+
+  //   if (answer) {
+
+  //     console.log('right answer')
+
+  //     let userIndex = roomsArray[findIndex].users.findIndex(obj => obj.name == user)
+  //     roomsArray[findIndex].users[userIndex].score += 10
+  //   }
+
+
+  //   if (roomsArray[findIndex].game[0].answered.length == roomsArray[findIndex].users.length) {
+  //     console.log("Everyone answered Next question")
+  //     console.log("reset current timer")
+  //     roomsArray[findIndex].game.shift()
+
+
+  //     updateData()
+  //     //clearInterval(setIntervalId)
+  //     socket.emit("ready_again", roomsArray[findIndex].id, roomsArray[findIndex].users[0].name)
+
+  //     return
+  //   }
+
+  //   //if this user already has not answered yet
+  //   if (!roomsArray[findIndex].game[0].answered.includes(user)) {
+
+  //     console.log(`${user}has been added to array of ppl who answered`)
+  //     //clearInterval(setIntervalId)
+
+  //     roomsArray[findIndex].game[0].answered.push(user)
+  //     //console.log(roomsArray[findIndex].game[0].answered)
+  //   }
+
+
+
+  //   updateData()
+  // });
+
   socket.on("update_game", (data, user, answer) => {
     console.log('update_game');
     console.log(user);
@@ -174,13 +218,14 @@ io.on("connection", (socket) => {
       console.log("Next question")
       roomsArray[findIndex].game.shift()
       updateData()
+      socket.emit("ready_again", roomsArray[findIndex].id, roomsArray[findIndex].users[0].name)
       return
     }
     if (!roomsArray[findIndex].game[0].answered.includes(user)) {
       roomsArray[findIndex].game[0].answered.push(user)
     }
     //console.log(roomsArray[findIndex].game[0])
-    updateCountdown(10, roomsArray[findIndex].id, findIndex, user)
+    // updateCountdown(10, roomsArray[findIndex].id, findIndex, user)
     updateData()
   });
 
@@ -198,7 +243,7 @@ io.on("connection", (socket) => {
   // })
 
   function updateCountdown(seconds, room, indexOfRoom, user) {
-    const setIntervalId = setInterval(function () {
+      setIntervalId = setInterval(function () {
       seconds--;
       console.log(seconds)
       socket.emit("receive_countdown", seconds, room)
@@ -217,7 +262,7 @@ io.on("connection", (socket) => {
         roomsArray[indexOfRoom].game.shift()
         //return the updated array
         updateData()
-        clearInterval(setIntervalId)
+        // clearInterval(setIntervalId)
         seconds = 10
 
         if (roomsArray[indexOfRoom].game.length == 0) {
@@ -239,7 +284,10 @@ io.on("connection", (socket) => {
     const indexOfRoom = roomsArray.findIndex(obj => obj.id == room)
     const indexOfUser = roomsArray[indexOfRoom].users.findIndex(obj => obj.name == user)
     roomsArray[indexOfRoom].users[indexOfUser].isReady = true
-
+    clearInterval(setIntervalId)
+    console.log('ready---')
+    console.log(user)
+    console.log(room)
     console.log(roomsArray[indexOfRoom].users)
     if (!roomsArray[indexOfRoom].users.find(obj => obj.isReady == false)) {
       socket.emit("test")
@@ -254,6 +302,8 @@ io.on("connection", (socket) => {
       //call timer here
       console.log(`room inside ready`)
       console.log(room)
+      // console.log(`setIntervalId`)
+      // console.log(setIntervalId)
       updateCountdown(10, room, indexOfRoom, user)
       
     }
