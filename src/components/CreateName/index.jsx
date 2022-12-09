@@ -69,9 +69,9 @@ const CreateName = ({ handleClose }) => {
                 animate="visible"
                 exit="exit">
                 <p className="title">Create a 4-letter username!</p>
-                <div className="nes-field">
+                <div className="nes-field" id="usermodal">
                     <label htmlFor="username">Your name</label>
-                    <input type="text" id="username" className="nes-input" onChange={handleChange} value={name} maxLength={4}></input>
+                    <input type="text" id="username" className="nes-input is-dark" onChange={handleChange} value={name} maxLength={4}></input>
                 </div>
                 <div className="buttons">
                     <button onClick={submit} type="button" className="nes-btn is-primary">Go!</button>

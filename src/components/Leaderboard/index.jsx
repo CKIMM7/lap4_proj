@@ -9,7 +9,7 @@ let tempArr = [
     { id: 5, name: 'e', diffifculty: 'hard', score: 2600 }
 ];
 
-const Leaderboard = ({data, level}) => {
+const Leaderboard = ({ data, level }) => {
     const [rank, setRank] = useState([])
     // const [dataArray, setDataArray] = useState([])
     const [hasData, setHasData] = useState(false)
@@ -28,17 +28,17 @@ const Leaderboard = ({data, level}) => {
         populateTable()
         setRank(tempArray)
         console.log('level: ' + level)
-    }, [data]) 
+    }, [data])
 
     // need to data from db then populate dataArray
-    function getData(){
+    function getData() {
 
     }
 
     const displayLevelTitle = (type) => {
-        if(type === 'easy') return 'Beginner';
-        else if(type === 'medium') return 'Intermediate';
-        else if(type === 'hard') return 'Expert';
+        if (type === 'easy') return 'Beginner';
+        else if (type === 'medium') return 'Intermediate';
+        else if (type === 'hard') return 'Expert';
         else return 'Error';
     }
 
@@ -58,7 +58,7 @@ const Leaderboard = ({data, level}) => {
     //         )} 
     //     </div>
     // </div>
-    return <div id={`leaderboard-${level}`}>
+    return <div className="leaderboardcont" id={`leaderboard-${level}`}>
         <h2>Leaderboard</h2>
         <h2>{displayLevelTitle(level)}</h2>
         <div id='leaderboard-rank-list'>
@@ -68,10 +68,10 @@ const Leaderboard = ({data, level}) => {
 
             {rank.map((ele, index) =>
                 <div id={`leaderboard-row-${index + 1}`} key={index}>
-                    <ul>
+                    <ul id="leaderboarddata">
                         <p>{index + 1}</p>
-                        <p>{ele.name}</p>
-                        <p>{ele.score}</p>
+                        <p style={{ color: 'black' }}>{ele.name}</p>
+                        <p style={{ color: 'white' }}>{ele.score}</p>
                     </ul>
                 </div>
             )}

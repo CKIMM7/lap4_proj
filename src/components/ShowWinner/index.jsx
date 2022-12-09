@@ -29,7 +29,7 @@ const ShowWinner = ({ data }) => {
         let tempArray = []
         function populateTable() {
             // sortScore();
-            
+
             for (let i = 0; i < 10; i++) {
                 if (listOfPlayers[i] !== undefined) tempArray.push(listOfPlayers[i])
             }
@@ -48,7 +48,7 @@ const ShowWinner = ({ data }) => {
                 score: user.score
             })
         })
-        
+
         setRank(tempArray)
     }, [])
     // useEffect(() => {
@@ -121,14 +121,14 @@ const ShowWinner = ({ data }) => {
 
         {data.map((player, index) => 
             <div id={`show-winner-${index + 1}`} key={index}>
-            <ul>
-                <p>{index+1}</p>
+                <ul>
+                    <p>{index + 1}</p>
                     <p>{userArray.filter(obj => obj.id == player.name)[0].name}</p>
-                <p>{player.score}</p>
+                    <p>{player.score}</p>
                 </ul>
-                
-        </div>
-        )} 
+
+            </div>
+        )}
     </div>
 }
 

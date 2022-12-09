@@ -6,34 +6,48 @@
     display: flex;
     justify-content: space-evenly;
     align-content: center;
-    margin: 200px 0;
+    margin: 100px 0;
 }
 
-.containerbtn {
+.jorccont {
     width: 400px;
     height: 500px;
-    border: 1px solid red;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    margin: 30px;
+    border: 3px white solid;
+    transition: 0.5s;
 }
 
-svg {
+.jorccont:hover {
+    transform: translateY(-15px);
+    transition: 0.5s;
+}
+
+
+.jorccont svg {
     width: 100%;
     height: 50%;
-    background-color: #F07DEA;
+    background-color: #209CEE;
 }
+
 
 button.roomselect {
     position: relative;
     width: 100%;
     height: 50%;
     margin: 0 !important;
-    background-color: aqua;
+    background-color: #006BB3;
     border: none;
     font-size: 30px;
 }
 
+#createbtn {
+    background-color: #4AA52E;
 
+}
 
-
+#first svg {
+    background-color: #92CC41;
+}

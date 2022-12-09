@@ -10,10 +10,10 @@ import useGetGames from "../../hooks/useGetGames";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux"; 
 import { usersActions } from "../../store/usersSlice";
+import './index.css'
 
 
 const CreateLobby = (room) => {
-
     const navigate = useNavigate();
     const params = useParams()
     const dispatch = useDispatch()
@@ -38,7 +38,8 @@ const CreateLobby = (room) => {
     return <div>
         {!category && <Category />}
         {!difficulty && category && <Difficulty />}
-        {difficulty && category && <button onClick={makeRoom} >start game</button>}
+        {difficulty && category && <div id="startgamebtn"><h1>Complete game creation?</h1><button onClick={makeRoom} className="nes-btn is-success" >Create</button>
+            <button onClick={() => navigate(-1)} className="nes-btn is-error">Back</button></div>}
     </div>
 }
 

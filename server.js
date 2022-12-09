@@ -215,7 +215,7 @@ io.on("connection", (socket) => {
   // })
 
   function updateCountdown(seconds, room, indexOfRoom, user) {
-      setIntervalId = setInterval(function () {
+    setIntervalId = setInterval(function () {
       seconds--;
       console.log(seconds)
       socket.emit("receive_countdown", seconds, room)
