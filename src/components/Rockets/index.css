@@ -1,14 +1,14 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css");
 
-.rocket{
-    background: transparent; 
+.rocket {
+    background: transparent;
     width: 100%;
-    height:100%;
-    
-   
+    height: 100%;
+
+
 }
 
-.rockets{
+.rockets {
     position: absolute;
     top: 0;
     left: 0;
@@ -16,16 +16,16 @@
     height: 100%;
     overflow: hidden;
     z-index: -1;
-    
+
 }
 
 i {
     box-shadow: none !important;
 }
 
-.rockets li{
+.rockets li {
     text-align: center;
-    color: aqua;
+    color: #209CEE;
     position: absolute;
     display: block;
     list-style: none;
@@ -34,74 +34,74 @@ i {
     /* background: #f07dea6c; */
     animation: animate 25s linear infinite;
     bottom: -150px;
-    
+
 }
 
-.rockets li:nth-child(1){
+.rockets li:nth-child(1) {
     left: 25%;
-    color:  #d333ff ;
+    color: #E76E55;
     font-size: 40px;
     animation-delay: 0s;
 }
 
 
-.rockets li:nth-child(2){
+.rockets li:nth-child(2) {
     left: 10%;
     font-size: 60px;
     animation-delay: 2s;
     animation-duration: 12s;
 }
 
-.rockets li:nth-child(3){
+.rockets li:nth-child(3) {
     left: 70%;
-    color:  #d333ff ;
+    color: #E76E55;
     font-size: 40px;
     animation-delay: 4s;
 }
 
-.rockets li:nth-child(4){
+.rockets li:nth-child(4) {
     left: 40%;
     font-size: 90px;
     animation-delay: 0s;
     animation-duration: 18s;
 }
 
-.rockets li:nth-child(5){
+.rockets li:nth-child(5) {
     left: 65%;
-    color:  #d333ff ;
+    color: #92CC41;
     font-size: 60px;
     animation-delay: 0s;
 }
 
-.rockets li:nth-child(6){
+.rockets li:nth-child(6) {
     left: 75%;
     font-size: 40px;
     animation-delay: 3s;
 }
 
-.rockets li:nth-child(7){
+.rockets li:nth-child(7) {
     left: 35%;
-    color:  #d333ff ;
+    color: #92CC41;
     font-size: 100px;
     animation-delay: 7s;
 }
 
-.rockets li:nth-child(8){
+.rockets li:nth-child(8) {
     left: 50%;
     font-size: 50px;
     animation-delay: 15s;
     animation-duration: 45s;
 }
 
-.rockets li:nth-child(9){
+.rockets li:nth-child(9) {
     left: 20%;
-    color:  #d333ff ;
+    color: #209CEE;
     font-size: 70px;
     animation-delay: 2s;
     animation-duration: 35s;
 }
 
-.rockets li:nth-child(10){
+.rockets li:nth-child(10) {
     left: 85%;
     font-size: 40px;
     animation-delay: 0s;
@@ -112,13 +112,13 @@ i {
 
 @keyframes animate {
 
-    0%{
+    0% {
         transform: translateY(0) rotate(0deg);
         opacity: 1;
         border-radius: 0;
     }
 
-    100%{
+    100% {
         transform: translateY(-1000px) rotate(720deg);
         opacity: 0;
         border-radius: 50%;
