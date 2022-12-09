@@ -3,6 +3,7 @@ import { socket } from "../../hooks/socket";
 import useUserStatus from "../../hooks/useUserStatus";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import Rockets from "../Rockets"
 import "nes.css/css/nes.min.css";
 import "./index.css"
 
@@ -55,22 +56,18 @@ const Ready = ({ start, setStart }) => {
         <div className="App">
 
             <div className="roomsection" id="playerinfo">
-                <h1>Players:</h1>
+                <h1 className="infotitle">Players:</h1>
                 {room.users.map(user => <p>{userArray.filter(obj => obj.id == user.name)[0].name}</p>)}
             </div>
-            <div className="roomsection" id="roominfo">
-                <h1>Room - {id}</h1>
-                <button onClick={ready}>Ready Up!</button>
-                <button onClick={leaveHandler}>Leave Lobby</button>
-            </div>
             <div className="roomsection" id="chatroominfo">
-                <h1> Chatroom:</h1>
+                <h1 className="infotitle"> Chatroom:</h1>
                 {console.log(room.messages)}
-                <div className="nes-balloon from-right" id="speechbubble">
+                <div className="nes-container is-rounded is-dark" id="roommessages">
                     {room.messages.map(msg =>
                         <p>{userArray.filter(obj => obj.id == msg.user)[0].name} - {msg.message}</p>)}
                 </div>
                 <input
+                    placeholder="Type a message..."
                     className="nes-input is-warning"
                     value={message}
                     onChange={(event) => {
@@ -79,7 +76,13 @@ const Ready = ({ start, setStart }) => {
                 />
                 <button onClick={sendMessageHandler} className="nes-btn is-warning" id="sendmessagebtn"> Send Message</button>
             </div>
+            <div className="roomsection" id="roominfo">
+                <h1 className="infotitle">Room Name - {id}</h1>
+                <button className="nes-btn is-success" onClick={ready}>Ready Up!</button>
+                <button className="nes-btn is-error" onClick={leaveHandler}>Leave Lobby</button>
+            </div>
 
+            <Rockets />
         </div>
     )
 

@@ -1,22 +1,22 @@
-.header {
-    margin: 150px auto 50px;
+.start .header {
+    margin: 100px auto 50px;
     width: 60%;
     text-align: center;
-    
-  }
-  
+
+}
+
 h1 {
-    color: #F07DEA;
+    color: #209CEE;
     font-family: 'Press Start 2p';
     text-shadow: 1px 3px 2px rgba(9, 0, 0, 0.81);
 }
 
 .welcome {
-  color: white;
+    color: white;
 }
 
 #maincontainer {
-    background-color: #170F29;
+    background-color: #212529;
     width: 1150px;
     margin: 0 auto;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
@@ -26,17 +26,17 @@ h1 {
     background-color: white !important;
     color: black;
 }
-  
+
 h3 {
     opacity: 1;
-    color: aqua;
+    color: #92CC41;
     font-family: 'Space Mono';
     width: 700px;
     margin: 0 auto 20px;
 }
 
 .instructions {
-      font-family: 'Space Mono';
+    font-family: 'Space Mono';
 }
 
 li {
@@ -44,4 +44,3 @@ li {
     font-size: 18px;
     line-height: 30px;
 }
-

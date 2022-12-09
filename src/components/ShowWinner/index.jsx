@@ -16,11 +16,11 @@ const ShowWinner = ({ data: listOfPlayers }) => {
 
     useEffect(() => {
         let tempArray = []
-        function populateTable(){
+        function populateTable() {
             // sortScore();
-            
-            for(let i=0; i < 10; i++){
-              if(listOfPlayers[i] !== undefined) tempArray.push(listOfPlayers[i])
+
+            for (let i = 0; i < 10; i++) {
+                if (listOfPlayers[i] !== undefined) tempArray.push(listOfPlayers[i])
             }
             console.log(tempArray)
         }
@@ -28,23 +28,25 @@ const ShowWinner = ({ data: listOfPlayers }) => {
         setRank(tempArray)
     }, [])
 
-    function addData(){
-        
+    function addData() {
+
     }
 
     return <div id='show-winner-container'>
-        {rank.map((player, index) => 
+        {rank.map((player, index) =>
             <div id={`show-winner-${index + 1}`} key={index}>
                 <h1>Lobby Leaderboard</h1>
-            <ul>
-                <p>{index+1}</p>
-                    <p>{userArray.filter(obj => obj.id == player.name)[0].name}</p>
-                <p>{player.score}</p>
-                </ul>
+                <div className="nes-container is-rounded is-dark">
+                    <ul>
+                        <p>{index + 1}</p>
+                        <p>{userArray.filter(obj => obj.id == player.name)[0].name}</p>
+                        <p>{player.score}</p>
+                    </ul>
+                </div>
                 <button onClick={() => navigate('/lobby')}>Back to Lobby</button>
                 <button>View Leaderboard</button>
-        </div>
-        )} 
+            </div>
+        )}
     </div>
 }
 

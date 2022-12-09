@@ -10,7 +10,7 @@ import './Category.css'
 const listOfCategory = [
     { id: 23, subject: 'history', desc: 'Think you can handle the past? Choose history to see how much you know about the lifetime of our planet.' },
     { id: 17, subject: 'science&nature', desc: 'Do you know what the mass of the Sun is? Or perhaps the role of the mitochondria? Make sure you are ready to be tested!' },
-    { id: 21, subject: 'sports', desc: 'I think we all know the fast 100m time run by none other than Usain Bolt. But can you tell me length of a standard football field?' }
+    { id: 21, subject: 'sports', desc: 'Sure, you know the 100m world record, but can you tell me length of a standard football field?' }
 ]
 
 const Category = ({ }) => {

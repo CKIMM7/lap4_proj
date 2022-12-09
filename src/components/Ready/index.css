@@ -11,20 +11,75 @@
 
 .roomsection {
 
+    margin: 100px 0;
     display: flex;
     flex-direction: row;
     justify-content: center;
     flex-wrap: wrap;
     position: relative;
     width: 30%;
-    height: 500px;
-    border: 1px solid red;
+    height: 600px;
+    background-color: #209CEE;
+    border: 3px solid white;
+    padding: 0 0 30px;
 }
 
+.roomsection h1 {
+    color: white;
+}
 
+#roominfo {
+    max-height: 300px;
+}
+
+#playerinfo {
+    max-height: 300px;
+}
+
+.infotitle {
+    margin: 20px 0 0;
+}
+
+#playerinfo p {
+    width: 100%;
+    font-size: 20px;
+    text-transform: uppercase;
+}
 
 #chatroominfo input {
     position: relative;
     width: 50%;
+    height: 50px;
+    color: white;
+    background-color: transparent;
 
+}
+
+#chatroominfo button {
+    position: relative;
+    width: 50%;
+    height: 50px;
+
+}
+
+#roominfo button {
+    position: relative;
+    top: 20%;
+    margin: 20px;
+    height: 50px;
+}
+
+#roommessages {
+    max-width: 80%;
+    position: relative;
+    background-color: transparent;
+    font-family: 'Space Mono';
+    font-size: 20px;
+    width: 50%;
+    margin: 0 0 20px;
+
+}
+
+#roommessages::before {
+    content: "Type a message";
 }
