@@ -32,6 +32,23 @@
     background-color: #209CEE;
 }
 
+#join-lobby {
+    border: 2px red solid;
+    display: flex;
+    flex-direction: row;
+}
+
+#joinLobby-back-btn {
+
+    margin: 20px;
+    
+}
+.room {
+    border: 2px yellow solid;
+    /* border: none; */
+    width: 150px;
+    height: 120px;
+}
 
 button.roomselect {
     position: relative;

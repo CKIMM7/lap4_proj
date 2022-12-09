@@ -53,9 +53,10 @@ function LobbyCode() {
 
         <div className="App">
             <h1 id="roomtitle">Select an Option to Get Started</h1>
-            {showLobby ? <>
-                <button onClick={joinRoom}>Back</button>
-                {roomsArray.length > 0 ? createdRooms : <p>No rooms</p>}</> :
+            {/* {showLobby && <button id='joinLobby-back-btn' onClick={joinRoom}>Back</button>  } */}
+            {showLobby ? <div id='join-lobby'>
+                <button className='nes-btn is-error' id='joinLobby-back-btn' onClick={joinRoom}>Back</button>
+                {roomsArray.length > 0 ? createdRooms : <p>No rooms</p>}</div> :
                 <div id="joincreate">
                     <div className="jorccont" id="first">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" fill="none" stroke-linecap="round" stroke-linejoin="round">
