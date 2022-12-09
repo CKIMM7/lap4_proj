@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
 import useGetGames from "../../hooks/useGetGames"
@@ -13,8 +13,41 @@ const Difficulty = ({ }) => {
     const dispatch = useDispatch();
     let difficulty = useSelector(state => state.user.difficulty)
     const category = useSelector(state => state.user.category)
-    const [levelIcon, setLevelIcon] = useState();
-    const [slide, setSlide] = useState(false);
+    const [levelIcon, setLevelIcon] = useState('');
+    const [data, setData] = useState([]);
+    const [hasData, setHasData] = useState(false);
+    const [showBoard, setShowBoard] = useState(false)
+    const [slide, setSlide] = useState(false)
+
+    const listOfCategory = [
+        { id: 23, subject: 'History' },
+        { id: 17, subject: 'Science' },
+        { id: 21, subject: 'Sports' }
+    ]
+
+
+    useEffect(() => {
+        async function fetchLeaderboard(category, level) {
+            try {
+                console.log('fetchLeaderboard')
+                // console.log(categoryString())
+                // console.log(levelIcon)
+                const url = 'http://localhost:3600'
+                fetch(`${url}/leaderboard/${category}/${level}`)
+                    .then(data => data.json())
+                    .then(obj => { setData(obj); setHasData(true) })
+
+                // const response = await fetch(`${url}/leaderboard/${category}/${level}`);
+                // const scoreArray = await response.json();
+                // console.log(scoreArray)
+                // setData(scoreArray)
+                // return scoreArray
+            } catch (err) {
+                console.log(err)
+            }
+        }
+        fetchLeaderboard(categoryString(), levelIcon)
+    }, [showBoard, levelIcon, hasData])
 
 
 
@@ -35,15 +68,25 @@ const Difficulty = ({ }) => {
         e.preventDefault()
         let id = e.target.id
         let type = id.split('-')
+        console.log(e.target)
         console.log(`leaderboard-icon: ${type[1]}`)
         setLevelIcon(type[1])
-        setSlide(true)
+        setShowBoard(true)
+        console.log(showBoard)
     }
 
     function exitLeaderboard(e) {
         e.preventDefault()
-        setLevelIcon(undefined)
-        setSlide(false)
+        setLevelIcon('')
+        setShowBoard(false)
+    }
+
+    function categoryString() {
+        let str = '';
+        for (let i = 0; i < listOfCategory.length; i++) {
+            if (listOfCategory[i].id === category) str = listOfCategory[i].subject;
+        }
+        return str;
     }
 
     return <div id='difficulty-screen'>
@@ -55,8 +98,8 @@ const Difficulty = ({ }) => {
                 <button type="button" className="choose-mode" onClick={e => startGame(e, 'easy')} id="easy" value={difficulty} >
                     Beginner
                 </button>
-                <i class="bi bi-cloud"></i>
-                <button onClick={displayLeaderboard} className="leaderbtn" id='leaderboard-easy'><i class="bi bi-bar-chart"></i></button>
+                <i  class="bi bi-cloud"></i>
+                <button className="leaderbtn" ><i onClick={displayLeaderboard} id='leaderboard-easy' class="bi bi-bar-chart"></i></button>
             </div>
             <div className="diffcon" id="interm">
                 <i class="bi bi-cloud-drizzle"></i>
@@ -64,7 +107,7 @@ const Difficulty = ({ }) => {
                     Intermediate
                 </button>
                 <i class="bi bi-cloud-drizzle"></i>
-                <button onClick={displayLeaderboard} className="leaderbtn" id='leaderboard-medium'><i class="bi bi-bar-chart"></i></button>
+                <button className="leaderbtn" ><i onClick={displayLeaderboard} id='leaderboard-medium' class="bi bi-bar-chart"></i></button>
             </div>
             <div className="diffcon" id="expert">
                 <i class="bi bi-cloud-lightning-rain"></i>
@@ -72,15 +115,20 @@ const Difficulty = ({ }) => {
                     Expert
                 </button>
                 <i class="bi bi-cloud-lightning-rain"></i>
-                <button onClick={displayLeaderboard} className="leaderbtn" id='leaderboard-hard'><i class="bi bi-bar-chart"></i></button>
+                <button className="leaderbtn" ><i onClick={displayLeaderboard} id='leaderboard-hard' class="bi bi-bar-chart"></i></button>
             </div>
         </div>
         <Rockets />
-        <div id='leaderboard-icons'>
+        {/* <div id='leaderboard-icons'>
             <button onClick={displayLeaderboard} id='leaderboard-easy'>*Leaderboard Icon*</button>
             <button onClick={displayLeaderboard} id='leaderboard-medium'>*Leaderboard Icon*</button>
             <button onClick={displayLeaderboard} id='leaderboard-hard'>*Leaderboard Icon*</button>
-        </div>
+        </div> */}
+        {showBoard && <div id='leaderboard-screen'>
+            {console.log('---leaderboadr rendered')}
+            <button id='x-btn' onClick={exitLeaderboard}>x btn icon</button>
+            <Leaderboard data={data} level={levelIcon} />
+        </div>}
 
     </div>
 }

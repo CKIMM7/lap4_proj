@@ -53,7 +53,7 @@ const CreateName = ({ handleClose }) => {
     function submit(e) {
         e.preventDefault()
         console.log(name)
-        const user = { id: socket.id, name: name }
+        const user = { id: socket.id, name: name.toUpperCase() }
         createUser(user)
         navigate('/lobby')
     }

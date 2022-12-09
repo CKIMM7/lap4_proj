@@ -39,7 +39,8 @@
     "start": "nodemon server.js",
     "server": "nodemon ./src/api",
     "coverage": "jest --coverage",
-    "build": "npm i"
+    "build": "npm i",
+    "db": "nodemon ./server/index.js"
   },
   "jest": {
     "testEnvironment": "jsdom",

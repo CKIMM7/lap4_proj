@@ -20,6 +20,7 @@ const io = new Server(server, {
 
 let roomsArray = []
 let userArray = []
+let setIntervalId
 
 io.on("connection", (socket) => {
 
@@ -189,13 +190,14 @@ io.on("connection", (socket) => {
       console.log("Next question")
       roomsArray[findIndex].game.shift()
       updateData()
+      socket.emit("ready_again", roomsArray[findIndex].id, roomsArray[findIndex].users[0].name)
       return
     }
     if (!roomsArray[findIndex].game[0].answered.includes(user)) {
       roomsArray[findIndex].game[0].answered.push(user)
     }
     //console.log(roomsArray[findIndex].game[0])
-    updateCountdown(10, roomsArray[findIndex].id, findIndex, user)
+    // updateCountdown(10, roomsArray[findIndex].id, findIndex, user)
     updateData()
   });
 
@@ -213,7 +215,7 @@ io.on("connection", (socket) => {
   // })
 
   function updateCountdown(seconds, room, indexOfRoom, user) {
-    const setIntervalId = setInterval(function () {
+      setIntervalId = setInterval(function () {
       seconds--;
       console.log(seconds)
       socket.emit("receive_countdown", seconds, room)
@@ -232,7 +234,7 @@ io.on("connection", (socket) => {
         roomsArray[indexOfRoom].game.shift()
         //return the updated array
         updateData()
-        clearInterval(setIntervalId)
+        // clearInterval(setIntervalId)
         seconds = 10
 
         if (roomsArray[indexOfRoom].game.length == 0) {
@@ -254,7 +256,10 @@ io.on("connection", (socket) => {
     const indexOfRoom = roomsArray.findIndex(obj => obj.id == room)
     const indexOfUser = roomsArray[indexOfRoom].users.findIndex(obj => obj.name == user)
     roomsArray[indexOfRoom].users[indexOfUser].isReady = true
-
+    clearInterval(setIntervalId)
+    console.log('ready---')
+    console.log(user)
+    console.log(room)
     console.log(roomsArray[indexOfRoom].users)
     if (!roomsArray[indexOfRoom].users.find(obj => obj.isReady == false)) {
       socket.emit("test")
@@ -269,6 +274,8 @@ io.on("connection", (socket) => {
       //call timer here
       console.log(`room inside ready`)
       console.log(room)
+      // console.log(`setIntervalId`)
+      // console.log(setIntervalId)
       updateCountdown(10, room, indexOfRoom, user)
 
     }
@@ -283,7 +290,38 @@ io.on("connection", (socket) => {
     //get updated array sent back to other
     socket.broadcast.emit('receive_user', userArray)
   })
+
+});
+const port = process.env.PORT || 3500
+
+const bodyParser = require('body-parser')
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+
+const { Client } = require('pg')
+const client = new Client('postgresql://bradley:99DLsT1U7bF2UCDFvKlEyg@basic-yak-3859.6zw.cockroachlabs.cloud:26257/quizdb?sslmode=verify-full')
+client.connect()
+
+const routes = require('./routes');
+app.use(cors())
+app.use('/', routes)
+
+app.get('/', (req, res) => {
+  console.log(req)
+  res.send('Hey')
 })
-server.listen(port, () => {
+
+app.post('/', (req, res) => {
+  console.log(req.body)
+  res.send(req.body)
+})
+
+
+server.listen(3500, () => {
   console.log(`SERVER IS RUNNING ON http://localhost:${port}`);
 });
+
+app.listen(3600, () => {
+  console.log(`SERVER IS RUNNING ON http://localhost:${port}`);
+});
+module.exports = app;

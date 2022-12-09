@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import io from "socket.io-client";
 import useUserStatus from '../../hooks/useUserStatus';
 import { roomActions } from '../../store/roomSlice';
+import { usersActions } from '../../store/usersSlice';
 import Room from '../room';
 import './index.css'
 
@@ -18,6 +19,12 @@ function LobbyCode() {
     const { createRoom, sendMessage, setMessage, broadCastGame } = useUserStatus();
     const [ showLobby, setShowLobby ] = useState()
 
+    useEffect(() => {
+        return (() => {
+            dispatch(usersActions.setDifficulty(''))
+            dispatch(usersActions.setCategory(''))
+        })
+    }, [])
     const userArray = useSelector(state => state.user.users);
     const roomsArray = useSelector(state => state.room.room);
     const messageReceived = useSelector(state => state.room.messageReceived);

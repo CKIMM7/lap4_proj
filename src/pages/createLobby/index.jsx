@@ -7,12 +7,16 @@ import { Category, Difficulty } from '../../components'
 
 import useUserStatus from "../../hooks/useUserStatus";
 import useGetGames from "../../hooks/useGetGames";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux"; 
+import { usersActions } from "../../store/usersSlice";
 
 
 const CreateLobby = (room) => {
 
     const navigate = useNavigate();
     const params = useParams()
+    const dispatch = useDispatch()
     const { broadCastGame } = useUserStatus()
 
     let difficulty = useSelector(state => state.user.difficulty) //save var to here
