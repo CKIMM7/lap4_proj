@@ -320,7 +320,7 @@ io.on("connection", (socket) => {
   })
 
 });
-const port = process.env.PORT || 3500
+
 
 const bodyParser = require('body-parser')
 app.use(bodyParser.json())
@@ -345,8 +345,15 @@ app.post('/', (req, res) => {
 })
 
 
+// server.listen(3500, () => {
+//   console.log(`SERVER IS RUNNING ON http://localhost:${port}`);
+// });
 
-app.listen(3600, () => {
+const port = process.env.PORT || 3500
+
+app.listen(port, () => {
+
   console.log(`SERVER IS RUNNING ON http://localhost:${port}`);
 });
 module.exports = app;
+
