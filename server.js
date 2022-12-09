@@ -345,8 +345,11 @@ app.post('/', (req, res) => {
 })
 
 
-app.listen(port, () => {
+server.listen(3500, () => {
   console.log(`SERVER IS RUNNING ON http://localhost:${port}`);
 });
 
+app.listen(3600, () => {
+  console.log(`SERVER IS RUNNING ON http://localhost:${port}`);
+});
 module.exports = app;

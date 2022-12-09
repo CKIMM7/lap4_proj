@@ -116,7 +116,7 @@ const ShowWinner = ({ data }) => {
     // }
 
     return <div id='show-winner-container'>
-        {/* {console.log(data.sort((a, b) => a.score - b.score))} */}
+        {/* {data.sort((a, b) => a.score - b.score)} */}
         {console.log(data)}
 
         {data.map((player, index) => 
