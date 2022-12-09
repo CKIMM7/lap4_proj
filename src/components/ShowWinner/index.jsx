@@ -64,6 +64,8 @@ const ShowWinner = ({ data }) => {
     //     // )
     //     console.log(data)
     // }, [])
+    console.log('zz')
+    console.log(userState)
     console.log(listOfCategory.filter(obj => obj.id == userState.category)[0].subject)
     console.log(userState.difficulty)
     console.log(userArray.filter(obj => obj.id == data[0].name)[0].name)

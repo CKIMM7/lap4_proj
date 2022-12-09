@@ -70,7 +70,7 @@ const Game = () => {
                 ? <h1>Waiting for other players</h1>
                 : <>
                 <p>game page</p>
-                        <p>username: {userArray.filter(obj => obj.id == userId)[0].name}</p>
+                <p>username: {userArray.filter(obj => obj.id == userId)[0].name}</p>
                 <p>score: {roomsArray[indexOfRoom].users[indexOfUser].score}</p>
                 <Count/>
                 <ul>{gameArray.length > 0 && gameArray[0]}</ul></>
