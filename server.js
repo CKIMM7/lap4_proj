@@ -9,7 +9,8 @@ app.use(cors());
 
 const server = http.createServer(app);
 
-const port = process.env.PORT || 3500
+const socketPort = process.env.PORT || 3500
+const dbPort = process.env.PORT || 3600
 
 const io = new Server(server, {
   cors: {
@@ -308,7 +309,7 @@ app.use('/', routes)
 
 app.get('/', (req, res) => {
   console.log(req)
-  res.send('Hey')
+  res.send('Database server')
 })
 
 app.post('/', (req, res) => {
@@ -317,11 +318,11 @@ app.post('/', (req, res) => {
 })
 
 
-server.listen(3500, () => {
-  console.log(`SERVER IS RUNNING ON http://localhost:${port}`);
+server.listen(socketPort, () => {
+  console.log(`SOCKET IS RUNNING ON http://localhost:${socketPort}`);
 });
 
-app.listen(3600, () => {
-  console.log(`SERVER IS RUNNING ON http://localhost:${port}`);
+app.listen(dbPort, () => {
+  console.log(`DB IS RUNNING ON http://localhost:${dbPort}`);
 });
 module.exports = app;

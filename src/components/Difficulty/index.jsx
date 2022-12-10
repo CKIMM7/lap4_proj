@@ -32,7 +32,7 @@ const Difficulty = ({ }) => {
                 console.log('fetchLeaderboard')
                 // console.log(categoryString())
                 // console.log(levelIcon)
-                const url = 'http://localhost:3600'
+                const url = 'https://react-quiz-game-sholes.herokuapp.com'
                 fetch(`${url}/leaderboard/${category}/${level}`)
                     .then(data => data.json())
                     .then(obj => { setData(obj); setHasData(true) })
